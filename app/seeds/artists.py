@@ -1,12 +1,12 @@
-from app.models import db, Album, environment, SCHEMA
+from app.models import db, Artist, environment, SCHEMA
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_albums():
-    test1 = Album(
-        title='Abbey Road', artistId = 1, description='test')
-    test2 = Album(
-         title='The Battle of Los Angeles',artistId = 2, description='test2')
+def seed_artists():
+    test1 = Artist(
+        name='The Beatles')
+    test2 = Artist(
+         name='Rage Against the Machine')
 
 
     db.session.add(test1)
@@ -21,10 +21,10 @@ def seed_albums():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_albums():
+def undo_artists():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.albums RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.artists RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM albums")
+        db.session.execute("DELETE FROM artists")
 
     db.session.commit()

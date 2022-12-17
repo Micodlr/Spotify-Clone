@@ -1,3 +1,7 @@
-from .db import db
+from .db import db, environment, SCHEMA
 from .user import User
-from .db import environment, SCHEMA
+from .album import Album
+from .song import Song
+from .playlist import Playlist
+from .playlist_songs import PlaylistSong
+from .review import Review

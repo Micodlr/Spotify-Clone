@@ -7,10 +7,14 @@ def seed_playlistSongs():
         songId=1, playlistId=1)
     test2 = PlaylistSong(
          songId=2, playlistId=2)
+    test3 = PlaylistSong(
+        songId=2, playlistId=1)
+
 
 
     db.session.add(test1)
     db.session.add(test2)
+    db.session.add(test3)
 
     db.session.commit()
 

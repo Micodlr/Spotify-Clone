@@ -59,7 +59,7 @@ def editPlaylist(id):
     form["csrf_token"].data = request.cookies["csrf_token"]
     playlist = Playlist.query.get_or_404(id)
 
-    if form.validate_on_submit():
+    if form.validate_on_submit and playlist.userId == current_user.id():
         playlist.name = form.name.data
         db.session.add(playlist)
         db.session.commit()
@@ -83,17 +83,18 @@ def deletePlaylist(id):
 
 @playlist_routes.route('/<int:id>', methods=["POST"])
 @login_required
-def playlistSongssss(id):
+def addPlaylistSong(id):
     """
     add a song to playlist
     """
+    playlist = Playlist.query.get(id)
 
     songs = PlaylistSong.query.filter(PlaylistSong.playlistId == id).first()
     # print(songs,'==============' )
     form = SongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    if form.validate_on_submit():
+    if form.validate_on_submit and current_user.id == playlist.userId:
         new_song = PlaylistSong(
             songId = form.songId.data,
             playlistId = id
@@ -102,3 +103,19 @@ def playlistSongssss(id):
         db.session.commit()
         return new_song.to_dict()
     return "Bad Data"
+
+@playlist_routes.route('/<int:id>/songs/<int:songId>', methods=["DELETE"])
+@login_required
+def deletePlaylistSong(id, songId):
+    """
+    delete a song from playlist
+    """
+    playlist = Playlist.query.get(id)
+    song = PlaylistSong.query.filter(PlaylistSong.songId == songId, PlaylistSong.playlistId == id).first()
+    print(song)
+
+    if current_user.id == playlist.userId:
+        db.session.delete(song)
+        db.session.commit()
+        return f'song {songId} deleted from playlist'
+    return "Unauthorized"

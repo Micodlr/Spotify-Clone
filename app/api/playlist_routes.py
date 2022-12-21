@@ -10,7 +10,7 @@ playlist_routes = Blueprint('playlists', __name__)
 @login_required
 def playlists():
     """
-    Query for all users and returns them in a list of user dictionaries
+    Query for all user playlist
     """
     playlists = Playlist.query.filter(Playlist.userId == current_user.id)
     print(playlists[0].playlistSongs)
@@ -59,7 +59,7 @@ def editPlaylist(id):
     form["csrf_token"].data = request.cookies["csrf_token"]
     playlist = Playlist.query.get_or_404(id)
 
-    if form.validate_on_submit and playlist.userId == current_user.id():
+    if form.validate_on_submit() and playlist.userId == current_user.id:
         playlist.name = form.name.data
         db.session.add(playlist)
         db.session.commit()
@@ -94,7 +94,7 @@ def addPlaylistSong(id):
     form = SongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    if form.validate_on_submit and current_user.id == playlist.userId:
+    if form.validate_on_submit() and current_user.id == playlist.userId:
         new_song = PlaylistSong(
             songId = form.songId.data,
             playlistId = id

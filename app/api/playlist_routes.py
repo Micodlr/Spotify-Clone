@@ -61,7 +61,7 @@ def editPlaylist(id):
 
     if form.validate_on_submit() and playlist.userId == current_user.id:
         playlist.name = form.name.data
-        db.session.add(playlist)
+        # db.session.add(playlist)
         db.session.commit()
         return playlist.to_dict()
     return "Bad Data"

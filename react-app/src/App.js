@@ -11,6 +11,10 @@ import { authenticate } from "./store/session";
 import SignInSide from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import LandingPage from "./components/LandingPage";
+import Content from "./components/dashboard/Content";
+import Header from "./components/dashboard/Header";
+import Navigator from "./components/dashboard/Navigator";
+import Paperbase from "./components/dashboard/Paperbase";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,9 +33,12 @@ function App() {
 
   return (
     <BrowserRouter>
+      {/* <Navigator /> */}
+      {/* <Header /> */}
+      {/* <Content /> */}
       <Switch>
-        <Route path="/" exact={true}>
-          <LandingPage />
+        <Route path="/dashboard">
+          <Paperbase />
         </Route>
 
         <Route path="/login" exact={true}>
@@ -40,6 +47,9 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUp />
         </Route>
+        {/* <Route path="/dashboard" exact={true}>
+          <Content />
+        </Route> */}
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>
@@ -47,7 +57,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <User />
         </Route>
       </Switch>
     </BrowserRouter>

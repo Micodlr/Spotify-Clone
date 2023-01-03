@@ -57,7 +57,7 @@ export default function SignInSide() {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (

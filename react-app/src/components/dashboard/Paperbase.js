@@ -11,6 +11,10 @@ import Header from "./Header";
 import UsersList from "../UsersList";
 import User from "../User";
 import { Route, Switch } from "react-router-dom";
+import HomePage from "./Home";
+import MuiAudioPlayer from "material-ui-audio-player";
+import AudioPlayer from "material-ui-audio-player";
+import { Card } from "@mui/material";
 
 function Copyright() {
   return (
@@ -66,6 +70,7 @@ theme = {
         },
       },
     },
+
     MuiButton: {
       styleOverrides: {
         root: {
@@ -206,6 +211,9 @@ export default function Paperbase() {
             sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
           >
             <Switch>
+              <Route exact path="/dashboard/home">
+                <Content Component={HomePage} />
+              </Route>
               <Route path="/dashboard/search">
                 <Content Component={UsersList} />
               </Route>
@@ -215,6 +223,11 @@ export default function Paperbase() {
             </Switch>
           </Box>
           <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
+            <audio
+              controls
+              // src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"
+            ></audio>
+
             <Copyright />
           </Box>
         </Box>

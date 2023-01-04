@@ -16,7 +16,9 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import LandingPage from "../LandingPage";
 import { Avatar } from "@mui/material";
+import { useHistory } from "react-router-dom";
 import "./logo.css";
+
 const categories = [
   {
     id: "Build",
@@ -25,7 +27,7 @@ const categories = [
         id: "Home",
         icon: <HomeIcon />,
         active: true,
-        href: "/",
+        href: "/home",
       },
       { id: "Search", icon: <SearchIcon />, href: "/search" },
       { id: "Your Library", icon: <LibraryMusicIcon />, href: "/library" },
@@ -57,6 +59,11 @@ const itemCategory = {
 
 export default function Navigator(props) {
   const { ...other } = props;
+  const history = useHistory();
+  function changeUrl(e, href) {
+    e.preventDefault();
+    history.push(`/dashboard${href}`);
+  }
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -101,7 +108,7 @@ export default function Navigator(props) {
                 <ListItemButton
                   selected={active}
                   sx={item}
-                  href={`/dashboard${href}`}
+                  onClick={(e) => changeUrl(e, href)}
                 >
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText>{childId}</ListItemText>

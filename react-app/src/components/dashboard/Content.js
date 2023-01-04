@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import AudioPlayer from "material-ui-audio-player";
 
 import { Switch, Route } from "react-router-dom";
 import UsersList from "../UsersList";

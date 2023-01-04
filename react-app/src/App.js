@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Routes } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
@@ -15,6 +15,8 @@ import Content from "./components/dashboard/Content";
 import Header from "./components/dashboard/Header";
 import Navigator from "./components/dashboard/Navigator";
 import Paperbase from "./components/dashboard/Paperbase";
+import HomePage from "./components/dashboard/Home";
+import AudioPlayer from "material-ui-audio-player";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,6 +41,17 @@ function App() {
       <Switch>
         <Route path="/dashboard">
           <Paperbase />
+
+          {/* <Route path="home">
+              <Content Component={HomePage} />
+            </Route>
+            <Route path="search">
+              <Content Component={UsersList} />
+            </Route>
+            <Route path="/library">
+              <Content Component={User} />
+            </Route>
+          </Paperbase> */}
         </Route>
 
         <Route path="/login" exact={true}>

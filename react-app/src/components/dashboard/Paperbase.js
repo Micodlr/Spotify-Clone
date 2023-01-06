@@ -15,6 +15,9 @@ import HomePage from "./Home";
 import MuiAudioPlayer from "material-ui-audio-player";
 import AudioPlayer from "material-ui-audio-player";
 import { Card } from "@mui/material";
+import MediaControlCard from "./MediaPlayer";
+import PlaylistsPage from "./Playlists";
+import PlaylistSongs from "./PlaylistSongs";
 
 function Copyright() {
   return (
@@ -184,11 +187,17 @@ export default function Paperbase() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex", minHeight: "100vh" }}>
+      <Box
+        sx={{ backgroundColor: "blue", display: "flex", minHeight: "100vh" }}
+      >
         <CssBaseline />
+
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          sx={{
+            width: { sm: drawerWidth },
+            flexShrink: { sm: 0 },
+          }}
         >
           {/* {isSmUp ? null : (
             <Navigator
@@ -201,14 +210,28 @@ export default function Paperbase() {
 
           <Navigator
             PaperProps={{ style: { width: drawerWidth } }}
-            sx={{ display: { sm: "block", xs: "none" } }}
+            sx={{
+              backgroundColor: "blue",
+              display: { sm: "block", xs: "none" },
+            }}
           />
         </Box>
-        <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Header onDrawerToggle={handleDrawerToggle} />
           <Box
             component="nav"
-            sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
+            sx={{
+              flex: 1,
+              py: 2,
+              px: 2,
+              bgcolor: "#eaeff1",
+            }}
           >
             <Switch>
               <Route exact path="/dashboard/home">
@@ -218,17 +241,23 @@ export default function Paperbase() {
                 <Content Component={UsersList} />
               </Route>
               <Route path="/dashboard/library">
-                <Content Component={User} />
+                <Content Component={PlaylistsPage} />
+              </Route>
+              <Route exact path="/dashboard/playlists">
+                <Content Component={PlaylistsPage} />
+              </Route>
+              <Route exact path="/dashboard/playlists/:playlistId">
+                <Content Component={PlaylistSongs} />
               </Route>
             </Switch>
           </Box>
           <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
-            <audio
+            {/* <audio
               controls
               // src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"
-            ></audio>
-
+            ></audio> */}
             <Copyright />
+            <MediaControlCard />
           </Box>
         </Box>
       </Box>

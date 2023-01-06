@@ -9,6 +9,7 @@ class Album(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   artistId = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod('artists.id')))
+  albumCover = db.Column(db.String, nullable=True)
   title = db.Column(db.String, nullable=False)
   description = db.Column(db.String, nullable=False)
 
@@ -22,6 +23,7 @@ class Album(db.Model):
     return {
         'id': self.id,
         'artistId': self.artistId,
+        'albumCover': self.albumCover,
         'title': self.title,
         'description': self.description,
     }

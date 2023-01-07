@@ -230,7 +230,7 @@ export default function Paperbase() {
               flex: 1,
               py: 2,
               px: 2,
-              bgcolor: "#eaeff1",
+              bgcolor: "#0f0f0f",
             }}
           >
             <Switch>

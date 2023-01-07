@@ -8,15 +8,14 @@ const getSongs = (songs) => ({
 });
 
 export const getSongsThunk = () => async (dispatch) => {
-  const res = await csrfFetch(`/api/users/balance`);
+  const res = await csrfFetch(`/api/songs/`);
 
-  const { balance, owe, owed } = await res.json();
+  const { songs } = await res.json();
 
   if (res.ok) {
     const data = {};
-    data["owe"] = owe;
-    data["owed"] = owed;
-    data["balance"] = balance;
+    songs.forEach((song) => (data[song.id] = song));
+
     dispatch(getSongs(data));
   }
   return res;

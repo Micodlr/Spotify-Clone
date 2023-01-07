@@ -26,6 +26,8 @@ def playlist(id):
     """
     playlist = Playlist.query.get_or_404(id)
     songs = playlist.playlistSongs
+
+
     listOfSongs = {'songs': [song.to_dict() for song in songs]}
     return {"playlist": listOfSongs}
 

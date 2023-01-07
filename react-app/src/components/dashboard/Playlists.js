@@ -84,7 +84,7 @@ export default function PlaylistPage() {
   }, [dispatch]);
 
   const playlists = useSelector((state) => Object.values(state.playlists));
-  console.log(playlists);
+
   const history = useHistory();
   const onClick = (e, playlistId) => {
     e.preventDefault();

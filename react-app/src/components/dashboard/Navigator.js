@@ -19,6 +19,8 @@ import { Avatar } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import "./logo.css";
 
+import BasicModal from "./Modal";
+
 const categories = [
   {
     id: "Build",
@@ -29,7 +31,11 @@ const categories = [
         active: true,
         href: "/home",
       },
-      { id: "Search", icon: <SearchIcon />, href: "/search" },
+      {
+        id: "Search",
+        icon: <SearchIcon />,
+        href: "/search",
+      },
       { id: "Your Library", icon: <LibraryMusicIcon />, href: "/library" },
     ],
   },
@@ -37,7 +43,7 @@ const categories = [
     id: "Quality",
     children: [
       { id: "Create Playlist", icon: <PlaylistAddIcon />, href: "/search" },
-      { id: "Like Songs", icon: <ThumbUpIcon />, href: "/search" },
+      { id: "Liked Songs", icon: <ThumbUpIcon />, href: "/search" },
     ],
   },
 ];
@@ -103,7 +109,7 @@ export default function Navigator(props) {
         </ListItem>
         {categories.map(({ id, children }) => (
           <Box key={id} sx={{ bgcolor: "#00000" }}>
-            {children.map(({ id: childId, icon, active, href }) => (
+            {children.map(({ id: childId, icon, active, href, modal }) => (
               <ListItem disablePadding key={childId}>
                 <ListItemButton
                   selected={active}
@@ -119,6 +125,30 @@ export default function Navigator(props) {
             <Divider sx={{ mt: 2 }} />
           </Box>
         ))}
+
+        <Box sx={{ bgcolor: "#00000", color: "whitesmoke" }}>
+          <ListItem disablePadding>
+            <ListItemButton
+              sx={{
+                py: "2px",
+                px: 3,
+                color: "rgba(255, 255, 255, 0.7)",
+                "&:hover, &:focus": {
+                  bgcolor: "rgba(255, 255, 255, 0.08)",
+                },
+              }}
+            >
+              <ListItemIcon>
+                <PlaylistAddIcon />
+              </ListItemIcon>
+              <BasicModal />
+              {/* <ListItemText></ListItemText> */}
+            </ListItemButton>
+          </ListItem>
+
+          <Divider sx={{ mt: 2 }} />
+        </Box>
+
         <ListItemText sx={{ mt: 2, fontSize: 22, color: "#ffffff" }}>
           playlist 1
         </ListItemText>

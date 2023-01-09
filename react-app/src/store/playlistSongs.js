@@ -9,7 +9,6 @@ const getPlaylistSongs = (playlist) => ({
 
 export const getPlaylistSongsThunk = (playlistId) => async (dispatch) => {
   const res = await csrfFetch(`/api/playlists/${playlistId}`);
-  console.log("hit  get playlistSongs");
 
   const { playlist } = await res.json();
 

@@ -1,11 +1,30 @@
 import { csrfFetch } from "./csrf";
 
 const GET_PLAYLISTS = "playlists/GET_PLAYLISTS";
+const ADD_PLAYLIST = "playlists/ADD_PLAYLIST";
 
 const getPlaylists = (playlists) => ({
   type: GET_PLAYLISTS,
   playlists,
 });
+const addPlaylists = (playlist) => ({
+  type: GET_PLAYLISTS,
+  playlist,
+});
+
+export const addPlaylistsThunk = (playlist) => async (dispatch) => {
+  const res = await csrfFetch(`/api/playlists/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(playlist),
+  });
+
+  if (res.ok) {
+    const newPlaylist = await res.json();
+    dispatch(addPlaylists(newPlaylist));
+  }
+  return res;
+};
 // const getPlaylistSongs = (playlist) => ({
 //   type: GET_PLAYLIST_SONGS,
 //   playlist,
@@ -47,8 +66,8 @@ const playlistsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PLAYLISTS:
       return { ...state, ...action.playlists };
-    // case GET_PLAYLIST_SONGS:
-    //   return { ...state, ...action.playlist };
+    case ADD_PLAYLIST:
+      return { ...state, ...action.playlist };
     default:
       return newState;
   }

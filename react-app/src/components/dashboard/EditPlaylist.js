@@ -6,16 +6,22 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ClearIcon from "@mui/icons-material/Clear";
 import Tooltip from "@mui/material/Tooltip";
-
+import EditIcon from "@mui/icons-material/Edit";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../store/session";
-import { useHistory } from "react-router-dom";
+import { deletePlaylistThunk } from "../../store/playlists";
+import { useHistory, useParams } from "react-router-dom";
+import BasicModal from "./Modal";
+import EditPlaylistModal from "./EditPlaylistModal";
 
-export default function AccountMenu() {
+export default function Ellipsis() {
+  const { playlistId } = useParams();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -27,41 +33,27 @@ export default function AccountMenu() {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const onLogout = async (e) => {
+
+  const deletePlaylist = async (e) => {
     e.preventDefault();
-    await dispatch(logout());
-    history.push("/login");
+    await dispatch(deletePlaylistThunk(playlistId));
+    history.push("/dashboard/library");
   };
 
   const user = useSelector((state) => state.session.user);
-  let firstLetter;
-  if (user) {
-    firstLetter = user.username[0];
-  }
 
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
-          <IconButton
+          <MoreHorizIcon
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{ color: "white", ml: 2 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
-          >
-            <Avatar
-              sx={{
-                color: "whitesmoke",
-                width: 32,
-                height: 32,
-                bgcolor: "#1DB954",
-              }}
-            >
-              {firstLetter}
-            </Avatar>
-          </IconButton>
+          ></MoreHorizIcon>
         </Tooltip>
       </Box>
       <Menu
@@ -69,7 +61,7 @@ export default function AccountMenu() {
         id="account-menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
+        // onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -100,24 +92,17 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
-        <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
-        <Divider />
+          <ListItemIcon>
+            <EditIcon fontSize="small" />
+          </ListItemIcon>
 
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
+          <EditPlaylistModal />
         </MenuItem>
-        <MenuItem onClick={onLogout}>
+        <MenuItem onClick={deletePlaylist}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <ClearIcon fontSize="small" />
           </ListItemIcon>
-          Logout
+          Delete Playlist
         </MenuItem>
       </Menu>
     </React.Fragment>

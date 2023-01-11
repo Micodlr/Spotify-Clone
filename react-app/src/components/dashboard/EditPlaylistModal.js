@@ -5,9 +5,15 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 // import BasicTextFields from "./AddPlaylistForm";
 import { FormControl, TextField } from "@mui/material";
-import { addPlaylistsThunk } from "../../store/playlists";
-import { useDispatch } from "react-redux";
+import {
+  editPlaylistNameThunk,
+  getplaylistsThunk,
+} from "../../store/playlists";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelect } from "@mui/base";
 
 const style = {
   position: "absolute",
@@ -15,22 +21,28 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "whitesmoke",
-  "border-radius": "40px",
-  display: "flex",
-  "flex-direction": "column",
+  bgcolor: "background.paper",
 
   border: "2px solid #000",
   boxShadow: 24,
-  p: 5,
+  p: 4,
 };
 
-export default function BasicModal() {
+export default function EditPlaylistModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const { playlistId } = useParams();
+
+  useEffect(() => {
+    const myPlaylists = async () => await dispatch(getplaylistsThunk());
+    myPlaylists();
+  }, [dispatch]);
+
+  const playlist = useSelector((state) => state.playlists[playlistId]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,10 +51,12 @@ export default function BasicModal() {
     //   email: data.get("email"),
     //   password: data.get("password"),
     // });
-    await dispatch(addPlaylistsThunk({ name: data.get("name") }));
+    await dispatch(
+      editPlaylistNameThunk({ id: playlist.id, name: data.get("name") })
+    );
 
     handleClose();
-    history.push("/dashboard/library");
+    // history.push("/dashboard/library");
     // if (res) {
     //   setErrors(res);
     // }
@@ -51,10 +65,10 @@ export default function BasicModal() {
   return (
     <div>
       <Button
-        sx={{ py: "2px", px: "2px", color: "whitesmoke" }}
+        sx={{ py: "2px", px: "2px", color: "black", fontSize: "17px" }}
         onClick={handleOpen}
       >
-        Create Playlist
+        Edit Playlist Name
       </Button>
       <Modal
         open={open}
@@ -64,18 +78,13 @@ export default function BasicModal() {
       >
         <Box sx={style} component="form" onSubmit={handleSubmit}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Create Playlist
+            Edit Playlist Name
           </Typography>
 
           <FormControl noValidate autoComplete="off">
-            <TextField name="name" id="name" label="Playlist Name" />
+            <TextField name="name" id="name" label={playlist?.name} />
 
-            <Button
-              sx={{ "&:hover": { bgcolor: "#1DB954" } }}
-              type="submit"
-              variant="contained"
-              color="primary"
-            >
+            <Button type="submit" variant="contained" color="primary">
               Submit
             </Button>
           </FormControl>

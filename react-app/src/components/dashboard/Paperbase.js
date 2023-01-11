@@ -18,7 +18,9 @@ import { Card } from "@mui/material";
 import MediaControlCard from "./MediaPlayer";
 import PlaylistsPage from "./Playlists";
 import PlaylistSongs from "./PlaylistSongs";
-
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getplaylistsThunk } from "../../store/playlists";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -178,6 +180,12 @@ theme = {
 const drawerWidth = 256;
 
 export default function Paperbase() {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const myPlaylists = async () => await dispatch(getplaylistsThunk());
+  //   myPlaylists();
+  // }, [dispatch]);
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -251,7 +259,7 @@ export default function Paperbase() {
               </Route>
             </Switch>
           </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
+          <Box component="footer" sx={{ p: 2, bgcolor: "#0f0f0f" }}>
             {/* <audio
               controls
               // src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"

@@ -28,6 +28,20 @@ export default function MediaControlCard() {
   //     },
   //   });
 
+  const audioRef = React.useRef();
+
+  const handlePlay = () => {
+    audioRef.current.play();
+  };
+
+  const handlePause = () => {
+    audioRef.current.pause();
+  };
+
+  const handleSeek = (event) => {
+    audioRef.current.currentTime = event.target.value;
+  };
+
   return (
     <Card sx={{ display: "flex" }}>
       <CardMedia
@@ -36,7 +50,6 @@ export default function MediaControlCard() {
         image={
           "https://t3.ftcdn.net/jpg/05/49/28/50/360_F_549285030_CYY2EQbWguJqh8jsuZCDzfkp294bHAnz.jpg"
         }
-        alt="Live from space album cover"
       />
       <Box
         sx={{
@@ -56,6 +69,12 @@ export default function MediaControlCard() {
             Mac Miller
           </Typography>
         </CardContent>
+        <CardMedia
+          component="audio"
+          //   src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"
+          title="Audio title"
+          ref={audioRef}
+        />
         <Box
           sx={{
             bgColor: "black",
@@ -72,7 +91,7 @@ export default function MediaControlCard() {
               <SkipPreviousIcon />
             )}
           </IconButton>
-          <IconButton aria-label="play/pause">
+          <IconButton onClick={handlePlay} aria-label="play/pause">
             <PlayArrowIcon sx={{ height: 38, width: 38 }} />
           </IconButton>
           <IconButton aria-label="next">

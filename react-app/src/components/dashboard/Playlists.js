@@ -68,21 +68,19 @@ import { getplaylistsThunk } from "../../store/playlists";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { maxHeight } from "@mui/system";
 import { useHistory } from "react-router-dom";
+import Ellipsis from "./EditPlaylist";
 
 export default function PlaylistPage() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    const myPlaylists = async () => await dispatch(getplaylistsThunk());
-    myPlaylists();
-  }, [dispatch]);
-
+  //   const playlistsState = useSelector((state) => state.playlists);
+  //   console.log(playlistsState);
   const playlists = useSelector((state) => Object.values(state.playlists));
 
   const history = useHistory();
@@ -90,8 +88,16 @@ export default function PlaylistPage() {
     e.preventDefault();
     history.push(`/dashboard/playlists/${playlistId}`);
   };
+  //   useEffect(() => {
+  //     const myPlaylists = async () => await dispatch(getplaylistsThunk());
+  //     myPlaylists();
+  //   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getplaylistsThunk());
+  }, [dispatch]);
   return (
-    <>
+    <Container sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
       {playlists.map((playlist) => (
         //   <Card>
         //     <div id="playlist-container" key={playlist?.id}>
@@ -121,6 +127,6 @@ export default function PlaylistPage() {
           </CardActionArea>
         </Card>
       ))}
-    </>
+    </Container>
   );
 }

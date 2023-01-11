@@ -2,13 +2,25 @@ import { csrfFetch } from "./csrf";
 
 const GET_PLAYLISTS = "playlists/GET_PLAYLISTS";
 const ADD_PLAYLIST = "playlists/ADD_PLAYLIST";
+const EDIT_PLAYLIST_NAME = "playlist/EDIT_PLAYLIST_NAME";
+const DELETE_PLAYLIST = "playlist/DELETE_PLAYLIST";
 
 const getPlaylists = (playlists) => ({
   type: GET_PLAYLISTS,
   playlists,
 });
 const addPlaylists = (playlist) => ({
-  type: GET_PLAYLISTS,
+  type: ADD_PLAYLIST,
+  playlist,
+});
+
+const editPlaylistName = (playlist) => ({
+  type: EDIT_PLAYLIST_NAME,
+  playlist,
+});
+
+const deletePlaylist = (playlist) => ({
+  type: DELETE_PLAYLIST,
   playlist,
 });
 
@@ -24,6 +36,32 @@ export const addPlaylistsThunk = (playlist) => async (dispatch) => {
     dispatch(addPlaylists(newPlaylist));
   }
   return res;
+};
+
+export const editPlaylistNameThunk = (playlist) => async (dispatch) => {
+  const { id } = playlist;
+  const res = await csrfFetch(`/api/playlists/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(playlist),
+  });
+
+  if (res.ok) {
+    const editedPlaylist = await res.json;
+    dispatch(editPlaylistName(editedPlaylist));
+  }
+  return;
+};
+
+export const deletePlaylistThunk = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/playlists/${id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deletePlaylist(id));
+    return res;
+  }
 };
 // const getPlaylistSongs = (playlist) => ({
 //   type: GET_PLAYLIST_SONGS,
@@ -67,7 +105,15 @@ const playlistsReducer = (state = initialState, action) => {
     case GET_PLAYLISTS:
       return { ...state, ...action.playlists };
     case ADD_PLAYLIST:
-      return { ...state, ...action.playlist };
+      //   return { ...state, ...action.playlist };
+      newState = { ...state, [action.playlist.id]: action.playlist };
+      return newState;
+    case EDIT_PLAYLIST_NAME:
+      newState = { ...state, [action.playlist.id]: action.playlist };
+      return newState;
+    case DELETE_PLAYLIST:
+      delete newState[action.playlist];
+      return newState;
     default:
       return newState;
   }

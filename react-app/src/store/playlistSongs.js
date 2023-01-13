@@ -28,7 +28,7 @@ const playlistSongsReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case GET_PLAYLIST_SONGS:
-      return { ...state, ...action.playlist };
+      return { ...action.playlist };
     default:
       return newState;
   }

@@ -21,6 +21,8 @@ import PlaylistSongs from "./PlaylistSongs";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getplaylistsThunk } from "../../store/playlists";
+import SearchPage from "./SearchPage";
+import AccountMenu from "./AccountMenu";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -199,7 +201,6 @@ export default function Paperbase() {
         sx={{ backgroundColor: "blue", display: "flex", minHeight: "100vh" }}
       >
         <CssBaseline />
-
         <Box
           component="nav"
           sx={{
@@ -246,7 +247,7 @@ export default function Paperbase() {
                 <Content Component={HomePage} />
               </Route>
               <Route path="/dashboard/search">
-                <Content Component={UsersList} />
+                <Content Component={SearchPage} />
               </Route>
               <Route path="/dashboard/library">
                 <Content Component={PlaylistsPage} />

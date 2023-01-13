@@ -27,7 +27,7 @@ function Header(props) {
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
-            {/* <Grid sx={{ display: { sm: "none", xs: "block" } }} item>
+            <Grid sx={{ display: { sm: "none", xs: "block" } }} item>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -36,22 +36,16 @@ function Header(props) {
               >
                 <MenuIcon />
               </IconButton>
-            </Grid> */}
+            </Grid>
             <Grid item xs />
 
-            <Grid item>
+            <Grid item sx={{ p: 0.5 }}>
               <AccountMenu />
-              {/* <IconButton
+              <IconButton
                 color="inherit"
                 sx={{ p: 0.5 }}
                 onClick={onDrawerToggle}
-              > */}
-              {/* <Avatar
-                  src="https://live.staticflickr.com/8281/7688689508_e66646c41d_b.jpg"
-                  alt="My Avatar"
-                /> */}
-              {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>M</Avatar> */}
-              {/* </IconButton> */}
+              ></IconButton>
             </Grid>
           </Grid>
         </Toolbar>

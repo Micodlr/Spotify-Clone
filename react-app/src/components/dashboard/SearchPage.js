@@ -21,7 +21,7 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { Grid } from "@material-ui/core";
 // import { getAllreviews } from "../../store/reviews";
 
-export default function PlaylistSongs() {
+export default function SearchPage() {
   const { playlistId } = useParams();
 
   const dispatch = useDispatch();
@@ -63,7 +63,11 @@ export default function PlaylistSongs() {
         <Ellipsis />
       </div>
       <List component="ol">
-        <ListSubheader style={{ color: "whitesmoke" }}>My List</ListSubheader>
+        <ListSubheader
+          style={{ fontSize: "20px", fontWeight: "bold", color: "whitesmoke" }}
+        >
+          Browse all
+        </ListSubheader>
 
         {listOfSongs.map((song, index) => (
           <ListItem key={song.id}>

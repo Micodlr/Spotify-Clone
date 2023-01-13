@@ -14,12 +14,27 @@ import {
   ListSubheader,
   Card,
 } from "@material-ui/core";
-import { Avatar, Button, ListItemIcon, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  CardMedia,
+  ListItemIcon,
+  Typography,
+} from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 
 import { Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import zIndex from "@mui/material/styles/zIndex";
 // import { getAllreviews } from "../../store/reviews";
+
+// const useStyles = makeStyles({
+//   media: {
+//     height: 0,
+//     paddingTop: "56.25%", // 16:9
+//   },
+// });
 
 export default function PlaylistSongs() {
   const { playlistId } = useParams();
@@ -36,7 +51,6 @@ export default function PlaylistSongs() {
   }, [dispatch, playlistId]);
   const songId = useSelector((state) => Object.values(state.playlistSongs));
   let songsId = songId.map((song) => song.songId);
-  console.log(songsId);
 
   useEffect(() => {
     dispatch(getSongsThunk());
@@ -45,6 +59,8 @@ export default function PlaylistSongs() {
   const songs = useSelector((state) => Object.values(state.songs));
   let listOfSongs = songs.filter((song) => songsId.includes(song.id));
   console.log(listOfSongs);
+
+  const playlist = useSelector((state) => state.playlists[playlistId]);
 
   return (
     <>
@@ -59,11 +75,41 @@ export default function PlaylistSongs() {
         ))}
       </Grid> */}
 
+      <Box>
+        <CardMedia
+          style={{
+            position: "relative",
+            paddingTop: "56.25%",
+            borderRadius: "10px",
+          }}
+          image={playlist?.playlistImg}
+          title="header image"
+        />
+      </Box>
+
+      <Box
+        style={{
+          display: "flex",
+          color: "whitesmoke",
+          zIndex: "99",
+          height: "60px",
+          width: "25%",
+          fontSize: "25px",
+          fontWeight: "bold",
+          alignItems: "flex-end",
+          textShadow: "1px 2px black",
+        }}
+      >
+        {playlist?.name}
+      </Box>
       <div>
         <Ellipsis />
       </div>
+
       <List component="ol">
-        <ListSubheader style={{ color: "whitesmoke" }}>My List</ListSubheader>
+        {/* <ListSubheader style={{ color: "whitesmoke" }}>
+          {playlistName}
+        </ListSubheader> */}
 
         {listOfSongs.map((song, index) => (
           <ListItem key={song.id}>

@@ -16,9 +16,9 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "whitesmoke",
-  "border-radius": "40px",
+  borderRadius: "40px",
   display: "flex",
-  "flex-direction": "column",
+  flexDirection: "column",
 
   border: "2px solid #000",
   boxShadow: 24,

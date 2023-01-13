@@ -40,7 +40,7 @@ export default function EditPlaylistModal() {
   useEffect(() => {
     const myPlaylists = async () => await dispatch(getplaylistsThunk());
     myPlaylists();
-  }, [dispatch]);
+  }, [dispatch, open]);
 
   const playlist = useSelector((state) => state.playlists[playlistId]);
 
@@ -65,7 +65,13 @@ export default function EditPlaylistModal() {
   return (
     <div>
       <Button
-        sx={{ py: "2px", px: "2px", color: "black", fontSize: "17px" }}
+        sx={{
+          py: "2px",
+          px: "2px",
+          color: "black",
+          fontSize: "17px",
+          "&:hover": { color: "#1DB954", fontWeight: "bold" },
+        }}
         onClick={handleOpen}
       >
         Edit Playlist Name

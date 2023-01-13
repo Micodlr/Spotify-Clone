@@ -7,10 +7,17 @@ def seed_songs():
         artistId=1, albumId=1, title="Come Together", lyrics="test", spotifySongId=1)
     test2 = Song(
          artistId=2, albumId=2, title="Bombtrack", lyrics="test", spotifySongId=2)
+    test3 = Song(
+         artistId=3, albumId=3, title="Infraction", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/summer-strut-infraction-main-version-16209-01-17.mp3", )
+    test4 = Song(
+         artistId=4, albumId=4, title="Infraction", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/night-in-kyoto-avbe-main-version-21302-01-57.mp3", )
+
 
 
     db.session.add(test1)
     db.session.add(test2)
+    db.session.add(test3)
+    db.session.add(test4)
 
     db.session.commit()
 

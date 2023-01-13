@@ -31,7 +31,7 @@ export default function SearchPage() {
   );
 
   useEffect(() => {
-    dispatch(getPlaylistSongsThunk(playlistId));
+    dispatch(getPlaylistSongsThunk(1));
     // dispatch(getAllreviews());
   }, [dispatch, playlistId]);
   const songId = useSelector((state) => Object.values(state.playlistSongs));
@@ -43,8 +43,6 @@ export default function SearchPage() {
     // dispatch(getAllreviews());
   }, [dispatch, playlistId]);
   const songs = useSelector((state) => Object.values(state.songs));
-  let listOfSongs = songs.filter((song) => songsId.includes(song.id));
-  console.log(listOfSongs);
 
   return (
     <>
@@ -69,7 +67,7 @@ export default function SearchPage() {
           Browse all
         </ListSubheader>
 
-        {listOfSongs.map((song, index) => (
+        {songs.map((song, index) => (
           <ListItem key={song.id}>
             <ListItemAvatar>
               <ListItemIcon>

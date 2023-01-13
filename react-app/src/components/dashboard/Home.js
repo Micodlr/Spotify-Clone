@@ -3,12 +3,12 @@ import NavBar from "../NavBar";
 
 function HomePage() {
   return (
-    <div class="page-container">
-      <div class="playlist-suggestion">new playlist suggestions</div>
-      <div class="greeting">Welcome</div>
-      <div class="suggestions">playlist suggestions</div>
-      <div class="recently-played">recently played</div>
-      <div class="coding-music">coding music</div>
+    <div className="page-container">
+      <div className="playlist-suggestion">new playlist suggestions</div>
+      <div className="greeting">Welcome</div>
+      <div className="suggestions">playlist suggestions</div>
+      <div className="recently-played">recently played</div>
+      <div className="coding-music">coding music</div>
     </div>
   );
 }

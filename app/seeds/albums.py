@@ -7,10 +7,16 @@ def seed_albums():
         title='Abbey Road', artistId = 1, description='test')
     test2 = Album(
          title='The Battle of Los Angeles',artistId = 2, description='test2')
+    test3 = Album(
+         title='Infraction',artistId = 3, albumCover = "https://musicvine.imgix.net/images/infraction-avatar-v1_7219676042219606.jpg", description='If Michael Bay made beats they’d sound something like this. Dystopian, cyberpunk-inspired EDM featuring glitch-hop, dog barks and Transformers sounds.')
 
+    test4 = Album(
+         title='Tatami',artistId = 4, albumCover = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS3rYHxDWo7D8N0piaFeKQRq_DGgapuywuAA&usqp=CAU", description="A versatile mix of sounds from a rare talent. Everything from 80s synthpop & hip hop beats, through to powerful orchestral arrangements.")
 
     db.session.add(test1)
     db.session.add(test2)
+    db.session.add(test3)
+    db.session.add(test4)
 
     db.session.commit()
 

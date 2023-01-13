@@ -91,16 +91,22 @@ export default function Ellipsis() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
+        <MenuItem sx={{ "&:hover": { color: "#1DB954", fontWeight: "bold" } }}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
 
           <EditPlaylistModal />
         </MenuItem>
-        <MenuItem onClick={deletePlaylist}>
+        <MenuItem
+          sx={{
+            fontSize: "17px",
+            "&:hover": { color: "red", fontWeight: "bold" },
+          }}
+          onClick={deletePlaylist}
+        >
           <ListItemIcon>
-            <ClearIcon fontSize="small" />
+            <ClearIcon fontSize="medium" />
           </ListItemIcon>
           Delete Playlist
         </MenuItem>

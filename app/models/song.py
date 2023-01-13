@@ -30,4 +30,5 @@ class Song(db.Model):
         'lyrics': self.lyrics,
         'songUrl': self.songUrl,
         'spotifySongId': self.spotifySongId,
+        'artist':self.artists.to_dict()
     }

@@ -3,49 +3,54 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
+
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import ClearIcon from "@mui/icons-material/Clear";
+
 import Tooltip from "@mui/material/Tooltip";
-import EditIcon from "@mui/icons-material/Edit";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
+
 import { useDispatch, useSelector } from "react-redux";
 import { deletePlaylistThunk } from "../../store/playlists";
 import { useHistory, useParams } from "react-router-dom";
 import BasicModal from "./Modal";
-import EditPlaylistModal from "./EditPlaylistModal";
 
-export default function Ellipsis() {
-  const { playlistId } = useParams();
-
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import AddIcon from "@mui/icons-material/Add";
+import { addSongToPlaylistThunk } from "../../store/playlistSongs";
+export default function SongEllipsis({ songId }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [nestedAnchorEl, setNestedAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+    setNestedAnchorEl(null);
+  };
+  const handleNestedMenuOpen = (event) => {
+    setNestedAnchorEl(event.currentTarget);
   };
 
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const deletePlaylist = async (e) => {
+  const addSong = async (e, playlistId) => {
     e.preventDefault();
-    await dispatch(deletePlaylistThunk(playlistId));
-    history.push("/dashboard/library");
+    await dispatch(
+      addSongToPlaylistThunk({ songId: songId, playlistId: playlistId })
+    );
+    handleClose();
+    history.push("/dashboard/playlists");
   };
 
   const user = useSelector((state) => state.session.user);
+  const playlists = useSelector((state) => Object.values(state.playlists));
+  console.log(playlists);
 
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Edit playlist">
+        <Tooltip title="Add to playlist">
           <MoreHorizIcon
             onClick={handleClick}
             size="small"
@@ -56,9 +61,9 @@ export default function Ellipsis() {
           ></MoreHorizIcon>
         </Tooltip>
       </Box>
-
       <Menu
         anchorEl={anchorEl}
+        keepMounted
         id="account-menu"
         open={open}
         onClose={handleClose}
@@ -93,24 +98,31 @@ export default function Ellipsis() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem sx={{ "&:hover": { color: "#1DB954", fontWeight: "bold" } }}>
-          <ListItemIcon>
-            <EditIcon fontSize="small" />
-          </ListItemIcon>
-
-          <EditPlaylistModal />
+          <PlaylistAddIcon />
+          Create playlist
+          <BasicModal />
         </MenuItem>
         <MenuItem
-          sx={{
-            fontSize: "17px",
-            "&:hover": { color: "red", fontWeight: "bold" },
-          }}
-          onClick={deletePlaylist}
+          sx={{ "&:hover": { color: "#1DB954", fontWeight: "bold" } }}
+          onClick={handleNestedMenuOpen}
         >
-          <ListItemIcon>
-            <ClearIcon fontSize="medium" />
-          </ListItemIcon>
-          - Delete Playlist
+          <AddIcon />
+          Add to playlist
         </MenuItem>
+        <Menu
+          id="nested-menu"
+          anchorEl={nestedAnchorEl}
+          keepMounted
+          open={Boolean(nestedAnchorEl)}
+          //   onClose={handleClose}
+          onMouseLeave={handleClose}
+        >
+          {playlists.map((playlist) => (
+            <MenuItem onClick={(e) => addSong(e, playlist.id)}>
+              {playlist.name}
+            </MenuItem>
+          ))}
+        </Menu>
       </Menu>
     </React.Fragment>
   );

@@ -103,7 +103,7 @@ const playlistsReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case GET_PLAYLISTS:
-      return { ...state, ...action.playlists };
+      return { ...action.playlists };
     case ADD_PLAYLIST:
       //   return { ...state, ...action.playlist };
       newState = { ...state, [action.playlist.id]: action.playlist };

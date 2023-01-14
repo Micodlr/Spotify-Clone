@@ -14,7 +14,6 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelect } from "@mui/base";
-import EditIcon from "@mui/icons-material/Edit";
 
 const style = {
   position: "absolute",
@@ -29,9 +28,8 @@ const style = {
   p: 4,
 };
 
-export default function EditPlaylistModal() {
+export default function AddSongModal() {
   const [open, setOpen] = React.useState(false);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
@@ -45,13 +43,6 @@ export default function EditPlaylistModal() {
   }, [dispatch, open]);
 
   const playlist = useSelector((state) => state.playlists[playlistId]);
-  const [currentPlaylistName, setCurrentPlaylistName] = React.useState(
-    playlist?.name
-  );
-
-  const handleOnChange = (e) => {
-    setCurrentPlaylistName(e.target.value);
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -77,14 +68,13 @@ export default function EditPlaylistModal() {
         sx={{
           py: "2px",
           px: "2px",
-          width: "100%",
           color: "black",
           fontSize: "17px",
           "&:hover": { color: "#1DB954", fontWeight: "bold" },
         }}
         onClick={handleOpen}
       >
-        - Edit name
+        Edit Playlist Name
       </Button>
       <Modal
         open={open}

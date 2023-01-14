@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlaylistSongsThunk } from "../../store/playlistSongs";
+import { getplaylistsThunk } from "../../store/playlists";
 import { useParams, Link } from "react-router-dom";
 import { getSongsThunk } from "../../store/songs";
 import Ellipsis from "./EditPlaylist";
@@ -27,6 +28,7 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import zIndex from "@mui/material/styles/zIndex";
+import PlaylistSongsElipsis from "./PlaylistSongsElipsis";
 // import { getAllreviews } from "../../store/reviews";
 
 // const useStyles = makeStyles({
@@ -46,6 +48,10 @@ export default function PlaylistSongs() {
   );
 
   useEffect(() => {
+    dispatch(getplaylistsThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(getPlaylistSongsThunk(playlistId));
     // dispatch(getAllreviews());
   }, [dispatch, playlistId]);
@@ -58,7 +64,6 @@ export default function PlaylistSongs() {
   }, [dispatch, playlistId]);
   const songs = useSelector((state) => Object.values(state.songs));
   let listOfSongs = songs.filter((song) => songsId.includes(song.id));
-  console.log(listOfSongs);
 
   const playlist = useSelector((state) => state.playlists[playlistId]);
 
@@ -146,6 +151,7 @@ export default function PlaylistSongs() {
             {/* <IconButton>
               <PlayArrowIcon />
             </IconButton> */}
+            <PlaylistSongsElipsis songId={song.id} />
           </ListItem>
         ))}
       </List>

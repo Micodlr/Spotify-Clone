@@ -16,7 +16,11 @@ import BasicModal from "./Modal";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import AddIcon from "@mui/icons-material/Add";
 import { addSongToPlaylistThunk } from "../../store/playlistSongs";
-export default function SongEllipsis({ songId }) {
+import ClearIcon from "@mui/icons-material/Clear";
+import { deleteSongThunk } from "../../store/playlistSongs";
+import { getPlaylistSongsThunk } from "../../store/playlistSongs";
+export default function PlaylistSongsElipsis({ songId }) {
+  const { playlistId } = useParams();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [nestedAnchorEl, setNestedAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -34,13 +38,16 @@ export default function SongEllipsis({ songId }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const addSong = async (e, playlistId) => {
+  //   React.useEffect(() => {
+  //     dispatch(getPlaylistSongsThunk(playlistId));
+  //     // dispatch(getAllreviews());
+  //   }, [dispatch, playlistId]);
+  const deleteSong = async (e, playlistId, songId) => {
     e.preventDefault();
-    await dispatch(
-      addSongToPlaylistThunk({ songId: songId, playlistId: playlistId })
-    );
+    await dispatch(deleteSongThunk({ songId: songId, playlistId: playlistId }));
     handleClose();
-    // history.push("/dashboard/playlists");
+    dispatch(getPlaylistSongsThunk(playlistId));
+    history.push(`/dashboard/playlists/${playlistId}`);
   };
 
   const user = useSelector((state) => state.session.user);
@@ -96,12 +103,14 @@ export default function SongEllipsis({ songId }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem sx={{ "&:hover": { color: "#1DB954", fontWeight: "bold" } }}>
-          <PlaylistAddIcon />
-          Create playlist
-          <BasicModal />
-        </MenuItem>
         <MenuItem
+          sx={{ "&:hover": { color: "red", fontWeight: "bold" } }}
+          onClick={(e) => deleteSong(e, playlistId, songId)}
+        >
+          <ClearIcon />
+          Remove from playlist
+        </MenuItem>
+        {/* <MenuItem
           sx={{ "&:hover": { color: "#1DB954", fontWeight: "bold" } }}
           //   onClick={handleNestedMenuOpen}
           onMouseEnter={handleNestedMenuOpen}
@@ -118,14 +127,11 @@ export default function SongEllipsis({ songId }) {
           onMouseLeave={handleClose}
         >
           {playlists.map((playlist) => (
-            <MenuItem
-              key={playlist.id}
-              onClick={(e) => addSong(e, playlist.id)}
-            >
+            <MenuItem onClick={(e) => addSong(e, playlist.id)}>
               {playlist.name}
             </MenuItem>
           ))}
-        </Menu>
+        </Menu> */}
       </Menu>
     </React.Fragment>
   );

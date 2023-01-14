@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_PLAYLIST_SONGS = "playlists/GET_SONGS";
 const ADD_PLAYLIST_SONG = "playlists/ADD_SONG";
+const DELETE_PLAYLIST_SONG = "playlists/DELETE_SONG";
 
 const getPlaylistSongs = (playlist) => ({
   type: GET_PLAYLIST_SONGS,
@@ -10,6 +11,11 @@ const getPlaylistSongs = (playlist) => ({
 
 const addSongToPlaylist = (song) => ({
   type: ADD_PLAYLIST_SONG,
+  song,
+});
+
+const deleteSong = (song) => ({
+  type: DELETE_PLAYLIST_SONG,
   song,
 });
 
@@ -45,6 +51,18 @@ export const addSongToPlaylistThunk = (song) => async (dispatch) => {
   return res;
 };
 
+export const deleteSongThunk = (song) => async (dispatch) => {
+  const { playlistId, songId } = song;
+  const res = await csrfFetch(`/api/playlists/${playlistId}/songs/${songId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteSong(songId));
+  }
+  return res;
+};
+
 const initialState = {};
 
 const playlistSongsReducer = (state = initialState, action) => {
@@ -55,6 +73,9 @@ const playlistSongsReducer = (state = initialState, action) => {
       return { ...action.playlist };
     case ADD_PLAYLIST_SONG:
       return { ...state, ...action.song };
+    case DELETE_PLAYLIST_SONG:
+      delete newState[action.song];
+      return newState;
     default:
       return newState;
   }

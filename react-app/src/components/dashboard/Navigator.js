@@ -42,7 +42,7 @@ const categories = [
   {
     id: "Quality",
     children: [
-      { id: "Create Playlist", icon: <PlaylistAddIcon />, href: "/search" },
+      // { id: "Create Playlist", icon: <PlaylistAddIcon />, href: "/search" },
       { id: "Liked Songs", icon: <ThumbUpIcon />, href: "/search" },
     ],
   },
@@ -146,11 +146,11 @@ export default function Navigator(props) {
             </ListItemButton>
           </ListItem>
 
-          <Divider sx={{ mt: 2 }} />
+          {/* <Divider sx={{ mt: 2 }} /> */}
         </Box>
 
         <ListItemText sx={{ mt: 2, fontSize: 22, color: "#ffffff" }}>
-          playlist 1
+          {/* playlist 1 */}
         </ListItemText>
       </List>
     </Drawer>

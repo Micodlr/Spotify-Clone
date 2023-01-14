@@ -8,9 +8,16 @@ def seed_artists():
     test2 = Artist(
          name='Rage Against the Machine')
 
+    test3 = Artist(
+         name='Infraction')
+    test4 = Artist(
+         name='AVBE')
+
 
     db.session.add(test1)
     db.session.add(test2)
+    db.session.add(test3)
+    db.session.add(test4)
 
     db.session.commit()
 

@@ -1,10 +1,16 @@
 import { csrfFetch } from "./csrf";
 
 const GET_PLAYLIST_SONGS = "playlists/GET_SONGS";
+const ADD_PLAYLIST_SONG = "playlists/ADD_SONG";
 
 const getPlaylistSongs = (playlist) => ({
   type: GET_PLAYLIST_SONGS,
   playlist,
+});
+
+const addSongToPlaylist = (song) => ({
+  type: ADD_PLAYLIST_SONG,
+  song,
 });
 
 export const getPlaylistSongsThunk = (playlistId) => async (dispatch) => {
@@ -21,6 +27,24 @@ export const getPlaylistSongsThunk = (playlistId) => async (dispatch) => {
   return res;
 };
 
+export const addSongToPlaylistThunk = (song) => async (dispatch) => {
+  console.log("hit addSong");
+  const { playlistId } = song;
+  const { songId } = song;
+  console.log(songId);
+
+  const res = await csrfFetch(`/api/playlists/${playlistId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(song),
+  });
+  if (res.ok) {
+    const newSong = await res.json();
+    dispatch(addSongToPlaylist(newSong));
+  }
+  return res;
+};
+
 const initialState = {};
 
 const playlistSongsReducer = (state = initialState, action) => {
@@ -29,6 +53,8 @@ const playlistSongsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PLAYLIST_SONGS:
       return { ...action.playlist };
+    case ADD_PLAYLIST_SONG:
+      return { ...state, ...action.song };
     default:
       return newState;
   }

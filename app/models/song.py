@@ -13,7 +13,7 @@ class Song(db.Model):
   title = db.Column(db.String, nullable=False)
   lyrics = db.Column(db.String, nullable=True)
   songUrl = db.Column(db.String, nullable=True)
-  spotifySongId = db.Column(db.Integer, nullable=False)
+  spotifySongId = db.Column(db.Integer, nullable=True)
 
   artists = db.relationship('Artist', back_populates='songs')
   albums = db.relationship('Album', back_populates='songs')

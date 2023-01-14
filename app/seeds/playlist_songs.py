@@ -8,7 +8,7 @@ def seed_playlistSongs():
     test2 = PlaylistSong(
          songId=2, playlistId=2)
     test3 = PlaylistSong(
-        songId=2, playlistId=1)
+        songId=3, playlistId=1)
 
 
 

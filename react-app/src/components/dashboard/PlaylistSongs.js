@@ -139,7 +139,10 @@ export default function PlaylistSongs() {
             </ListItemAvatar>
 
             <ListItemIcon>
-              <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPhGnlVYBxoNgvDsRx_YIr8BGxjPUZt8ipKVcjzC6SJMq5Gf17xofCZbrQXmDTZq5eWwo&usqp=CAU" />
+              <Avatar
+                sx={{ width: "2.5rem", height: "2.5rem", borderRadius: "0" }}
+                src={song?.album?.albumCover}
+              />
             </ListItemIcon>
             <ListItemText
               style={{ color: "whitesmoke" }}

@@ -246,7 +246,7 @@ export default function Paperbase() {
               <Route exact path="/dashboard/home">
                 <Content Component={HomePage} />
               </Route>
-              <Route path="/dashboard/search">
+              <Route path="/dashboard/songs">
                 <Content Component={SearchPage} />
               </Route>
               <Route path="/dashboard/library">

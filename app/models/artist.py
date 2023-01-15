@@ -20,4 +20,5 @@ class Artist(db.Model):
     return {
         'id': self.id,
         'name': self.name,
+
     }

@@ -24,6 +24,9 @@ import { getplaylistsThunk } from "../../store/playlists";
 import SearchPage from "./SearchPage";
 import AccountMenu from "./AccountMenu";
 import { yellow } from "@mui/material/colors";
+import ArtistsPage from "./Artists";
+import { getArtistThunk } from "../../store/artists";
+import ArtistIdPage from "./ArtistIdPage";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -192,7 +195,10 @@ theme = {
 const drawerWidth = 256;
 
 export default function Paperbase() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getArtistThunk());
+  }, [dispatch]);
   // useEffect(() => {
   //   const myPlaylists = async () => await dispatch(getplaylistsThunk());
   //   myPlaylists();
@@ -255,6 +261,12 @@ export default function Paperbase() {
             <Switch>
               <Route exact path="/dashboard/home">
                 <Content Component={HomePage} />
+              </Route>
+              <Route exact path="/dashboard/artists">
+                <Content Component={ArtistsPage} />
+              </Route>
+              <Route exact path="/dashboard/artists/:artistId">
+                <Content Component={ArtistIdPage} />
               </Route>
               <Route path="/dashboard/songs">
                 <Content Component={SearchPage} />

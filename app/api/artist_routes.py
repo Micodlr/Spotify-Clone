@@ -13,7 +13,7 @@ def getArtists():
     Query for all artists and returns them in a list of user dictionaries
     """
     artists = Artist.query.all()
-    print(artists[0].name)
+
     return {'artists': [artist.to_dict() for artist in artists]}
 
 @artist_routes.route('/<int:id>')

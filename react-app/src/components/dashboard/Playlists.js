@@ -113,8 +113,13 @@ export default function PlaylistPage() {
               image={playlist?.playlistImg}
               title="playlist image"
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+            <CardContent color="custom">
+              <Typography
+                color="custom"
+                gutterBottom
+                variant="h5"
+                component="div"
+              >
                 {playlist.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">

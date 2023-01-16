@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getplaylistsThunk } from "../../store/playlists";
 import SearchPage from "./SearchPage";
 import AccountMenu from "./AccountMenu";
+import { yellow } from "@mui/material/colors";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -42,6 +43,15 @@ let theme = createTheme({
       main: "#0a0001",
       dark: "#006db3",
     },
+    secondary: {
+      main: "#e9f542",
+    },
+    // custom: {
+    //   light: "#e517fc",
+    //   main: "#cc1629",
+    //   dark: "#e517fc",
+    //   contrastText: "rgba(0, 0, 0, 0.87)",
+    // },
   },
   typography: {
     h5: {
@@ -246,7 +256,7 @@ export default function Paperbase() {
               <Route exact path="/dashboard/home">
                 <Content Component={HomePage} />
               </Route>
-              <Route path="/dashboard/search">
+              <Route path="/dashboard/songs">
                 <Content Component={SearchPage} />
               </Route>
               <Route path="/dashboard/library">

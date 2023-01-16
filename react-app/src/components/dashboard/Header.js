@@ -39,7 +39,7 @@ function Header(props) {
             </Grid>
             <Grid item xs />
 
-            <Grid item sx={{ p: 0.5 }}>
+            <Grid item sx={{ p: 0.5, mt: 3 }}>
               <AccountMenu />
               <IconButton
                 color="inherit"

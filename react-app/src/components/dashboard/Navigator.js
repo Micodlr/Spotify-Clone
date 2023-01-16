@@ -8,10 +8,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
-
+import GroupIcon from "@mui/icons-material/Group";
 import SearchIcon from "@mui/icons-material/Search";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
-
+import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import LandingPage from "../LandingPage";
@@ -28,15 +28,25 @@ const categories = [
       {
         id: "Home",
         icon: <HomeIcon />,
-        active: true,
+        active: false,
         href: "/home",
+      },
+      {
+        id: "Artists",
+        icon: <GroupIcon />,
+        href: "/artists",
+      },
+      {
+        id: "Songs",
+        icon: <LibraryMusicIcon />,
+        href: "/songs",
       },
       {
         id: "Search",
         icon: <SearchIcon />,
         href: "/search",
       },
-      { id: "Your Library", icon: <LibraryMusicIcon />, href: "/library" },
+      { id: "Your Library", icon: <QueueMusicIcon />, href: "/library" },
     ],
   },
   {
@@ -80,6 +90,7 @@ export default function Navigator(props) {
             ...itemCategory,
             fontSize: 22,
             color: "#ffffff",
+            p: 2.9,
           }}
         >
           {/* <Avatar

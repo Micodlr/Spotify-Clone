@@ -114,7 +114,7 @@ export default function SongEllipsis({ songId }) {
           anchorEl={nestedAnchorEl}
           keepMounted
           open={Boolean(nestedAnchorEl)}
-          //   onClose={handleClose}
+          onClose={handleClose}
           onMouseLeave={handleClose}
         >
           {playlists.map((playlist) => (

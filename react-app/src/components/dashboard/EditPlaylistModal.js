@@ -98,7 +98,12 @@ export default function EditPlaylistModal() {
           </Typography>
 
           <FormControl noValidate autoComplete="off">
-            <TextField name="name" id="name" label={playlist?.name} />
+            <TextField
+              inputProps={{ maxLength: 25 }}
+              name="name"
+              id="name"
+              label={playlist?.name}
+            />
 
             <Button type="submit" variant="contained" color="primary">
               Submit

@@ -90,6 +90,7 @@ export default function Navigator(props) {
             ...itemCategory,
             fontSize: 22,
             color: "#ffffff",
+            p: 2.9,
           }}
         >
           {/* <Avatar

@@ -68,7 +68,12 @@ export default function BasicModal() {
           </Typography>
 
           <FormControl noValidate autoComplete="off">
-            <TextField name="name" id="name" label="Playlist Name" />
+            <TextField
+              inputProps={{ maxLength: 25 }}
+              name="name"
+              id="name"
+              label="Playlist Name"
+            />
 
             <Button
               sx={{ "&:hover": { bgcolor: "#1DB954" } }}

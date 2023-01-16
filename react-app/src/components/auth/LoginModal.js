@@ -62,6 +62,12 @@ export default function LoginModal() {
     handleClose();
   };
 
+  const handleGuestLogin = (e) => {
+    e.preventDefault();
+
+    return setEmail("demo@aa.io"), setPassword("password");
+  };
+
   return (
     <div>
       <Button
@@ -112,8 +118,22 @@ export default function LoginModal() {
               onChange={updatePassword}
             />
 
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ "&:hover": { bgcolor: "#1DB954", fontWeight: "bold" } }}
+            >
               Log in
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleGuestLogin}
+              sx={{ "&:hover": { bgcolor: "#1DB954", fontWeight: "bold" } }}
+            >
+              Demo User
             </Button>
           </FormControl>
           <div style={{ color: "red" }}>

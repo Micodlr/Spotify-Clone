@@ -39,7 +39,7 @@ function App() {
       {/* <Header /> */}
       {/* <Content /> */}
       <Switch>
-        <Route path="/dashboard">
+        <Route path="/">
           <Paperbase />
 
           {/* <Route path="home">

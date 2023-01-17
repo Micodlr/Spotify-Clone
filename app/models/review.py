@@ -25,5 +25,6 @@ class Review(db.Model):
         'userId': self.userId,
         'albumId': self.albumId,
         'review': self.review,
-        'edited': self.edited
+        'edited': self.edited,
+        'username': self.users.to_dict()
     }

@@ -20,6 +20,7 @@ class Artist(db.Model):
     return {
         'id': self.id,
         'name': self.name,
+        'albums': [album.to_dict() for album in self.albums]
 
 
 

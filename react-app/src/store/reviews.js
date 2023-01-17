@@ -25,7 +25,9 @@ const deleteReview = (review) => ({
 });
 
 export const addReviewThunk = (review) => async (dispatch) => {
-  const res = await csrfFetch(`/api/reviews/`, {
+  const { albumId } = review;
+  console.log("hit add review thunk");
+  const res = await csrfFetch(`/api/albums/${albumId}/reviews`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(review),
@@ -64,8 +66,8 @@ export const deleteReviewThunk = (id) => async (dispatch) => {
   }
 };
 
-export const getReviewsThunk = () => async (dispatch) => {
-  const res = await csrfFetch(`/api/reviews/`);
+export const getReviewsThunk = (albumId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/albums/${albumId}/reviews`);
 
   const { reviews } = await res.json();
 

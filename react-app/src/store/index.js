@@ -6,11 +6,13 @@ import playlistsReducer from "./playlists";
 import playlistSongsReducer from "./playlistSongs";
 import artistsReducer from "./artists";
 import reviewsReducer from "./reviews";
+import albumsReducer from "./albums";
 
 const rootReducer = combineReducers({
   session,
   songs: songsReducer,
   artists: artistsReducer,
+  albums: albumsReducer,
   playlists: playlistsReducer,
   playlistSongs: playlistSongsReducer,
   reviews: reviewsReducer,

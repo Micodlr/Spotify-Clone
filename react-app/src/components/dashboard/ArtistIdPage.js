@@ -18,7 +18,10 @@ import {
 import {
   Avatar,
   Button,
+  CardActionArea,
+  CardContent,
   CardMedia,
+  Container,
   ListItemIcon,
   Typography,
 } from "@mui/material";
@@ -30,6 +33,8 @@ import { makeStyles } from "@material-ui/styles";
 import zIndex from "@mui/material/styles/zIndex";
 import PlaylistSongsElipsis from "./PlaylistSongsElipsis";
 import { getArtistThunk } from "../../store/artists";
+import { getAlbumsThunk } from "../../store/albums";
+import Albums from "./Albums";
 // import { getAllreviews } from "../../store/reviews";
 
 // const useStyles = makeStyles({
@@ -39,8 +44,20 @@ import { getArtistThunk } from "../../store/artists";
 //   },
 // });
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette,
+    color: theme.palette,
+    "&:hover": {
+      backgroundColor: theme.palette,
+    },
+  },
+}));
+
 export default function ArtistIdPage() {
   const { artistId } = useParams();
+
+  const classes = useStyles();
 
   const dispatch = useDispatch();
 
@@ -56,6 +73,9 @@ export default function ArtistIdPage() {
   //   console.log(songs);
   useEffect(() => {
     dispatch(getArtistThunk());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAlbumsThunk());
   }, [dispatch]);
 
   //   useEffect(() => {
@@ -73,7 +93,10 @@ export default function ArtistIdPage() {
   //   let listOfSongs = songs.filter((song) => songsId.includes(song.id));
 
   const artist = useSelector((state) => state.artists[artistId]);
+  const albums = useSelector((state) => Object.values(state.albums));
 
+  const artistAlbums = albums.filter((album) => album.artistId == artistId);
+  console.log(artistAlbums);
   return (
     <>
       {/* <Grid container spacing={3}>
@@ -137,10 +160,11 @@ export default function ArtistIdPage() {
           textShadow: "1px 2px black",
         }}
       >
-        Reviews
+        Albums
       </Box>
+      <Albums artistAlbums={artistAlbums} />
 
-      <Box
+      {/* <Box
         style={{
           display: "flex",
           color: "whitesmoke",
@@ -152,57 +176,73 @@ export default function ArtistIdPage() {
           alignItems: "flex-end",
           textShadow: "1px 2px black",
         }}
-      >
-        Albums
-      </Box>
-
-      {/*
-      <List component="ol"> */}
-      {/* <ListSubheader style={{ color: "whitesmoke" }}>
-          {playlistName}
-        </ListSubheader> */}
-
-      {/* {artist.map((artist, index) => (
-          <ListItem key={song.id}>
-            <ListItemAvatar>
-              <ListItemIcon>
-                <Button
-                  sx={{ "&:hover": { bgcolor: "#1DB954" } }}
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
-                  <PlayArrowIcon />
-                </Button>
-
-              </ListItemIcon>
-            </ListItemAvatar>
-
-            <ListItemIcon>
-              <Avatar
-                sx={{ width: "2.5rem", height: "2.5rem", borderRadius: "0" }}
-                src={song?.album?.albumCover}
+      > */}
+      {/* <h1 style={{ color: "whitesmoke" }}>Albums</h1>
+      <Container sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        {artistAlbums.map((album) => (
+          <Card key={artist?.id} sx={{ width: 160, height: 260 }}>
+            <CardActionArea>
+              <CardMedia
+                sx={{ height: 130, maxWidth: "100%" }}
+                image={album.albumCover}
+                title="Album cover"
               />
-            </ListItemIcon>
-            <ListItemText
-              style={{ color: "whitesmoke" }}
-              secondaryTypographyProps={{ style: { color: "whitesmoke" } }}
-              primary={song.title}
-              secondary={song.artist.name}
-            />
-
-            <PlaylistSongsElipsis songId={song.id} />
-          </ListItem>
+              <CardContent sx={{ width: 130 }}>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  style={{ fontSize: "16px", fontWeight: "bold" }}
+                  component="div"
+                  textOverflow={"ellipsis"}
+                >
+                  {album?.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {album.description}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         ))}
-      </List> */}
+      </Container> */}
 
-      {/* <List>
-        {listOfSongs.map((song) => (
-          <Box sx={{ color: "whitesmoke" }} key={song.id}>
-            {song.title}
-          </Box>
-        ))}
-      </List> */}
+      {/* <List component="ol">
+
+          {artistAlbums.map((album, index) => (
+            <ListItem key={album.id}>
+              <ListItemAvatar>
+                <ListItemIcon>
+                  <Button
+                    sx={{ "&:hover": { bgcolor: "#1DB954" } }}
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  >
+                    <PlayArrowIcon />
+                  </Button>
+
+                </ListItemIcon>
+              </ListItemAvatar>
+
+              <ListItemIcon>
+                <Avatar
+                  sx={{ width: "2.5rem", height: "2.5rem", borderRadius: "0" }}
+                  src={album?.albumCover}
+                />
+              </ListItemIcon>
+              <ListItemText
+                style={{ color: "whitesmoke" }}
+                secondaryTypographyProps={{ style: { color: "whitesmoke" } }}
+                primary={album.title}
+                // secondary={song.artist.name}
+              />
+
+
+              <PlaylistSongsElipsis />
+            </ListItem>
+          ))}
+        </List> */}
+      {/* </Box> */}
     </>
   );
 }

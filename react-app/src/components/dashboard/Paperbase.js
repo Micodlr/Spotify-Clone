@@ -27,6 +27,7 @@ import { yellow } from "@mui/material/colors";
 import ArtistsPage from "./Artists";
 import { getArtistThunk } from "../../store/artists";
 import ArtistIdPage from "./ArtistIdPage";
+import AlbumPage from "./AlbumPage";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -267,6 +268,9 @@ export default function Paperbase() {
               </Route>
               <Route exact path="/dashboard/artists/:artistId">
                 <Content Component={ArtistIdPage} />
+              </Route>
+              <Route exact path="/dashboard/albums/:albumId">
+                <Content Component={AlbumPage} />
               </Route>
               <Route path="/dashboard/songs">
                 <Content Component={SearchPage} />

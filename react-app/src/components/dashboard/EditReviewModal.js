@@ -5,9 +5,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 // import BasicTextFields from "./AddPlaylistForm";
 import { FormControl, TextField } from "@mui/material";
-import { addPlaylistsThunk } from "../../store/playlists";
+
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { editReviewThunk } from "../../store/reviews";
 
 const style = {
   position: "absolute",
@@ -25,7 +26,9 @@ const style = {
   p: 5,
 };
 
-export default function BasicModal() {
+export default function EditReviewModal({ review }) {
+  const { albumId } = useParams();
+  const [errors, setErrors] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,22 +42,35 @@ export default function BasicModal() {
     //   email: data.get("email"),
     //   password: data.get("password"),
     // });
-    await dispatch(addPlaylistsThunk({ name: data.get("name") }));
+    const res = await dispatch(
+      editReviewThunk({ id: review.id, review: data.get("review") })
+    );
+    if (res) {
+      return setErrors(res);
+    } else {
+      handleClose();
+    }
 
-    handleClose();
-    history.push("/dashboard/library");
     // if (res) {
     //   setErrors(res);
     // }
   };
 
   return (
-    <div>
+    <>
       <Button
-        sx={{ py: "2px", px: "2px", color: "whitesmoke" }}
+        sx={{
+          bgcolor: "#1DB954",
+
+          "&:hover": {
+            bgcolor: "#1DB954",
+            fontWeight: "bold",
+            color: "whitesmoke",
+          },
+        }}
         onClick={handleOpen}
       >
-        Create Playlist
+        Edit review
       </Button>
       <Modal
         open={open}
@@ -64,15 +80,20 @@ export default function BasicModal() {
       >
         <Box sx={style} component="form" onSubmit={handleSubmit}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Create Playlist
+            {review.review}
           </Typography>
+          {/* <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div> */}
 
           <FormControl noValidate autoComplete="off">
             <TextField
-              inputProps={{ maxLength: 20 }}
-              name="name"
-              id="name"
-              label="Playlist Name"
+              inputProps={{ minLength: 4, maxLength: 25 }}
+              name="review"
+              id="review"
+              label="review"
               required
             />
 
@@ -89,6 +110,6 @@ export default function BasicModal() {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }

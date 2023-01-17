@@ -104,7 +104,7 @@ export default function AccountMenu() {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <MenuItem>
+          {/* <MenuItem>
             <Avatar /> My account
           </MenuItem>
           <MenuItem>
@@ -117,7 +117,7 @@ export default function AccountMenu() {
               <Settings fontSize="small" />
             </ListItemIcon>
             Settings
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={onLogout}>
             <ListItemIcon>
               <Logout fontSize="small" />
@@ -194,20 +194,6 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
-        <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
-        <Divider />
-
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
         <MenuItem onClick={onLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />

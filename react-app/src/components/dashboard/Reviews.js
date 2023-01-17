@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { getreviewsThunk } from "../../store/reviews";
+import { deleteReviewThunk, getreviewsThunk } from "../../store/reviews";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import { CardActionArea, Container } from "@mui/material";
+import { Box, CardActionArea, Container } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
@@ -13,6 +13,7 @@ import { maxHeight } from "@mui/system";
 import { useHistory, useParams } from "react-router-dom";
 // import Ellipsis from "./Editreview";
 import { getReviewsThunk } from "../../store/reviews";
+import EditReviewModal from "./EditReviewModal";
 
 export default function Reviews() {
   const { albumId } = useParams();
@@ -20,6 +21,13 @@ export default function Reviews() {
 
   const reviews = useSelector((state) => Object.values(state.reviews));
   const user = useSelector((state) => state.session);
+  console.log(user);
+
+  const handleDelete = async (e, reviewId) => {
+    e.preventDefault();
+    await dispatch(deleteReviewThunk(reviewId));
+    dispatch(getReviewsThunk(albumId));
+  };
 
   const history = useHistory();
   const onClick = (e) => {
@@ -49,10 +57,34 @@ export default function Reviews() {
                 {review.review}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                by: {review.username.username}
+                by: {review?.username?.username}
               </Typography>
             </CardContent>
           </CardActionArea>
+          {review.userId === user.user.id ? (
+            <Box
+              sx={{
+                display: "flex",
+                gap: "2px",
+                justifyContent: "space-between",
+              }}
+            >
+              <EditReviewModal review={review} />
+              <Button
+                sx={{
+                  bgcolor: "black",
+                  color: "whitesmoke",
+
+                  "&:hover": { bgcolor: "red", fontWeight: "bold" },
+                }}
+                onClick={(e) => handleDelete(e, review.id)}
+              >
+                DELETE
+              </Button>
+            </Box>
+          ) : (
+            <></>
+          )}
         </Card>
       ))}
     </Container>

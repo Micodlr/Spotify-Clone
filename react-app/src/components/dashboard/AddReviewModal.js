@@ -81,10 +81,11 @@ export default function AddReviewModal() {
 
           <FormControl noValidate autoComplete="off">
             <TextField
-              inputProps={{ maxLength: 25 }}
+              inputProps={{ minLength: 4, maxLength: 50 }}
               name="review"
               id="review"
               label="review"
+              required
             />
 
             <Button

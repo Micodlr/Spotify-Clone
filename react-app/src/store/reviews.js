@@ -5,9 +5,9 @@ const ADD_REVIEW = "reviews/ADD_REVIEW";
 const EDIT_REVIEW = "reviews/EDIT_REVIEW";
 const DELETE_REVIEW = "reviews/DELETE_REVIEW";
 
-const getReviews = (Reviews) => ({
+const getReviews = (reviews) => ({
   type: GET_REVIEWS,
-  Reviews,
+  reviews,
 });
 const addReview = (review) => ({
   type: ADD_REVIEW,
@@ -26,7 +26,7 @@ const deleteReview = (review) => ({
 
 export const addReviewThunk = (review) => async (dispatch) => {
   const { albumId } = review;
-  console.log("hit add review thunk");
+
   const res = await csrfFetch(`/api/albums/${albumId}/reviews`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -49,10 +49,13 @@ export const editReviewThunk = (review) => async (dispatch) => {
   });
 
   if (res.ok) {
-    const editedReviews = await res.json;
-    dispatch(editReview(editedReviews));
+    const editedReview = await res.json();
+    dispatch(editReview(editedReview));
+  } else if (res.errors) {
+    return res.errors;
   }
-  return;
+
+  return res;
 };
 
 export const deleteReviewThunk = (id) => async (dispatch) => {
@@ -86,7 +89,7 @@ const reviewsReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case GET_REVIEWS:
-      return { ...action.Reviews };
+      return { ...action.reviews };
     case ADD_REVIEW:
       //   return { ...state, ...action.reviews };
       newState = { ...state, [action.review.id]: action.review };

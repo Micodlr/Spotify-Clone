@@ -18,8 +18,10 @@ import LandingPage from "../LandingPage";
 import { Avatar } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import "./logo.css";
+import InfoIcon from "@mui/icons-material/Info";
 
 import BasicModal from "./Modal";
+import AboutMeModal from "./AboutMeModal";
 
 const categories = [
   {
@@ -160,11 +162,28 @@ export default function Navigator(props) {
           {/* <Divider sx={{ mt: 2 }} /> */}
         </Box>
 
-        <ListItemText
-          sx={{ display: "flex", mt: 2, fontSize: 22, color: "#ffffff" }}
-        >
-          <div>about me</div>
-        </ListItemText>
+        <Box sx={{ mt: "220px", color: "whitesmoke" }}>
+          <ListItem disablePadding>
+            <ListItemButton
+              sx={{
+                mt: "600px",
+                py: "2px",
+                px: 3,
+                color: "rgba(255, 255, 255, 0.7)",
+                "&:hover, &:focus": {
+                  bgcolor: "rgba(255, 255, 255, 0.08)",
+                },
+              }}
+            >
+              <ListItemIcon>
+                <InfoIcon />
+              </ListItemIcon>
+              <AboutMeModal />
+            </ListItemButton>
+          </ListItem>
+
+          {/* <Divider sx={{ mt: 2 }} /> */}
+        </Box>
       </List>
     </Drawer>
   );

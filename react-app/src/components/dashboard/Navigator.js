@@ -160,8 +160,10 @@ export default function Navigator(props) {
           {/* <Divider sx={{ mt: 2 }} /> */}
         </Box>
 
-        <ListItemText sx={{ mt: 2, fontSize: 22, color: "#ffffff" }}>
-          {/* playlist 1 */}
+        <ListItemText
+          sx={{ display: "flex", mt: 2, fontSize: 22, color: "#ffffff" }}
+        >
+          <div>about me</div>
         </ListItemText>
       </List>
     </Drawer>

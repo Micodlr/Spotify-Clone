@@ -72,7 +72,7 @@ const item = {
 const itemCategory = {
   boxShadow: "0 -1px 0 rgb(255,255,255,0.1) inset",
   py: 1.5,
-  px: 3,
+  px: 2,
 };
 
 export default function Navigator(props) {
@@ -92,7 +92,7 @@ export default function Navigator(props) {
             ...itemCategory,
             fontSize: 22,
             color: "#ffffff",
-            p: 2.9,
+            p: 2,
           }}
         >
           {/* <Avatar

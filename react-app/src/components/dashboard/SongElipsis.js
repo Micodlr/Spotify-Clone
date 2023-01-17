@@ -9,7 +9,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Tooltip from "@mui/material/Tooltip";
 
 import { useDispatch, useSelector } from "react-redux";
-import { deletePlaylistThunk } from "../../store/playlists";
+import { deletePlaylistThunk, getplaylistsThunk } from "../../store/playlists";
 import { useHistory, useParams } from "react-router-dom";
 import BasicModal from "./Modal";
 
@@ -33,6 +33,10 @@ export default function SongEllipsis({ songId }) {
 
   const history = useHistory();
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getplaylistsThunk());
+  }, [dispatch]);
 
   const addSong = async (e, playlistId) => {
     e.preventDefault();

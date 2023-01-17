@@ -225,14 +225,14 @@ export default function Paperbase() {
             flexShrink: { sm: 0 },
           }}
         >
-          {/* {isSmUp ? null : (
+          {isSmUp ? null : (
             <Navigator
               PaperProps={{ style: { width: drawerWidth } }}
               variant="temporary"
               open={mobileOpen}
               onClose={handleDrawerToggle}
             />
-          )} */}
+          )}
 
           <Navigator
             PaperProps={{ style: { width: drawerWidth } }}

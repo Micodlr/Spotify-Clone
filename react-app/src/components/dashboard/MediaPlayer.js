@@ -12,6 +12,7 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import { createTheme } from "@mui/material/styles";
 import { green, purple } from "@mui/material/colors";
 import { makeStyles } from "@material-ui/core/styles";
+import img from "./Silverbackogo.png";
 
 export default function MediaControlCard() {
   const theme = useTheme();
@@ -48,6 +49,7 @@ export default function MediaControlCard() {
         component="img"
         sx={{ width: 150 }}
         image={
+          //   img
           "https://t3.ftcdn.net/jpg/05/49/28/50/360_F_549285030_CYY2EQbWguJqh8jsuZCDzfkp294bHAnz.jpg"
         }
       />

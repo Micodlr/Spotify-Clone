@@ -76,6 +76,7 @@ import Typography from "@mui/material/Typography";
 import { maxHeight } from "@mui/system";
 import { useHistory } from "react-router-dom";
 import Ellipsis from "./EditPlaylist";
+import img from "./Silverbackogo.png";
 
 export default function PlaylistPage() {
   const dispatch = useDispatch();
@@ -110,6 +111,7 @@ export default function PlaylistPage() {
           <CardActionArea onClick={(e) => onClick(e, playlist.id)}>
             <CardMedia
               sx={{ height: 100 }}
+              //   image={ playlist?.playlistImg}
               image={playlist?.playlistImg}
               title="playlist image"
             />

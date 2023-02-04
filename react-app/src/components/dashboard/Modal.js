@@ -20,7 +20,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
 
-  border: "2px solid #000",
+  border: "2px solid whitesmoke",
   boxShadow: 24,
   p: 5,
 };

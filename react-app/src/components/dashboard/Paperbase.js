@@ -21,13 +21,15 @@ import PlaylistSongs from "./PlaylistSongs";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getplaylistsThunk } from "../../store/playlists";
-import SearchPage from "./SearchPage";
+import SearchPage from "./SongsPage";
 import AccountMenu from "./AccountMenu";
 import { yellow } from "@mui/material/colors";
 import ArtistsPage from "./Artists";
 import { getArtistThunk } from "../../store/artists";
 import ArtistIdPage from "./ArtistIdPage";
 import AlbumPage from "./AlbumPage";
+import SongsPage from "./SongsPage";
+import LikedSongsPage from "./testpage";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -214,9 +216,7 @@ export default function Paperbase() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{ backgroundColor: "blue", display: "flex", minHeight: "100vh" }}
-      >
+      <Box sx={{ backgroundColor: "blue", display: "flex", height: "100vh" }}>
         <CssBaseline />
         <Box
           component="nav"
@@ -238,7 +238,7 @@ export default function Paperbase() {
             PaperProps={{ style: { width: drawerWidth } }}
             sx={{
               backgroundColor: "blue",
-              display: { sm: "block", xs: "none" },
+              display: { sm: "flex", xs: "none" },
             }}
           />
         </Box>
@@ -256,6 +256,7 @@ export default function Paperbase() {
               flex: 1,
               py: 2,
               px: 2,
+
               bgcolor: "#0f0f0f",
             }}
           >
@@ -272,8 +273,8 @@ export default function Paperbase() {
               <Route exact path="/dashboard/albums/:albumId">
                 <Content Component={AlbumPage} />
               </Route>
-              <Route path="/dashboard/songs">
-                <Content Component={SearchPage} />
+              <Route path="/dashboard/likedSongs">
+                <Content Component={LikedSongsPage} />
               </Route>
               <Route path="/dashboard/library">
                 <Content Component={PlaylistsPage} />

@@ -22,6 +22,7 @@ import InfoIcon from "@mui/icons-material/Info";
 
 import BasicModal from "./Modal";
 import AboutMeModal from "./AboutMeModal";
+import { height } from "@mui/system";
 
 const categories = [
   {
@@ -38,11 +39,11 @@ const categories = [
         icon: <GroupIcon />,
         href: "/artists",
       },
-      {
-        id: "Songs",
-        icon: <LibraryMusicIcon />,
-        href: "/songs",
-      },
+      // {
+      //   id: "Songs",
+      //   icon: <LibraryMusicIcon />,
+      //   href: "/songs",
+      // },
       {
         id: "Search",
         icon: <SearchIcon />,
@@ -51,19 +52,19 @@ const categories = [
       { id: "Your Library", icon: <QueueMusicIcon />, href: "/library" },
     ],
   },
-  {
-    id: "Quality",
-    children: [
-      // { id: "Create Playlist", icon: <PlaylistAddIcon />, href: "/search" },
-      { id: "Liked Songs", icon: <ThumbUpIcon />, href: "/search" },
-    ],
-  },
+  // {
+  //   id: "Quality",
+  //   children: [
+  //     // { id: "Create Playlist", icon: <PlaylistAddIcon />, href: "/search" },
+  //     { id: "Liked Songs", icon: <ThumbUpIcon />, href: "/likedSongs" },
+  //   ],
+  // },
 ];
 
 const item = {
   py: "2px",
   px: 3,
-  color: "rgba(255, 255, 255, 0.7)",
+  color: "whitesmoke",
   "&:hover, &:focus": {
     bgcolor: "rgba(255, 255, 255, 0.08)",
   },
@@ -85,11 +86,9 @@ export default function Navigator(props) {
 
   return (
     <Drawer variant="permanent" {...other}>
-      <List disablePadding>
+      <List>
         <ListItem
           sx={{
-            ...item,
-            ...itemCategory,
             fontSize: 22,
             color: "#ffffff",
             p: 2,
@@ -120,69 +119,98 @@ export default function Navigator(props) {
             src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
           /> */}
         </ListItem>
-        {categories.map(({ id, children }) => (
-          <Box key={id} sx={{ bgcolor: "#00000" }}>
-            {children.map(({ id: childId, icon, active, href, modal }) => (
-              <ListItem disablePadding key={childId}>
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            height: "80%",
+          }}
+        >
+          {categories.map(({ id, children }) => (
+            <Box key={id} sx={{ bgcolor: "#00000" }}>
+              {children.map(({ id: childId, icon, active, href, modal }) => (
+                <ListItem disablePadding key={childId}>
+                  <ListItemButton
+                    selected={active}
+                    sx={item}
+                    onClick={(e) => changeUrl(e, href)}
+                  >
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText>{childId}</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+
+              <Divider sx={{ bgcolor: "	black", mt: 2 }} />
+            </Box>
+          ))}
+
+          <Box sx={{ bgcolor: "#00000", color: "whitesmoke" }}>
+            <ListItem disablePadding>
+              <ListItemButton
+                sx={{
+                  py: "2px",
+                  px: 3,
+                  color: "whitesmoke",
+                  "&:hover, &:focus": {
+                    bgcolor: "rgba(255, 255, 255, 0.08)",
+                  },
+                }}
+              >
+                <ListItemIcon>
+                  <PlaylistAddIcon />
+                </ListItemIcon>
+                <BasicModal />
+                {/* <ListItemText></ListItemText> */}
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton
+                sx={{
+                  py: "2px",
+                  px: 3.2,
+                  fontSize: "0.900rem",
+                  color: "whitesmoke",
+                  "&:hover, &:focus": {
+                    bgcolor: "rgba(255, 255, 255, 0.08)",
+                  },
+                }}
+                onClick={(e) => {
+                  changeUrl(e, "/likedSongs");
+                }}
+              >
+                <ListItemIcon>
+                  <ThumbUpIcon />
+                </ListItemIcon>
+                Liked Songs
+                {/* <ListItemText></ListItemText> */}
+              </ListItemButton>
+            </ListItem>
+
+            <Divider variant="middle" sx={{ bgcolor: "	#whitesmoke", m: 1 }} />
+
+            <Box sx={{ color: "whitesmoke" }}>
+              <ListItem disablePadding>
                 <ListItemButton
-                  selected={active}
-                  sx={item}
-                  onClick={(e) => changeUrl(e, href)}
+                  sx={{
+                    py: "2px",
+                    px: 2.9,
+                    color: "rgba(255, 255, 255, 0.7)",
+                    "&:hover, &:focus": {
+                      bgcolor: "rgba(255, 255, 255, 0.08)",
+                    },
+                  }}
                 >
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText>{childId}</ListItemText>
+                  <ListItemIcon>
+                    <InfoIcon />
+                  </ListItemIcon>
+                  <AboutMeModal />
                 </ListItemButton>
               </ListItem>
-            ))}
-
-            <Divider sx={{ mt: 2 }} />
+            </Box>
           </Box>
-        ))}
-
-        <Box sx={{ bgcolor: "#00000", color: "whitesmoke" }}>
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{
-                py: "2px",
-                px: 3,
-                color: "rgba(255, 255, 255, 0.7)",
-                "&:hover, &:focus": {
-                  bgcolor: "rgba(255, 255, 255, 0.08)",
-                },
-              }}
-            >
-              <ListItemIcon>
-                <PlaylistAddIcon />
-              </ListItemIcon>
-              <BasicModal />
-              {/* <ListItemText></ListItemText> */}
-            </ListItemButton>
-          </ListItem>
-
-          {/* <Divider sx={{ mt: 2 }} /> */}
-        </Box>
-
-        <Box sx={{ mt: "220px", color: "whitesmoke" }}>
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{
-                mt: "600px",
-                py: "2px",
-                px: 3,
-                color: "rgba(255, 255, 255, 0.7)",
-                "&:hover, &:focus": {
-                  bgcolor: "rgba(255, 255, 255, 0.08)",
-                },
-              }}
-            >
-              <ListItemIcon>
-                <InfoIcon />
-              </ListItemIcon>
-              <AboutMeModal />
-            </ListItemButton>
-          </ListItem>
-
-          {/* <Divider sx={{ mt: 2 }} /> */}
         </Box>
       </List>
     </Drawer>

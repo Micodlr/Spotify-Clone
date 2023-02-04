@@ -41,11 +41,11 @@ export default function SearchPage() {
   return (
     <>
       <List>
-        <ListSubheader
+        {/* <ListSubheader
           style={{ fontSize: "20px", fontWeight: "bold", color: "whitesmoke" }}
         >
           Browse all
-        </ListSubheader>
+        </ListSubheader> */}
 
         {songs.map((song, index) => (
           <ListItem key={song.id}>

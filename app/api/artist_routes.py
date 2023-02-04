@@ -7,7 +7,7 @@ artist_routes = Blueprint('artists', __name__)
 
 
 @artist_routes.route('/')
-@login_required
+
 def getArtists():
     """
     Query for all artists and returns them in a list of user dictionaries
@@ -17,7 +17,7 @@ def getArtists():
     return {'artists': [artist.to_dict() for artist in artists]}
 
 @artist_routes.route('/<int:id>')
-@login_required
+
 def getArtistById(id):
     """
     Query for all artists and returns them in a list of user dictionaries
@@ -28,7 +28,7 @@ def getArtistById(id):
     return artist.to_dict()
 
 @artist_routes.route('/<int:id>/albums')
-@login_required
+
 def getAllAlbums(id):
     """
     Query for all artist albums
@@ -39,7 +39,7 @@ def getAllAlbums(id):
     return {'Albums': [album.to_dict() for album in albums]}
 
 @artist_routes.route('/<int:id>/albums/<int:albumId>')
-@login_required
+
 def getAlbumById(id, albumId):
     """
     Query for album by albumId

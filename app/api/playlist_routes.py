@@ -7,7 +7,7 @@ playlist_routes = Blueprint('playlists', __name__)
 
 
 @playlist_routes.route('/')
-@login_required
+
 def playlists():
     """
     Query for all user playlist

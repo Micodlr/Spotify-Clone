@@ -194,8 +194,9 @@ export default function Navigator(props) {
                         bgcolor: "black",
                       }}
                     >
-                      You must be logged in to access this feature.
-                      <Box
+                      Error: Login Required. Please log in to access this
+                      feature.
+                      {/* <Box
                         sx={{ display: "flex", justifyContent: "space-evenly" }}
                       >
                         <Button sx={{ bgcolor: "black" }}>
@@ -204,7 +205,7 @@ export default function Navigator(props) {
                         <Button>
                           <LoginModal />
                         </Button>
-                      </Box>
+                      </Box> */}
                     </Alert>
                   </Snackbar>
                   {/* <Snackbar
@@ -225,47 +226,108 @@ export default function Navigator(props) {
           ))}
 
           <Box sx={{ bgcolor: "#00000", color: "whitesmoke" }}>
-            <ListItem disablePadding>
-              <ListItemButton
-                sx={{
-                  py: "2px",
-                  px: 3,
-                  color: "whitesmoke",
-                  "&:hover, &:focus": {
-                    bgcolor: "rgba(255, 255, 255, 0.08)",
-                  },
-                }}
-              >
-                <ListItemIcon>
-                  <PlaylistAddIcon />
-                </ListItemIcon>
-                <BasicModal />
-                {/* <ListItemText></ListItemText> */}
-              </ListItemButton>
-            </ListItem>
+            {!user ? (
+              <ListItem disablePadding>
+                <ListItemButton
+                  sx={{
+                    py: "2px",
+                    px: 3,
+                    color: "whitesmoke",
+                    "&:hover, &:focus": {
+                      bgcolor: "rgba(255, 255, 255, 0.08)",
+                    },
+                  }}
+                  onClick={() => (!user ? handleClick() : null)}
+                >
+                  <ListItemIcon>
+                    <PlaylistAddIcon />
+                  </ListItemIcon>
+                  Create Playlist
+                  {/* <ListItemText></ListItemText> */}
+                </ListItemButton>
 
-            <ListItem disablePadding>
-              <ListItemButton
-                sx={{
-                  py: "2px",
-                  px: 3.2,
-                  fontSize: "0.900rem",
-                  color: "whitesmoke",
-                  "&:hover, &:focus": {
-                    bgcolor: "rgba(255, 255, 255, 0.08)",
-                  },
-                }}
-                onClick={(e) => {
-                  changeUrl(e, "/likedSongs");
-                }}
-              >
-                <ListItemIcon>
-                  <ThumbUpIcon />
-                </ListItemIcon>
-                Liked Songs
-                {/* <ListItemText></ListItemText> */}
-              </ListItemButton>
-            </ListItem>
+                <Snackbar
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    onClose={handleClose}
+                    severity="error"
+                    sx={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      borderRadius: "15px",
+
+                      width: "100%",
+                      color: "whitesmoke",
+                      bgcolor: "black",
+                    }}
+                  >
+                    Error: Login Required. Please log in to access this feature.
+                    {/* <Box
+                        sx={{ display: "flex", justifyContent: "space-evenly" }}
+                      >
+                        <Button sx={{ bgcolor: "black" }}>
+                          <SignUpModal />
+                        </Button>
+                        <Button>
+                          <LoginModal />
+                        </Button>
+                      </Box> */}
+                  </Alert>
+                </Snackbar>
+              </ListItem>
+            ) : (
+              <>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    sx={{
+                      py: "2px",
+                      px: 3,
+                      color: "whitesmoke",
+                      "&:hover, &:focus": {
+                        bgcolor: "rgba(255, 255, 255, 0.08)",
+                      },
+                    }}
+                    onClick={() => (!user ? handleClick() : null)}
+                  >
+                    <ListItemIcon>
+                      <PlaylistAddIcon />
+                    </ListItemIcon>
+                    <BasicModal />
+                    {/* <ListItemText></ListItemText> */}
+                  </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                  <ListItemButton
+                    sx={{
+                      py: "2px",
+                      px: 3.2,
+                      fontSize: 16,
+                      color: "whitesmoke",
+                      "&:hover, &:focus": {
+                        bgcolor: "rgba(255, 255, 255, 0.08)",
+                      },
+                    }}
+                    onClick={(e) => {
+                      changeUrl(e, "/likedSongs");
+                    }}
+                  >
+                    <ListItemIcon>
+                      <ThumbUpIcon />
+                    </ListItemIcon>
+                    Liked Songs
+                    {/* <ListItemText></ListItemText> */}
+                  </ListItemButton>
+                </ListItem>
+              </>
+            )}
 
             <Divider variant="middle" sx={{ bgcolor: "	#whitesmoke", m: 1 }} />
 

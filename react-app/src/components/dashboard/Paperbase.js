@@ -167,7 +167,7 @@ theme = {
     MuiListItemText: {
       styleOverrides: {
         primary: {
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: theme.typography.fontWeightMedium,
         },
       },
@@ -195,7 +195,7 @@ theme = {
   },
 };
 
-const drawerWidth = 256;
+const drawerWidth = 220;
 
 export default function Paperbase() {
   const dispatch = useDispatch();

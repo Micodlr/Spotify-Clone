@@ -107,7 +107,18 @@ export default function PlaylistPage() {
         //       </div>
         //     </div>
         //   </Card>
-        <Card key={playlist.id} sx={{ maxWidth: 180 }}>
+        <Card
+          key={playlist.id}
+          sx={{
+            width: 180,
+            height: 270,
+            p: "9px",
+
+            bgcolor: "#121212",
+            color: "white",
+            "&:hover": { bgcolor: "#515151" },
+          }}
+        >
           <CardActionArea onClick={(e) => onClick(e, playlist.id)}>
             <CardMedia
               sx={{ height: 100 }}
@@ -117,6 +128,11 @@ export default function PlaylistPage() {
             />
             <CardContent color="custom">
               <Typography
+                style={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "normal",
+                }}
                 color="custom"
                 gutterBottom
                 variant="h5"
@@ -124,9 +140,31 @@ export default function PlaylistPage() {
               >
                 {playlist.name}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                playlist descrption
-              </Typography>
+              <p
+                style={{
+                  color: "gray",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "normal",
+                  fontFamily: "inherit",
+                  fontSize: "14px",
+                }}
+              >
+                artist description amsdkmvmasp amwpqmams,d, masidmopqw,dmqwd
+                masdm,pqwmdoqwdma;s{" "}
+              </p>
+              {/* <Typography
+                style={{
+                  whiteSpace: "normal",
+                  overflow: "auto",
+                  textOverflow: "ellipsis",
+                }}
+                variant="body2"
+                color="gray"
+              >
+                playlist descrption this is a great album, mix of funk, reggae,
+                rock, hip-hop, r&b, soul, metal, rap, punk, pop!
+              </Typography> */}
             </CardContent>
             {/* <CardActions>
           <Button size="small">Share</Button>

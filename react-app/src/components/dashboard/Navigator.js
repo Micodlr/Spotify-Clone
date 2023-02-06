@@ -15,16 +15,57 @@ import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import LandingPage from "../LandingPage";
-import { Avatar } from "@mui/material";
+import { Alert, Avatar, Button, Snackbar } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import "./logo.css";
-import InfoIcon from "@mui/icons-material/Info";
 
+import { useState } from "react";
+import InfoIcon from "@mui/icons-material/Info";
+import { useSelector } from "react-redux";
 import BasicModal from "./Modal";
 import AboutMeModal from "./AboutMeModal";
 import { height } from "@mui/system";
+import SignUpModal from "../auth/SignupModal";
+import LoginModal from "../auth/LoginModal";
 
 const categories = [
+  {
+    id: "Build",
+    children: [
+      {
+        id: "Home",
+        icon: <HomeIcon />,
+        active: false,
+        href: "/home",
+      },
+      {
+        id: "Artists",
+        icon: <GroupIcon />,
+        href: "/artists",
+      },
+      // {
+      //   id: "Songs",
+      //   icon: <LibraryMusicIcon />,
+      //   href: "/songs",
+      // },
+      {
+        id: "Search",
+        icon: <SearchIcon />,
+        href: "/search",
+      },
+      { id: "Your Library", icon: <QueueMusicIcon />, href: "/library" },
+    ],
+  },
+  // {
+  //   id: "Quality",
+  //   children: [
+  //     // { id: "Create Playlist", icon: <PlaylistAddIcon />, href: "/search" },
+  //     { id: "Liked Songs", icon: <ThumbUpIcon />, href: "/likedSongs" },
+  //   ],
+  // },
+];
+
+const categoriesTwo = [
   {
     id: "Build",
     children: [
@@ -77,13 +118,25 @@ const itemCategory = {
 };
 
 export default function Navigator(props) {
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const { ...other } = props;
   const history = useHistory();
+  const user = useSelector((state) => state.session.user);
   function changeUrl(e, href) {
     e.preventDefault();
+    if (!user) {
+      // return history.push("/dashboard/home");
+      return handleClick();
+    }
     history.push(`/dashboard${href}`);
   }
-
   return (
     <Drawer variant="permanent" {...other}>
       <List>
@@ -94,30 +147,10 @@ export default function Navigator(props) {
             p: 2,
           }}
         >
-          {/* <Avatar
-            src="https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png"
-            sx={{
-              width: 65,
-              height: 65,
-            }}
-          ></Avatar> */}
           <img
             className="logo"
             src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
           />
-          {/* <Box
-            component="img"
-            sx={{
-              height: 75,
-              width: 75,
-              maxHeight: { xs: 233, md: 167 },
-              maxWidth: { xs: 350, md: 250 },
-              padding: 0,
-              margin: 0,
-            }}
-            alt="The house from the offer."
-            src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
-          /> */}
         </ListItem>
         <Box
           style={{
@@ -139,6 +172,51 @@ export default function Navigator(props) {
                     <ListItemIcon>{icon}</ListItemIcon>
                     <ListItemText>{childId}</ListItemText>
                   </ListItemButton>
+                  <Snackbar
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    open={open}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity="error"
+                      sx={{
+                        fontSize: "18px",
+                        fontWeight: "bold",
+                        borderRadius: "15px",
+
+                        width: "100%",
+                        color: "whitesmoke",
+                        bgcolor: "black",
+                      }}
+                    >
+                      You must be logged in to access this feature.
+                      <Box
+                        sx={{ display: "flex", justifyContent: "space-evenly" }}
+                      >
+                        <Button sx={{ bgcolor: "black" }}>
+                          <SignUpModal />
+                        </Button>
+                        <Button>
+                          <LoginModal />
+                        </Button>
+                      </Box>
+                    </Alert>
+                  </Snackbar>
+                  {/* <Snackbar
+                    anchorOrigin={{
+                      vertical: "center",
+                      horizontal: "center",
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                    message="Snackbar was opened."
+                    autoHideDuration={3000}
+                  /> */}
                 </ListItem>
               ))}
 

@@ -80,14 +80,17 @@ export default function PlaylistSongs() {
         ))}
       </Grid> */}
 
-      <Box>
+      <Box style={{}}>
         <CardMedia
           style={{
             position: "relative",
             paddingTop: "56.25%",
             borderRadius: "10px",
+            backgroundPosition: "fill",
           }}
-          image={playlist?.playlistImg}
+          image={
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBY28Lx1k453KCRAMvffTlgRGTDiLkk0XZeg&usqp=CAU"
+          }
           title="header image"
         />
       </Box>
@@ -111,7 +114,7 @@ export default function PlaylistSongs() {
         <Ellipsis />
       </div>
 
-      <List component="ol">
+      <List>
         {/* <ListSubheader style={{ color: "whitesmoke" }}>
           {playlistName}
         </ListSubheader> */}
@@ -158,6 +161,7 @@ export default function PlaylistSongs() {
           </ListItem>
         ))}
       </List>
+
       {/* <List>
         {listOfSongs.map((song) => (
           <Box sx={{ color: "whitesmoke" }} key={song.id}>

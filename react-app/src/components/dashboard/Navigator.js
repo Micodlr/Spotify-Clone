@@ -38,11 +38,11 @@ const categories = [
         active: false,
         href: "/home",
       },
-      {
-        id: "Artists",
-        icon: <GroupIcon />,
-        href: "/artists",
-      },
+      // {
+      //   id: "Artists",
+      //   icon: <GroupIcon />,
+      //   href: "/artists",
+      // },
       // {
       //   id: "Songs",
       //   icon: <LibraryMusicIcon />,
@@ -73,7 +73,7 @@ const categoriesTwo = [
         id: "Home",
         icon: <HomeIcon />,
         active: false,
-        href: "/home",
+        href: "/dashboard",
       },
       {
         id: "Artists",

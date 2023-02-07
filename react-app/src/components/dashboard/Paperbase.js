@@ -30,6 +30,8 @@ import ArtistIdPage from "./ArtistIdPage";
 import AlbumPage from "./AlbumPage";
 import SongsPage from "./SongsPage";
 import LikedSongsPage from "./testpage";
+import Dashboard from "./Dashboard";
+import AllSongs from "./SongsPage";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -261,12 +263,15 @@ export default function Paperbase() {
             }}
           >
             <Switch>
+              <Route exact path="/">
+                <Content Component={Dashboard} />
+              </Route>
               <Route exact path="/dashboard/home">
                 <Content Component={HomePage} />
               </Route>
-              <Route exact path="/dashboard/artists">
+              {/* <Route exact path="/dashboard/artists">
                 <Content Component={ArtistsPage} />
-              </Route>
+              </Route> */}
               <Route exact path="/dashboard/artists/:artistId">
                 <Content Component={ArtistIdPage} />
               </Route>
@@ -274,7 +279,7 @@ export default function Paperbase() {
                 <Content Component={AlbumPage} />
               </Route>
               <Route path="/dashboard/likedSongs">
-                <Content Component={LikedSongsPage} />
+                <Content Component={AllSongs} />
               </Route>
               <Route path="/dashboard/library">
                 <Content Component={PlaylistsPage} />

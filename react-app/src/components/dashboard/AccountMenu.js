@@ -35,7 +35,7 @@ export default function AccountMenu() {
   const onLogout = async (e) => {
     e.preventDefault();
     await dispatch(logout());
-    history.push("/dashboard/home");
+    history.push("/dashboard/");
   };
 
   const user = useSelector((state) => state.session.user);

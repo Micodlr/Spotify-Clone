@@ -5,15 +5,12 @@ import { useParams, Link } from "react-router-dom";
 import { getSongsThunk } from "../../store/songs";
 import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  IconButton,
-  ListSubheader,
-  Card,
-} from "@material-ui/core";
+import { IconButton, ListSubheader, Card } from "@material-ui/core";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 import { Avatar, Button, ListItemIcon, Typography } from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
@@ -23,7 +20,7 @@ import { Grid } from "@material-ui/core";
 
 // import { getAllreviews } from "../../store/reviews";
 
-export default function SearchPage() {
+export default function AllSongs() {
   const { playlistId } = useParams();
 
   const dispatch = useDispatch();

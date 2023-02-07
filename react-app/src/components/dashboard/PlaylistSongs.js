@@ -6,15 +6,18 @@ import { useParams, Link } from "react-router-dom";
 import { getSongsThunk } from "../../store/songs";
 import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  IconButton,
-  ListSubheader,
-  Card,
-} from "@material-ui/core";
+// import {
+//   List,
+//   ListItem,
+//   ListItemAvatar,
+//   ListItemText,
+
+// } from "@material-ui/core";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 import {
   Avatar,
   Button,

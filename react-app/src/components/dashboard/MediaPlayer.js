@@ -44,7 +44,14 @@ export default function MediaControlCard() {
   };
 
   return (
-    <Card sx={{ display: "flex" }}>
+    <Card
+      sx={{
+        display: "flex",
+        width: "100%",
+        bgcolor: "black",
+        color: "whitesmoke",
+      }}
+    >
       <CardMedia
         component="img"
         sx={{ width: 150 }}
@@ -59,15 +66,11 @@ export default function MediaControlCard() {
           flexDirection: "column",
         }}
       >
-        <CardContent sx={{ flex: "1 0 auto" }}>
+        <CardContent sx={{ flex: "1 0 auto", color: "whitesmoke" }}>
           <Typography component="div" variant="h5">
             Live From Space
           </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
+          <Typography variant="subtitle1" color="whitesmoke" component="div">
             Mac Miller
           </Typography>
         </CardContent>
@@ -86,17 +89,21 @@ export default function MediaControlCard() {
             pb: 1,
           }}
         >
-          <IconButton aria-label="previous">
+          <IconButton aria-label="previous" sx={{ color: "whitesmoke" }}>
             {theme.direction === "rtl" ? (
               <SkipNextIcon />
             ) : (
               <SkipPreviousIcon />
             )}
           </IconButton>
-          <IconButton onClick={handlePlay} aria-label="play/pause">
+          <IconButton
+            onClick={handlePlay}
+            aria-label="play/pause"
+            sx={{ color: "whitesmoke" }}
+          >
             <PlayArrowIcon sx={{ height: 38, width: 38 }} />
           </IconButton>
-          <IconButton aria-label="next">
+          <IconButton aria-label="next" sx={{ color: "whitesmoke" }}>
             {theme.direction === "rtl" ? (
               <SkipPreviousIcon />
             ) : (

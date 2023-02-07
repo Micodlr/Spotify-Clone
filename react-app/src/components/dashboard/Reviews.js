@@ -61,7 +61,7 @@ export default function Reviews() {
               </Typography>
             </CardContent>
           </CardActionArea>
-          {review.userId === user.user.id ? (
+          {review.userId === user?.user?.id ? (
             <Box
               sx={{
                 display: "flex",

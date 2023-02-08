@@ -32,6 +32,7 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import zIndex from "@mui/material/styles/zIndex";
 import PlaylistSongsElipsis from "./PlaylistSongsElipsis";
+import { getSong } from "../../store/mediaPlayer";
 // import { getAllreviews } from "../../store/reviews";
 
 // const useStyles = makeStyles({
@@ -70,6 +71,11 @@ export default function PlaylistSongs() {
 
   const playlist = useSelector((state) => state.playlists[playlistId]);
 
+  const onClick = (e, song) => {
+    e.preventDefault();
+    dispatch(getSong(song));
+  };
+
   return (
     <>
       {/* <Grid container spacing={3}>
@@ -92,7 +98,7 @@ export default function PlaylistSongs() {
             backgroundPosition: "fill",
           }}
           image={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBY28Lx1k453KCRAMvffTlgRGTDiLkk0XZeg&usqp=CAU"
+            "https://meghanoonacliffordblog.files.wordpress.com/2011/04/event-vertex-meets-the-light-by-meghan-oona-clifford-web.jpg?w=336"
           }
           title="header image"
         />
@@ -131,6 +137,7 @@ export default function PlaylistSongs() {
                   type="submit"
                   variant="contained"
                   color="primary"
+                  onClick={(e) => onClick(e, song)}
                 >
                   <PlayArrowIcon />
                 </Button>

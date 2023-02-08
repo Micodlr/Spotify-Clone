@@ -16,6 +16,7 @@ import img from "./Silverbackogo.png";
 
 export default function MediaControlCard() {
   const theme = useTheme();
+
   //   const theme = createTheme({
   //     palette: {
   //       primary: {

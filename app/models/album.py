@@ -11,7 +11,7 @@ class Album(db.Model):
   artistId = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod('artists.id')))
   albumCover = db.Column(db.String, nullable=True)
   title = db.Column(db.String, nullable=False)
-  description = db.Column(db.String, nullable=False)
+  description = db.Column(db.String, nullable=False, default="Album description")
 
   artists = db.relationship('Artist', back_populates='albums')
   songs = db.relationship('Song', back_populates='albums')

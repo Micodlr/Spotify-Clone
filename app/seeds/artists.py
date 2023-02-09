@@ -13,11 +13,15 @@ def seed_artists():
     test4 = Artist(
          name='AVBE')
 
+    test5 = Artist(
+         name='Hartzmann')
+
 
     db.session.add(test1)
     db.session.add(test2)
     db.session.add(test3)
     db.session.add(test4)
+    db.session.add(test5)
 
     db.session.commit()
 

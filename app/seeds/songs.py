@@ -10,14 +10,25 @@ def seed_songs():
     test3 = Song(
          artistId=3, albumId=3, title="Infraction", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/summer-strut-infraction-main-version-16209-01-17.mp3", )
     test4 = Song(
-         artistId=4, albumId=4, title="Infraction", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/night-in-kyoto-avbe-main-version-21302-01-57.mp3", )
-
+         artistId=4, albumId=4, title="Night in Kyoto", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/night-in-kyoto-avbe-main-version-21302-01-57.mp3", )
+    test5 = Song(
+         artistId=5, albumId=5, title="Clear sky", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3", )
+    test6 = Song(
+         artistId=5, albumId=5, title="Paradise Island", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/paradise-island-hartzmann-main-version-03-07-13205.mp3", )
+    test7 = Song(
+         artistId=5, albumId=5, title="Sunny", lyrics="Sunny sun sun sun.....", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/sunny-hartzmann-main-version-02-12-7500.mp3", )
+    test8 = Song(
+         artistId=3, albumId=3, title="Tropic of life", lyrics="Tropic sun sun sun.....", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/tropic-of-life-infraction-main-version-02-21-13491.mp3", )
 
 
     db.session.add(test1)
     db.session.add(test2)
     db.session.add(test3)
     db.session.add(test4)
+    db.session.add(test5)
+    db.session.add(test6)
+    db.session.add(test7)
+    db.session.add(test8)
 
     db.session.commit()
 

@@ -22,7 +22,7 @@ export default function MediaControlCard() {
   const theme = useTheme();
   const song = useSelector((state) => state.mediaPlayer);
   const [play, setPlay] = useState(false);
-  console.log(song.url);
+
   //   const theme = createTheme({
   //     palette: {
   //       primary: {
@@ -51,6 +51,11 @@ export default function MediaControlCard() {
   const handleSeek = (event) => {
     audioRef.current.currentTime = event.target.value;
   };
+
+  useEffect(() => {
+    setPlay(false);
+    handlePlay();
+  }, [song?.songUrl]);
 
   return (
     <Card
@@ -82,7 +87,7 @@ export default function MediaControlCard() {
         </CardContent>
         <CardMedia
           component="audio"
-          src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"
+          src={song?.songUrl}
           title="Audio title"
           ref={audioRef}
         />

@@ -7,7 +7,6 @@ import { getSongsThunk } from "../../store/songs";
 import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
 import {
-  List,
   ListItem,
   ListItemAvatar,
   ListItemText,

@@ -7,20 +7,16 @@ import { getSongsThunk } from "../../store/songs";
 
 import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  IconButton,
-  ListSubheader,
-  Card,
-} from "@material-ui/core";
+
 import {
   Avatar,
   Button,
   CardMedia,
+  List,
+  ListItem,
+  ListItemAvatar,
   ListItemIcon,
+  ListItemText,
   Typography,
 } from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";

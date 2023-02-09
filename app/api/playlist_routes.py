@@ -7,12 +7,20 @@ playlist_routes = Blueprint('playlists', __name__)
 
 
 @playlist_routes.route('/')
-
 def playlists():
     """
     Query for all user playlist
     """
     playlists = Playlist.query.filter(Playlist.userId == current_user.id)
+    print(playlists[0].playlistSongs)
+    return {'playlists':[ playlist.to_dict() for playlist in playlists]}
+
+@playlist_routes.route('/suggested')
+def suggested_playlists():
+    """
+    Query for all suggested playlist
+    """
+    playlists = Playlist.query.filter(Playlist.userId == 4)
     print(playlists[0].playlistSongs)
     return {'playlists':[ playlist.to_dict() for playlist in playlists]}
 

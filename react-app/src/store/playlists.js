@@ -96,6 +96,19 @@ export const getplaylistsThunk = () => async (dispatch) => {
   return res;
 };
 
+export const getSuggestedPlaylistsThunk = () => async (dispatch) => {
+  const res = await csrfFetch(`/api/playlists/suggested`);
+
+  const { playlists } = await res.json();
+
+  if (res.ok) {
+    const data = {};
+    playlists.forEach((playlist) => (data[playlist.id] = playlist));
+    dispatch(getPlaylists(data));
+  }
+  return res;
+};
+
 const initialState = {};
 
 const playlistsReducer = (state = initialState, action) => {

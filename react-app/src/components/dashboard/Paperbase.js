@@ -256,7 +256,8 @@ export default function Paperbase() {
             component="nav"
             sx={{
               flex: 1,
-              py: 2,
+              pt: 1,
+              pb: 14,
               px: 2,
 
               bgcolor: "#0f0f0f",
@@ -275,6 +276,9 @@ export default function Paperbase() {
               <Route exact path="/dashboard/artists/:artistId">
                 <Content Component={ArtistIdPage} />
               </Route>
+              <Route exact path="/dashboard/artists/">
+                <Content Component={ArtistsPage} />
+              </Route>
               <Route exact path="/dashboard/albums/:albumId">
                 <Content Component={AlbumPage} />
               </Route>
@@ -292,7 +296,16 @@ export default function Paperbase() {
               </Route>
             </Switch>
           </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: "#0f0f0f" }}>
+          <Box
+            component="footer"
+            sx={{
+              bottom: 0,
+              width: "100%",
+              position: "fixed",
+              p: 2,
+              bgcolor: "#0f0f0f",
+            }}
+          >
             {/* <audio
               controls
               // src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"

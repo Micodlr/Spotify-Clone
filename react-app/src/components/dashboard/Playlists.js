@@ -110,9 +110,9 @@ export default function PlaylistPage() {
         <Card
           key={playlist.id}
           sx={{
-            width: 180,
-            height: 270,
-            p: "9px",
+            width: 190,
+            height: 280,
+            p: "10px",
 
             bgcolor: "#121212",
             color: "white",
@@ -121,7 +121,7 @@ export default function PlaylistPage() {
         >
           <CardActionArea onClick={(e) => onClick(e, playlist.id)}>
             <CardMedia
-              sx={{ height: 100 }}
+              sx={{ height: 150, width: 170 }}
               //   image={ playlist?.playlistImg}
               image={playlist?.playlistImg}
               title="playlist image"
@@ -132,16 +132,21 @@ export default function PlaylistPage() {
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   whiteSpace: "normal",
+                  fontSize: "1.2em",
+                  marginBottom: "2px",
                 }}
                 color="custom"
                 gutterBottom
-                variant="h5"
+                variant="h6"
                 component="div"
               >
                 {playlist.name}
               </Typography>
               <p
                 style={{
+                  marginTop: "1px",
+                  marginBottom: "5px",
+                  paddingBottom: "5px",
                   color: "gray",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
@@ -150,8 +155,8 @@ export default function PlaylistPage() {
                   fontSize: "14px",
                 }}
               >
-                artist description amsdkmvmasp amwpqmams,d, masidmopqw,dmqwd
-                masdm,pqwmdoqwdma;s{" "}
+                playlist description asdczxcas asda sczcasdqw
+                asdaaasdasdasdasdasdasdasdads
               </p>
               {/* <Typography
                 style={{

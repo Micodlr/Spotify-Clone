@@ -13,10 +13,16 @@ import { createTheme } from "@mui/material/styles";
 import { green, purple } from "@mui/material/colors";
 import { makeStyles } from "@material-ui/core/styles";
 import img from "./Silverbackogo.png";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import PauseIcon from "@mui/icons-material/Pause";
 
 export default function MediaControlCard() {
   const theme = useTheme();
-
+  const song = useSelector((state) => state.mediaPlayer);
+  const [play, setPlay] = useState(false);
+  console.log(song.url);
   //   const theme = createTheme({
   //     palette: {
   //       primary: {
@@ -34,10 +40,12 @@ export default function MediaControlCard() {
 
   const handlePlay = () => {
     audioRef.current.play();
+    setPlay(true);
   };
 
   const handlePause = () => {
     audioRef.current.pause();
+    setPlay(false);
   };
 
   const handleSeek = (event) => {
@@ -56,10 +64,7 @@ export default function MediaControlCard() {
       <CardMedia
         component="img"
         sx={{ width: 150 }}
-        image={
-          //   img
-          "https://t3.ftcdn.net/jpg/05/49/28/50/360_F_549285030_CYY2EQbWguJqh8jsuZCDzfkp294bHAnz.jpg"
-        }
+        image={song?.album?.albumCover}
       />
       <Box
         sx={{
@@ -69,15 +74,15 @@ export default function MediaControlCard() {
       >
         <CardContent sx={{ flex: "1 0 auto", color: "whitesmoke" }}>
           <Typography component="div" variant="h5">
-            Live From Space
+            {song?.title}
           </Typography>
           <Typography variant="subtitle1" color="whitesmoke" component="div">
-            Mac Miller
+            {song?.artist?.name}
           </Typography>
         </CardContent>
         <CardMedia
           component="audio"
-          //   src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"
+          src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"
           title="Audio title"
           ref={audioRef}
         />
@@ -97,12 +102,15 @@ export default function MediaControlCard() {
               <SkipPreviousIcon />
             )}
           </IconButton>
-          <IconButton
-            onClick={handlePlay}
-            aria-label="play/pause"
-            sx={{ color: "whitesmoke" }}
-          >
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+          <IconButton aria-label="play/pause" sx={{ color: "whitesmoke" }}>
+            {!play ? (
+              <PlayArrowIcon
+                onClick={handlePlay}
+                sx={{ height: 38, width: 38 }}
+              />
+            ) : (
+              <PauseIcon onClick={handlePause} sx={{ height: 38, width: 38 }} />
+            )}
           </IconButton>
           <IconButton aria-label="next" sx={{ color: "whitesmoke" }}>
             {theme.direction === "rtl" ? (

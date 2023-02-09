@@ -21,6 +21,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import {
   Avatar,
   Button,
+  Card,
   CardMedia,
   ListItemIcon,
   Typography,
@@ -89,20 +90,23 @@ export default function PlaylistSongs() {
         ))}
       </Grid> */}
 
-      <Box style={{}}>
-        <CardMedia
+      <Card style={{ width: "99%", height: "50vh" }}>
+        <img
+          src={playlist?.playlistImg}
+          style={{ width: "100%", height: "100%" }}
+        ></img>
+        {/* <CardMedia
+          component={"img"}
           style={{
-            position: "relative",
-            paddingTop: "56.25%",
-            borderRadius: "10px",
-            backgroundPosition: "fill",
+            width: "100%",
+            height: "100%",
+
+            objectFit: "fill",
           }}
-          image={
-            "https://meghanoonacliffordblog.files.wordpress.com/2011/04/event-vertex-meets-the-light-by-meghan-oona-clifford-web.jpg?w=336"
-          }
+          image={playlist?.playlistImg}
           title="header image"
-        />
-      </Box>
+        /> */}
+      </Card>
 
       <Box
         style={{

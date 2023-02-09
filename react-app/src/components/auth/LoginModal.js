@@ -57,6 +57,7 @@ export default function LoginModal() {
     event.preventDefault();
 
     const res = await dispatch(login(email, password));
+    history.push("/dashboard/home");
 
     if (res) {
       return setErrors(res);
@@ -69,7 +70,7 @@ export default function LoginModal() {
 
     // return setEmail("demo@aa.io"), setPassword("password");
     const res = await dispatch(login("demo@aa.io", "password"));
-
+    history.push("/dashboard/home");
     if (res) {
       return setErrors(res);
     }

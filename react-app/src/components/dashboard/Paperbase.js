@@ -32,6 +32,7 @@ import SongsPage from "./SongsPage";
 import LikedSongsPage from "./testpage";
 import Dashboard from "./Dashboard";
 import AllSongs from "./SongsPage";
+import ComingSoonPage from "./ComingSoon";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -293,6 +294,9 @@ export default function Paperbase() {
               </Route>
               <Route exact path="/dashboard/playlists/:playlistId">
                 <Content Component={PlaylistSongs} />
+              </Route>
+              <Route path="/dashboard/search">
+                <Content Component={ComingSoonPage} />
               </Route>
             </Switch>
           </Box>

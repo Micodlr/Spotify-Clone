@@ -85,7 +85,7 @@ export default function PlaylistPage() {
   const playlists = useSelector((state) => Object.values(state.playlists));
   const user = useSelector((state) => state.session.user);
   const userplaylists = playlists.filter(
-    (playlist) => playlist.userId == user.id
+    (playlist) => playlist?.userId == user?.id
   );
 
   const history = useHistory();

@@ -75,7 +75,7 @@ export default function AlbumPage() {
   };
 
   return (
-    <Container style={{ paddingBottom: 20 }}>
+    <Container style={{ paddingBottom: 100 }}>
       <Card style={{ width: "100%", height: "35vw" }}>
         <img
           src={album?.albumCover}

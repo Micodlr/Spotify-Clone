@@ -37,7 +37,9 @@ export default function ArtistsPage() {
   return (
     <>
       <h1 style={{ color: "whitesmoke" }}>Artists</h1>
-      <Container sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      <Container
+        sx={{ pb: 10, display: "flex", flexWrap: "wrap", gap: "20px" }}
+      >
         {artists.map((artist) => (
           // <Card>
           //   <div id="playlist-container" key={playlist?.id}>

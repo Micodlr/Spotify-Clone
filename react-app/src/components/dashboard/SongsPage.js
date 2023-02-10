@@ -20,6 +20,8 @@ import {
   IconButton,
   Snackbar,
   Alert,
+  Typography,
+  ListSubheader,
 } from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
@@ -58,11 +60,7 @@ export default function AllSongs() {
   return (
     <Container sx={{ ml: 0, pb: 5 }}>
       <List>
-        {/* <ListSubheader
-          style={{ fontSize: "20px", fontWeight: "bold", color: "whitesmoke" }}
-        >
-          Browse all
-        </ListSubheader> */}
+        <h1 style={{ color: "whitesmoke" }}>Songs</h1>
 
         {songs.map((song, index) => (
           <ListItem key={song.id}>

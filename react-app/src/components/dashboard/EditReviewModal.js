@@ -61,6 +61,8 @@ export default function EditReviewModal({ review }) {
       <Button
         sx={{
           bgcolor: "#1DB954",
+          mb: 0,
+          fontSize: "16px",
 
           "&:hover": {
             bgcolor: "#1DB954",
@@ -70,7 +72,7 @@ export default function EditReviewModal({ review }) {
         }}
         onClick={handleOpen}
       >
-        Edit review
+        Edit
       </Button>
       <Modal
         open={open}

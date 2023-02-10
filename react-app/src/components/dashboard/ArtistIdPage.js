@@ -97,7 +97,7 @@ export default function ArtistIdPage() {
   const artistAlbums = albums.filter((album) => album.artistId == artistId);
   console.log(artistAlbums);
   return (
-    <Container style={{ paddingBottom: 100 }}>
+    <Container style={{ paddingBottom: "200px" }}>
       {/* <Grid container spacing={3}>
         {listOfSongs.map((song, index) => (
           <Grid item xs={4} key={index}>

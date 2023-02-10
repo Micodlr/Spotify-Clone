@@ -66,11 +66,12 @@ export default function MediaControlCard() {
         width: "100%",
         bgcolor: "black",
         color: "whitesmoke",
+        p: 0,
       }}
     >
       <CardMedia
         component="img"
-        sx={{ width: 150 }}
+        sx={{ width: 150, height: 130 }}
         image={song?.album?.albumCover || h}
       />
       <Box

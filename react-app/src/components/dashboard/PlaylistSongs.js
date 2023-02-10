@@ -64,7 +64,7 @@ export default function PlaylistSongs() {
   };
 
   return (
-    <>
+    <Box sx={{ pb: 10 }}>
       {/* <Grid container spacing={3}>
         {listOfSongs.map((song, index) => (
           <Grid item xs={4} key={index}>
@@ -75,7 +75,7 @@ export default function PlaylistSongs() {
           </Grid>
         ))}
       </Grid> */}
-      <Container sx={{ pl: 5 }}>
+      <Container sx={{ pl: 5, pt: 0 }}>
         <Card style={{ width: "95%", height: "28vw" }}>
           <img
             src={playlist?.playlistImg}
@@ -183,6 +183,6 @@ export default function PlaylistSongs() {
           </Box>
         ))}
       </List> */}
-    </>
+    </Box>
   );
 }

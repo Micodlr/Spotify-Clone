@@ -44,22 +44,50 @@ export default function Reviews() {
     <Container sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
       <h1 style={{ color: "whitesmoke" }}>Reviews:</h1>
       {reviews.map((review) => (
-        <Card key={review.id} sx={{ maxWidth: 180, bgcolor: "whitesmoke" }}>
-          <CardActionArea onClick={(e) => onClick(e)}>
-            <CardContent color="custom">
-              <Typography
-                color="custom"
-                gutterBottom
-                variant="h5"
-                component="div"
-              >
-                {review.review}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                by: {review?.username?.username}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
+        <Card
+          key={review.id}
+          sx={{
+            // minWidth: 150,
+            // maxWidth: 150,
+
+            // bgcolor: "whitesmoke",
+            display: "flex",
+
+            flexWrap: "wrap",
+            alignItems: "flex-end",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            p: "10px",
+
+            bgcolor: "whitesmoke",
+            color: "black",
+            "&:hover": { bgcolor: "white" },
+          }}
+        >
+          <CardContent color="custom">
+            <Typography
+              // color="custom"
+              // gutterBottom
+              // variant="h6"
+              // sx={{ display: "flex", flexWrap: "wrap" }}
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "normal",
+                fontSize: "1.2em",
+                marginBottom: "2px",
+              }}
+              color="custom"
+              gutterBottom
+              variant="h6"
+            >
+              {review?.review}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              by: {review?.username?.username}
+            </Typography>
+          </CardContent>
+
           {review.userId === user?.user?.id ? (
             <Box
               sx={{
@@ -68,7 +96,6 @@ export default function Reviews() {
                 justifyContent: "space-between",
               }}
             >
-              <EditReviewModal review={review} />
               <Button
                 sx={{
                   bgcolor: "black",
@@ -80,6 +107,7 @@ export default function Reviews() {
               >
                 DELETE
               </Button>
+              <EditReviewModal review={review} />
             </Box>
           ) : (
             <></>

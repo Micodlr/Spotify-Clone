@@ -302,7 +302,7 @@ export default function Paperbase() {
               bottom: 0,
               width: "100%",
               position: "fixed",
-              p: 2,
+              p: 0,
               bgcolor: "#0f0f0f",
             }}
           >

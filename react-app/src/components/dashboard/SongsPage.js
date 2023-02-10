@@ -5,16 +5,24 @@ import { useParams, Link } from "react-router-dom";
 import { getSongsThunk } from "../../store/songs";
 import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
-import { IconButton, ListSubheader, Card } from "@material-ui/core";
+
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import { Avatar, Button, ListItemIcon, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Container,
+  Icon,
+  ListItemIcon,
+  IconButton,
+} from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import SongEllipsis from "./SongElipsis";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { Grid } from "@material-ui/core";
 
@@ -36,7 +44,7 @@ export default function AllSongs() {
   const songs = useSelector((state) => Object.values(state.songs));
 
   return (
-    <>
+    <Container sx={{ ml: 0, pb: 5 }}>
       <List>
         {/* <ListSubheader
           style={{ fontSize: "20px", fontWeight: "bold", color: "whitesmoke" }}
@@ -48,14 +56,17 @@ export default function AllSongs() {
           <ListItem key={song.id}>
             <ListItemAvatar>
               <ListItemIcon>
-                <Button
-                  sx={{ "&:hover": { bgcolor: "#1DB954" } }}
+                <IconButton
+                  sx={{
+                    color: "whitesmoke",
+                    "&:hover": { bgcolor: "#1DB954", color: "black" },
+                  }}
                   type="submit"
                   variant="contained"
                   color="primary"
                 >
                   <PlayArrowIcon />
-                </Button>
+                </IconButton>
               </ListItemIcon>
             </ListItemAvatar>
 
@@ -71,10 +82,11 @@ export default function AllSongs() {
               primary={song.title}
               secondary={song.artist.name}
             />
+            <FavoriteBorderIcon sx={{ color: "whitesmoke" }} />
             <SongEllipsis songId={song.id} />
           </ListItem>
         ))}
       </List>
-    </>
+    </Container>
   );
 }

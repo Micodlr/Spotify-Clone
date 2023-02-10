@@ -27,7 +27,7 @@ def suggested_playlists():
 
 
 @playlist_routes.route('/<int:id>')
-@login_required
+
 def playlist(id):
     """
     Query for a playlist by id and returns that playlist in a dictionary

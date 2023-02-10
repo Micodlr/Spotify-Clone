@@ -9,9 +9,11 @@ import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
 
 import {
+  Card,
   Avatar,
   Button,
   CardMedia,
+  Container,
   List,
   ListItem,
   ListItemAvatar,
@@ -30,6 +32,8 @@ import { getArtistThunk } from "../../store/artists";
 import { getAlbumsThunk } from "../../store/albums";
 import Reviews from "./Reviews";
 import AddReviewModal from "./AddReviewModal";
+import SongEllipsis from "./SongElipsis";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 // import { getAllreviews } from "../../store/reviews";
 
 // const useStyles = makeStyles({
@@ -64,8 +68,14 @@ export default function AlbumPage() {
   let listOfSongs = songs.filter((song) => song.albumId == albumId);
 
   return (
-    <>
-      <Box>
+    <Container style={{ paddingBottom: 20 }}>
+      <Card style={{ width: "100%", height: "35vw" }}>
+        <img
+          src={album?.albumCover}
+          style={{ width: "100%", height: "100%" }}
+        ></img>
+      </Card>
+      {/* <Box>
         <CardMedia
           style={{
             position: "relative",
@@ -75,7 +85,7 @@ export default function AlbumPage() {
           image={album?.albumCover}
           title="header image"
         />
-      </Box>
+      </Box> */}
       <Box
         style={{
           display: "flex",
@@ -127,8 +137,8 @@ export default function AlbumPage() {
               primary={song.title}
               secondary={song.artist.name}
             />
-
-            <PlaylistSongsElipsis songId={song.id} />
+            <FavoriteBorderIcon sx={{ color: "whitesmoke" }} />
+            <SongEllipsis songId={song.id} />
           </ListItem>
         ))}
       </List>
@@ -147,6 +157,6 @@ export default function AlbumPage() {
       </Button> */}
       <AddReviewModal />
       <Reviews />
-    </>
+    </Container>
   );
 }

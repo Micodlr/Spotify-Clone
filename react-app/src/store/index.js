@@ -8,6 +8,7 @@ import artistsReducer from "./artists";
 import reviewsReducer from "./reviews";
 import albumsReducer from "./albums";
 import mediaPlayerReducer from "./mediaPlayer";
+import spotPlaylistReducer from "./recommendedPlaylist";
 
 const rootReducer = combineReducers({
   session,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   playlistSongs: playlistSongsReducer,
   reviews: reviewsReducer,
   mediaPlayer: mediaPlayerReducer,
+  // spotPlaylist: spotPlaylistReducer,
 });
 
 let enhancer;

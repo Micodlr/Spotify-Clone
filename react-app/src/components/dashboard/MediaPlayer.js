@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import PauseIcon from "@mui/icons-material/Pause";
+import "./Silverbackogo.png";
 
 export default function MediaControlCard() {
   const theme = useTheme();
@@ -69,7 +70,10 @@ export default function MediaControlCard() {
       <CardMedia
         component="img"
         sx={{ width: 150 }}
-        image={song?.album?.albumCover}
+        image={
+          song?.album?.albumCover ||
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfC48UU7rDDImLp7OQcY73XUdcGYJmg-jCAw&usqp=CAU"
+        }
       />
       <Box
         sx={{

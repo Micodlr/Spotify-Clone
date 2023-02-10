@@ -49,6 +49,9 @@ export default function SongEllipsis({ songId }) {
 
   const user = useSelector((state) => state.session.user);
   const playlists = useSelector((state) => Object.values(state.playlists));
+  const userPlaylists = playlists.filter(
+    (playlist) => playlist.userId == user.id
+  );
 
   return (
     <React.Fragment>
@@ -121,7 +124,7 @@ export default function SongEllipsis({ songId }) {
           onClose={handleClose}
           onMouseLeave={handleClose}
         >
-          {playlists.map((playlist) => (
+          {userPlaylists.map((playlist) => (
             <MenuItem
               key={playlist.id}
               onClick={(e) => addSong(e, playlist.id)}

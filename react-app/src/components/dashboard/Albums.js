@@ -27,7 +27,7 @@ export default function Albums({ artistAlbums }) {
 
   return (
     <Container
-      style={{ paddingLeft: "2px" }}
+      style={{ paddingLeft: "2px", paddingBottom: 100 }}
       sx={{
         display: "flex",
         flexWrap: "wrap",

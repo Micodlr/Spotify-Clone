@@ -11,8 +11,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { maxHeight } from "@mui/system";
 import { useHistory } from "react-router-dom";
-import Ellipsis from "./EditPlaylist";
-import img from "./Silverbackogo.png";
 
 export default function Albums({ artistAlbums }) {
   const history = useHistory();

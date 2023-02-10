@@ -196,16 +196,6 @@ export default function Navigator(props) {
                     >
                       Error: Login Required. Please log in to access this
                       feature.
-                      {/* <Box
-                        sx={{ display: "flex", justifyContent: "space-evenly" }}
-                      >
-                        <Button sx={{ bgcolor: "black" }}>
-                          <SignUpModal />
-                        </Button>
-                        <Button>
-                          <LoginModal />
-                        </Button>
-                      </Box> */}
                     </Alert>
                   </Snackbar>
                   {/* <Snackbar

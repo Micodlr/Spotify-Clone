@@ -20,6 +20,7 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  IconButton,
 } from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
@@ -114,14 +115,17 @@ export default function AlbumPage() {
           <ListItem key={song.id}>
             <ListItemAvatar>
               <ListItemIcon>
-                <Button
-                  sx={{ "&:hover": { bgcolor: "#1DB954" } }}
+                <IconButton
+                  sx={{
+                    color: "whitesmoke",
+                    "&:hover": { bgcolor: "#1DB954" },
+                  }}
                   type="submit"
                   variant="contained"
                   color="primary"
                 >
                   <PlayArrowIcon />
-                </Button>
+                </IconButton>
               </ListItemIcon>
             </ListItemAvatar>
 
@@ -137,8 +141,11 @@ export default function AlbumPage() {
               primary={song.title}
               secondary={song.artist.name}
             />
-            <FavoriteBorderIcon sx={{ color: "whitesmoke" }} />
-            <SongEllipsis songId={song.id} />
+            <IconButton>
+              <FavoriteBorderIcon sx={{ color: "whitesmoke" }} />
+
+              <SongEllipsis songId={song.id} />
+            </IconButton>
           </ListItem>
         ))}
       </List>

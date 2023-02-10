@@ -200,10 +200,10 @@ theme = {
 const drawerWidth = 220;
 
 export default function Paperbase() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getArtistThunk());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getArtistThunk());
+  // }, [dispatch]);
   // useEffect(() => {
   //   const myPlaylists = async () => await dispatch(getplaylistsThunk());
   //   myPlaylists();

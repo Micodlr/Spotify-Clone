@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -8,10 +9,10 @@ const LogoutButton = () => {
   const dispatch = useDispatch();
   const onLogout = async (e) => {
     await dispatch(logout());
-    history.push("/home");
+    history.push("/");
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return <Button onClick={onLogout}>Logout</Button>;
 };
 
 export default LogoutButton;

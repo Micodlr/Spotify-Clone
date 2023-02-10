@@ -20,7 +20,9 @@ export default function SongEllipsis({ songId }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [nestedAnchorEl, setNestedAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
+    if (!user) return;
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -34,9 +36,9 @@ export default function SongEllipsis({ songId }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    dispatch(getplaylistsThunk());
-  }, [dispatch]);
+  // React.useEffect(() => {
+  //   dispatch(getplaylistsThunk());
+  // }, [dispatch]);
 
   const addSong = async (e, playlistId) => {
     e.preventDefault();
@@ -50,7 +52,7 @@ export default function SongEllipsis({ songId }) {
   const user = useSelector((state) => state.session.user);
   const playlists = useSelector((state) => Object.values(state.playlists));
   const userPlaylists = playlists.filter(
-    (playlist) => playlist.userId == user.id
+    (playlist) => playlist?.userId == user?.id
   );
 
   return (

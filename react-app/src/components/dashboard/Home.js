@@ -28,9 +28,9 @@ export default function HomePage() {
 
   const user = useSelector((state) => state.session.user);
   const userplaylists = playlists.filter(
-    (playlist) => playlist.userId == user.id
+    (playlist) => playlist?.userId == user?.id
   );
-  const suggested = playlists.filter((playlist) => playlist.userId == 4);
+  const suggested = playlists.filter((playlist) => playlist?.userId == 4);
 
   const history = useHistory();
   const onClick = (e, playlistId) => {
@@ -83,12 +83,7 @@ export default function HomePage() {
                 style={{ width: "100%", height: 150, borderRadius: "10px" }}
               ></img>
               <CardContent color="custom">
-                <Typography
-                  color="custom"
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                >
+                <Typography color="custom" variant="h5" component="div">
                   {playlist.name}
                 </Typography>
                 <Typography variant="body2" color="gray">
@@ -104,7 +99,6 @@ export default function HomePage() {
       </Container>
 
       <Typography
-        gutterTop
         variant="h3"
         style={{ fontSize: "24px", fontWeight: "bold" }}
         textOverflow={"ellipsis"}

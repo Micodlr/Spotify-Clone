@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import { Box, CardActionArea, Container } from "@mui/material";
+import { Alert, Box, CardActionArea, Container, Snackbar } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
@@ -19,6 +19,13 @@ import { getArtistThunk } from "../../store/artists";
 import AllSongs from "./SongsPage";
 
 export default function Dashboard() {
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const dispatch = useDispatch();
   //   const playlistsState = useSelector((state) => state.playlists);
   //   console.log(playlistsState);
@@ -79,7 +86,7 @@ export default function Dashboard() {
               "&:hover": { bgcolor: "#515151" },
             }}
           >
-            <CardActionArea onClick={(e) => onClick(e, artist?.id)}>
+            <CardActionArea onClick={handleClick}>
               <CardMedia
                 sx={{ height: 130, maxWidth: "100%", borderRadius: "10px" }}
                 image={artist?.image}
@@ -103,6 +110,31 @@ export default function Dashboard() {
           <Button size="small">Share</Button>
         </CardActions> */}
             </CardActionArea>
+            <Snackbar
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+              <Alert
+                onClose={handleClose}
+                severity="error"
+                sx={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  borderRadius: "15px",
+
+                  width: "100%",
+                  color: "whitesmoke",
+                  bgcolor: "black",
+                }}
+              >
+                Error: Login Required. Please log in to access this feature.
+              </Alert>
+            </Snackbar>
           </Card>
         ))}
       </Container>
@@ -144,7 +176,7 @@ export default function Dashboard() {
               "&:hover": { bgcolor: "#515151" },
             }}
           >
-            <CardActionArea onClick={(e) => onClick2(e, playlist?.id)}>
+            <CardActionArea onClick={handleClick}>
               <CardMedia
                 sx={{ height: 150, width: 170 }}
                 //   image={ playlist?.playlistImg}
@@ -204,7 +236,7 @@ export default function Dashboard() {
         ))}
       </Container>
       <Typography
-        gutterTop
+        guttertop
         variant="h2"
         style={{ fontSize: "24px", fontWeight: "bold" }}
         textOverflow={"ellipsis"}

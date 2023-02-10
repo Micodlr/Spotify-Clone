@@ -54,7 +54,7 @@ export default function MediaControlCard() {
   };
 
   useEffect(() => {
-    setPlay(false);
+    setPlay(true);
     handlePlay();
   }, [song?.songUrl]);
 

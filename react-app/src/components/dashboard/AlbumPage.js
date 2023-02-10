@@ -7,21 +7,20 @@ import { getSongsThunk } from "../../store/songs";
 
 import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
+
 import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  IconButton,
-  ListSubheader,
   Card,
-} from "@material-ui/core";
-import {
   Avatar,
   Button,
   CardMedia,
+  Container,
+  List,
+  ListItem,
+  ListItemAvatar,
   ListItemIcon,
+  ListItemText,
   Typography,
+  IconButton,
 } from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
@@ -34,6 +33,9 @@ import { getArtistThunk } from "../../store/artists";
 import { getAlbumsThunk } from "../../store/albums";
 import Reviews from "./Reviews";
 import AddReviewModal from "./AddReviewModal";
+import SongEllipsis from "./SongElipsis";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { getSong } from "../../store/mediaPlayer";
 // import { getAllreviews } from "../../store/reviews";
 
 // const useStyles = makeStyles({
@@ -67,9 +69,20 @@ export default function AlbumPage() {
 
   let listOfSongs = songs.filter((song) => song.albumId == albumId);
 
+  const onClick = (e, song) => {
+    e.preventDefault();
+    dispatch(getSong(song));
+  };
+
   return (
-    <>
-      <Box>
+    <Container style={{ paddingBottom: 100 }}>
+      <Card style={{ width: "100%", height: "35vw" }}>
+        <img
+          src={album?.albumCover}
+          style={{ width: "100%", height: "100%" }}
+        ></img>
+      </Card>
+      {/* <Box>
         <CardMedia
           style={{
             position: "relative",
@@ -79,7 +92,7 @@ export default function AlbumPage() {
           image={album?.albumCover}
           title="header image"
         />
-      </Box>
+      </Box> */}
       <Box
         style={{
           display: "flex",
@@ -108,14 +121,18 @@ export default function AlbumPage() {
           <ListItem key={song.id}>
             <ListItemAvatar>
               <ListItemIcon>
-                <Button
-                  sx={{ "&:hover": { bgcolor: "#1DB954" } }}
+                <IconButton
+                  onClick={(e) => onClick(e, song)}
+                  sx={{
+                    color: "whitesmoke",
+                    "&:hover": { bgcolor: "#1DB954" },
+                  }}
                   type="submit"
                   variant="contained"
                   color="primary"
                 >
                   <PlayArrowIcon />
-                </Button>
+                </IconButton>
               </ListItemIcon>
             </ListItemAvatar>
 
@@ -131,8 +148,11 @@ export default function AlbumPage() {
               primary={song.title}
               secondary={song.artist.name}
             />
+            <IconButton>
+              <FavoriteBorderIcon sx={{ color: "whitesmoke" }} />
 
-            <PlaylistSongsElipsis songId={song.id} />
+              <SongEllipsis songId={song.id} />
+            </IconButton>
           </ListItem>
         ))}
       </List>
@@ -151,6 +171,6 @@ export default function AlbumPage() {
       </Button> */}
       <AddReviewModal />
       <Reviews />
-    </>
+    </Container>
   );
 }

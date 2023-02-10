@@ -16,6 +16,7 @@ import BasicModal from "./Modal";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import AddIcon from "@mui/icons-material/Add";
 import { addSongToPlaylistThunk } from "../../store/playlistSongs";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ClearIcon from "@mui/icons-material/Clear";
 import { deleteSongThunk } from "../../store/playlistSongs";
 import { getPlaylistSongsThunk } from "../../store/playlistSongs";

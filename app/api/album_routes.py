@@ -7,7 +7,7 @@ album_routes = Blueprint('albums', __name__)
 
 
 @album_routes.route('/')
-@login_required
+
 def albums():
     """
     Query for all albums
@@ -18,7 +18,7 @@ def albums():
 
 
 @album_routes.route('/<int:id>')
-@login_required
+
 def album(id):
     """
     Query for a album by id and returns that user in a dictionary
@@ -29,7 +29,7 @@ def album(id):
 
 
 @album_routes.route("/<int:id>/reviews")
-@login_required
+
 def getAlbumReviews(id):
     """
     Get all albums reviews

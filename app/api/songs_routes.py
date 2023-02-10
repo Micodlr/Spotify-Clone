@@ -6,7 +6,7 @@ from app.models import Song, Artist, db
 song_routes = Blueprint('songs', __name__)
 
 @song_routes.route("/")
-@login_required
+
 def getSongs():
     """
     Get all songs
@@ -18,7 +18,7 @@ def getSongs():
     return {'songs': [song.to_dict() for song in songs]}
 
 @song_routes.route("/<int:songId>")
-@login_required
+
 def getReviewById(songId):
     """
     Get review by id

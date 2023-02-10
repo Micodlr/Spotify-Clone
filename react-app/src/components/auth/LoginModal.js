@@ -20,13 +20,15 @@ import { Snackbar } from "@material-ui/core";
 import { login } from "../../store/session";
 
 const style = {
+  display: "flex",
+  flexDirection: "column",
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-
+  borderRadius: "10px",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
@@ -55,6 +57,7 @@ export default function LoginModal() {
     event.preventDefault();
 
     const res = await dispatch(login(email, password));
+    history.push("/dashboard/home");
 
     if (res) {
       return setErrors(res);
@@ -62,10 +65,16 @@ export default function LoginModal() {
     handleClose();
   };
 
-  const handleGuestLogin = (e) => {
+  const handleGuestLogin = async (e) => {
     e.preventDefault();
 
-    return setEmail("demo@aa.io"), setPassword("password");
+    // return setEmail("demo@aa.io"), setPassword("password");
+    const res = await dispatch(login("demo@aa.io", "password"));
+    history.push("/dashboard/home");
+    if (res) {
+      return setErrors(res);
+    }
+    handleClose();
   };
 
   return (
@@ -105,6 +114,7 @@ export default function LoginModal() {
               required
               value={email}
               onChange={updateEmail}
+              sx={{ m: "3px 0" }}
             />
             <TextField
               name="name"
@@ -116,13 +126,17 @@ export default function LoginModal() {
                 type: "password",
               }}
               onChange={updatePassword}
+              sx={{ m: "3px 0" }}
             />
 
             <Button
               type="submit"
               variant="contained"
               color="primary"
-              sx={{ "&:hover": { bgcolor: "#1DB954", fontWeight: "bold" } }}
+              sx={{
+                m: "3px 0",
+                "&:hover": { bgcolor: "#1DB954", fontWeight: "bold" },
+              }}
             >
               Log in
             </Button>
@@ -130,7 +144,7 @@ export default function LoginModal() {
               type="submit"
               variant="contained"
               color="primary"
-              onClick={handleGuestLogin}
+              onClick={(e) => handleGuestLogin(e)}
               sx={{ "&:hover": { bgcolor: "#1DB954", fontWeight: "bold" } }}
             >
               Demo User

@@ -21,13 +21,18 @@ import PlaylistSongs from "./PlaylistSongs";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getplaylistsThunk } from "../../store/playlists";
-import SearchPage from "./SearchPage";
+import SearchPage from "./SongsPage";
 import AccountMenu from "./AccountMenu";
 import { yellow } from "@mui/material/colors";
 import ArtistsPage from "./Artists";
 import { getArtistThunk } from "../../store/artists";
 import ArtistIdPage from "./ArtistIdPage";
 import AlbumPage from "./AlbumPage";
+import SongsPage from "./SongsPage";
+import LikedSongsPage from "./testpage";
+import Dashboard from "./Dashboard";
+import AllSongs from "./SongsPage";
+import ComingSoonPage from "./ComingSoon";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -165,7 +170,7 @@ theme = {
     MuiListItemText: {
       styleOverrides: {
         primary: {
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: theme.typography.fontWeightMedium,
         },
       },
@@ -193,13 +198,13 @@ theme = {
   },
 };
 
-const drawerWidth = 256;
+const drawerWidth = 220;
 
 export default function Paperbase() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getArtistThunk());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getArtistThunk());
+  // }, [dispatch]);
   // useEffect(() => {
   //   const myPlaylists = async () => await dispatch(getplaylistsThunk());
   //   myPlaylists();
@@ -214,9 +219,7 @@ export default function Paperbase() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{ backgroundColor: "blue", display: "flex", minHeight: "100vh" }}
-      >
+      <Box sx={{ backgroundColor: "blue", display: "flex", height: "100vh" }}>
         <CssBaseline />
         <Box
           component="nav"
@@ -238,7 +241,7 @@ export default function Paperbase() {
             PaperProps={{ style: { width: drawerWidth } }}
             sx={{
               backgroundColor: "blue",
-              display: { sm: "block", xs: "none" },
+              display: { sm: "flex", xs: "none" },
             }}
           />
         </Box>
@@ -254,26 +257,34 @@ export default function Paperbase() {
             component="nav"
             sx={{
               flex: 1,
-              py: 2,
+              pt: 1,
+              pb: 14,
               px: 2,
+
               bgcolor: "#0f0f0f",
             }}
           >
             <Switch>
+              <Route exact path="/">
+                <Content Component={Dashboard} />
+              </Route>
               <Route exact path="/dashboard/home">
                 <Content Component={HomePage} />
               </Route>
-              <Route exact path="/dashboard/artists">
+              {/* <Route exact path="/dashboard/artists">
                 <Content Component={ArtistsPage} />
-              </Route>
+              </Route> */}
               <Route exact path="/dashboard/artists/:artistId">
                 <Content Component={ArtistIdPage} />
+              </Route>
+              <Route exact path="/dashboard/artists/">
+                <Content Component={ArtistsPage} />
               </Route>
               <Route exact path="/dashboard/albums/:albumId">
                 <Content Component={AlbumPage} />
               </Route>
-              <Route path="/dashboard/songs">
-                <Content Component={SearchPage} />
+              <Route path="/dashboard/likedSongs">
+                <Content Component={AllSongs} />
               </Route>
               <Route path="/dashboard/library">
                 <Content Component={PlaylistsPage} />
@@ -284,9 +295,21 @@ export default function Paperbase() {
               <Route exact path="/dashboard/playlists/:playlistId">
                 <Content Component={PlaylistSongs} />
               </Route>
+              <Route path="/dashboard/search">
+                <Content Component={ComingSoonPage} />
+              </Route>
             </Switch>
           </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: "#0f0f0f" }}>
+          <Box
+            component="footer"
+            sx={{
+              bottom: 0,
+              width: "100%",
+              position: "fixed",
+              p: 0,
+              bgcolor: "#0f0f0f",
+            }}
+          >
             {/* <audio
               controls
               // src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"

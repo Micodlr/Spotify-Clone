@@ -18,14 +18,16 @@ import { signUp } from "../../store/session";
 import EditIcon from "@mui/icons-material/Edit";
 
 const style = {
+  display: "flex",
+  flexDirection: "column",
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-
   border: "2px solid #000",
+  borderRadius: "10px",
   boxShadow: 24,
   p: 4,
 };
@@ -108,6 +110,7 @@ export default function SignUpModal() {
 
           <FormControl noValidate autoComplete="off">
             <TextField
+              sx={{ m: "3px 0" }}
               name="firstName"
               id="firstName"
               label={"First Name"}
@@ -116,6 +119,7 @@ export default function SignUpModal() {
               required
             />
             <TextField
+              sx={{ m: "2px 0" }}
               name="lastName"
               id="lastName"
               label={"last Name"}
@@ -124,6 +128,7 @@ export default function SignUpModal() {
               required
             />
             <TextField
+              sx={{ m: "2px 0" }}
               name="username"
               id="username"
               label={"Username"}
@@ -132,6 +137,7 @@ export default function SignUpModal() {
               required
             />
             <TextField
+              sx={{ m: "2px 0" }}
               name="email"
               id="email"
               label={"Email"}
@@ -140,6 +146,7 @@ export default function SignUpModal() {
               required
             />
             <TextField
+              sx={{ m: "2px 0" }}
               name="password"
               id="password"
               label={"Password"}

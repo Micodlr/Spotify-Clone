@@ -1,12 +1,17 @@
 import { csrfFetch } from "./csrf";
 
 const GET_PLAYLISTS = "playlists/GET_PLAYLISTS";
+const GET_SUGGESTED = "playlists/GET_SUGGESTED";
 const ADD_PLAYLIST = "playlists/ADD_PLAYLIST";
 const EDIT_PLAYLIST_NAME = "playlist/EDIT_PLAYLIST_NAME";
 const DELETE_PLAYLIST = "playlist/DELETE_PLAYLIST";
 
 const getPlaylists = (playlists) => ({
   type: GET_PLAYLISTS,
+  playlists,
+});
+const getSuggestedPlaylists = (playlists) => ({
+  type: GET_SUGGESTED,
   playlists,
 });
 const addPlaylists = (playlist) => ({
@@ -96,14 +101,29 @@ export const getplaylistsThunk = () => async (dispatch) => {
   return res;
 };
 
+export const getSuggestedPlaylistsThunk = () => async (dispatch) => {
+  const res = await csrfFetch(`/api/playlists/suggested`);
+
+  const { playlists } = await res.json();
+
+  if (res.ok) {
+    const data = {};
+    playlists.forEach((playlist) => (data[playlist.id] = playlist));
+    dispatch(getSuggestedPlaylists(data));
+  }
+  return res;
+};
+
 const initialState = {};
 
 const playlistsReducer = (state = initialState, action) => {
   let newState = { ...state };
 
   switch (action.type) {
+    case GET_SUGGESTED:
+      return { ...state, ...action.playlists };
     case GET_PLAYLISTS:
-      return { ...action.playlists };
+      return { ...state, ...action.playlists };
     case ADD_PLAYLIST:
       //   return { ...state, ...action.playlist };
       newState = { ...state, [action.playlist.id]: action.playlist };

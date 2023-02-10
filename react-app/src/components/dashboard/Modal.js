@@ -20,7 +20,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
 
-  border: "2px solid #000",
+  border: "2px solid whitesmoke",
   boxShadow: 24,
   p: 5,
 };
@@ -51,7 +51,7 @@ export default function BasicModal() {
   return (
     <div>
       <Button
-        sx={{ py: "2px", px: "2px", color: "whitesmoke" }}
+        sx={{ fontSize: 16, py: "2px", px: "2px", color: "whitesmoke" }}
         onClick={handleOpen}
       >
         Create Playlist

@@ -46,10 +46,10 @@ export default function Dashboard() {
       await dispatch(getSuggestedPlaylistsThunk());
     myPlaylists();
   }, [dispatch]);
-  useEffect(() => {
-    const playlist = async () => await dispatch(getplaylistsThunk());
-    playlist();
-  }, [dispatch]);
+  //   useEffect(() => {
+  //     const playlist = async () => await dispatch(getplaylistsThunk());
+  //     playlist();
+  //   }, [dispatch]);
 
   useEffect(() => {
     dispatch(getArtistThunk());
@@ -57,7 +57,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <h1 style={{ color: "whitesmoke" }}>Welcome to Potify</h1>
       <h2 style={{ color: "whitesmoke" }}>Artists</h2>
       <Container
         sx={{

@@ -17,7 +17,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import LandingPage from "../LandingPage";
 import { Alert, Avatar, Button, Snackbar } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import "./logo.css";
+import logo from "./logo2.png";
 
 import { useState } from "react";
 import InfoIcon from "@mui/icons-material/Info";
@@ -144,12 +144,17 @@ export default function Navigator(props) {
           sx={{
             fontSize: 22,
             color: "#ffffff",
-            p: 2,
+            p: 0.4,
           }}
         >
           <img
-            className="logo"
-            src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
+            src={logo}
+            style={{
+              width: "200px",
+              height: "90px",
+              padding: "0",
+            }}
+            // src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
           />
         </ListItem>
         <Box

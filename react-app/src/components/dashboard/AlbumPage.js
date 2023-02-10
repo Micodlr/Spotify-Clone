@@ -35,6 +35,7 @@ import Reviews from "./Reviews";
 import AddReviewModal from "./AddReviewModal";
 import SongEllipsis from "./SongElipsis";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { getSong } from "../../store/mediaPlayer";
 // import { getAllreviews } from "../../store/reviews";
 
 // const useStyles = makeStyles({
@@ -67,6 +68,11 @@ export default function AlbumPage() {
   const album = useSelector((state) => state.albums[albumId]);
 
   let listOfSongs = songs.filter((song) => song.albumId == albumId);
+
+  const onClick = (e, song) => {
+    e.preventDefault();
+    dispatch(getSong(song));
+  };
 
   return (
     <Container style={{ paddingBottom: 20 }}>
@@ -116,6 +122,7 @@ export default function AlbumPage() {
             <ListItemAvatar>
               <ListItemIcon>
                 <IconButton
+                  onClick={(e) => onClick(e, song)}
                   sx={{
                     color: "whitesmoke",
                     "&:hover": { bgcolor: "#1DB954" },

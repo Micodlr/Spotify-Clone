@@ -21,7 +21,6 @@ export default function Reviews() {
 
   const reviews = useSelector((state) => Object.values(state.reviews));
   const user = useSelector((state) => state.session);
-  console.log(user);
 
   const handleDelete = async (e, reviewId) => {
     e.preventDefault();

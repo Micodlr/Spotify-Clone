@@ -4,9 +4,9 @@ from app.models import db, Song, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_songs():
     test1 = Song(
-        artistId=1, albumId=1, title="Breezy", lyrics="test" )
+        artistId=1, albumId=1, title="Breezy", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/breezy-qube-main-version-21955-02-04.mp3" )
     test2 = Song(
-         artistId=2, albumId=2, title="Lazy Day", lyrics="test")
+         artistId=2, albumId=2, title="Lazy Day", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/lazy-day-moire-main-version-21130-02-01.mp3")
     test3 = Song(
          artistId=3, albumId=3, title="Infraction", lyrics="test", songUrl="https://boring-music.s3.us-west-1.amazonaws.com/summer-strut-infraction-main-version-16209-01-17.mp3", )
     test4 = Song(

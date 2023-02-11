@@ -36,6 +36,7 @@ import AddReviewModal from "./AddReviewModal";
 import SongEllipsis from "./SongElipsis";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { getSong } from "../../store/mediaPlayer";
+import { getReviewsThunk } from "../../store/reviews";
 // import { getAllreviews } from "../../store/reviews";
 
 // const useStyles = makeStyles({
@@ -64,6 +65,14 @@ export default function AlbumPage() {
     dispatch(getSongsThunk());
     // dispatch(getAllreviews());
   }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getReviewsThunk(albumId));
+  // }, [dispatch, albumId]);
+
+  useEffect(() => {
+    const myreviews = async () => await dispatch(getReviewsThunk(albumId));
+    myreviews();
+  }, [dispatch, albumId]);
   const songs = useSelector((state) => Object.values(state.songs));
   const album = useSelector((state) => state.albums[albumId]);
 

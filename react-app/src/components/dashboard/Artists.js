@@ -13,12 +13,16 @@ import { maxHeight } from "@mui/system";
 import { useHistory } from "react-router-dom";
 import Ellipsis from "./EditPlaylist";
 import { getArtistThunk } from "../../store/artists";
+import { clearReviews } from "../../store/reviews";
 
 export default function ArtistsPage() {
   const dispatch = useDispatch();
   //   const playlistsState = useSelector((state) => state.playlists);
   //   console.log(playlistsState);
   const artists = useSelector((state) => Object.values(state.artists));
+  useEffect(() => {
+    dispatch(clearReviews());
+  }, [dispatch]);
 
   const history = useHistory();
   const onClick = (e, artistId) => {
@@ -33,7 +37,7 @@ export default function ArtistsPage() {
   useEffect(() => {
     dispatch(getArtistThunk());
   }, [dispatch]);
-  console.log(artists);
+
   return (
     <>
       <h1 style={{ color: "whitesmoke" }}>Artists</h1>

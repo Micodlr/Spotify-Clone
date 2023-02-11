@@ -24,6 +24,11 @@ const deleteReview = (review) => ({
   review,
 });
 
+export const clearReviews = () => ({
+  type: GET_REVIEWS,
+  reviews: {},
+});
+
 export const addReviewThunk = (review) => async (dispatch) => {
   const { albumId } = review;
 

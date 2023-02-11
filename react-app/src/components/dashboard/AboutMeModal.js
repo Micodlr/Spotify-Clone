@@ -71,15 +71,25 @@ export default function AboutMeModal() {
           >
             Full Stack Developer
           </Typography>
+
           <p style={{ color: "whitesmoke" }} id="email">
             Email: dlreyesmico@gmail.com
           </p>
-          <a
-            style={{ textDecoration: "none", color: "#1DB954" }}
-            href="https://github.com/Micodlr"
-          >
-            Github
-          </a>
+          <Box sx={{ display: "flex", gap: "10px" }}>
+            <a
+              style={{ textDecoration: "none", color: "#1DB954" }}
+              href="https://github.com/Micodlr"
+            >
+              Github
+            </a>
+            <a
+              style={{ textDecoration: "none", color: "#1DB954" }}
+              href="https://www.linkedin.com/in/michael-de-los-reyes-bb90a9263/"
+            >
+              Linkedin
+            </a>
+          </Box>
+
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
         </Box>
       </Modal>

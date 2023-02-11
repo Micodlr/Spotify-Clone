@@ -104,9 +104,7 @@ export default function HomePage() {
         textOverflow={"ellipsis"}
         color={"whitesmoke"}
         sx={{ marginTop: "5px", paddingTop: "5px" }}
-      >
-        Songs
-      </Typography>
+      ></Typography>
       <AllSongs />
     </>
   );

@@ -315,9 +315,9 @@ export default function Navigator(props) {
                     }}
                   >
                     <ListItemIcon>
-                      <ThumbUpIcon />
+                      <LibraryMusicIcon />
                     </ListItemIcon>
-                    Liked Songs
+                    Songs
                     {/* <ListItemText></ListItemText> */}
                   </ListItemButton>
                 </ListItem>

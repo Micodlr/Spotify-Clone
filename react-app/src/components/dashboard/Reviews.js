@@ -32,14 +32,15 @@ export default function Reviews() {
   const onClick = (e) => {
     e.preventDefault();
   };
-  //   useEffect(() => {
-  //     const myreviews = async () => await dispatch(getreviewsThunk());
-  //     myreviews();
-  //   }, [dispatch]);
-
   useEffect(() => {
-    dispatch(getReviewsThunk(albumId));
-  }, [dispatch]);
+    const myreviews = async () => await dispatch(getReviewsThunk(albumId));
+    myreviews();
+  }, [dispatch, albumId]);
+
+  // useEffect(() => {
+  //   dispatch(getReviewsThunk(albumId));
+  // }, [dispatch]);
+
   return (
     <Container sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
       <h1 style={{ color: "whitesmoke" }}>Reviews:</h1>

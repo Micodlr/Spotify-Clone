@@ -27,6 +27,7 @@ import PlaylistSongsElipsis from "./PlaylistSongsElipsis";
 import { getSong } from "../../store/mediaPlayer";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import SongEllipsis from "./SongElipsis";
 
 export default function PlaylistSongs() {
   const { playlistId } = useParams();
@@ -170,8 +171,11 @@ export default function PlaylistSongs() {
                 <FavoriteBorderIcon />
               )}
             </IconButton> */}
-
-            <PlaylistSongsElipsis songId={song.id} />
+            {playlist?.user?.id === 4 ? (
+              <PlaylistSongsElipsis songId={song.id} />
+            ) : (
+              <SongEllipsis songId={song.id} />
+            )}
           </ListItem>
         ))}
       </List>

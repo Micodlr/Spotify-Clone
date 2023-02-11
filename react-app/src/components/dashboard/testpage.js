@@ -49,6 +49,26 @@ const useStyles = makeStyles((theme) => ({
 
 function LikedSongsPage() {
   const classes = useStyles();
+  const songs = [
+    {
+      title: "Bohemian Rhapsody",
+      artist: "Queen",
+      album: "A Night at the Opera",
+      cover: "https://i.imgur.com/J6xnKjW.jpg",
+    },
+    {
+      title: "Imagine",
+      artist: "John Lennon",
+      album: "Imagine",
+      cover: "https://i.imgur.com/Vj1tLrN.jpg",
+    },
+    {
+      title: "Billie Jean",
+      artist: "Michael Jackson",
+      album: "Thriller",
+      cover: "https://i.imgur.com/v5yCGK5.jpg",
+    },
+  ];
 
   return (
     <ul disablePadding>

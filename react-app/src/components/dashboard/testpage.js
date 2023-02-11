@@ -58,7 +58,7 @@ function LikedSongsPage() {
     },
     {
       title: "Imagine",
-      artist: "John Lennon",
+      artist: "John Lemon",
       album: "Imagine",
       cover: "https://i.imgur.com/Vj1tLrN.jpg",
     },

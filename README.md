@@ -11,7 +11,7 @@
 
 HackPitch
 
-An application where users can shop for OTC healthcare items, find local healthcare facilities near them and chat with medical professionals regarding any health concerns.
+Spotify clone allows users to create, edit, delete playlists and leave reviews for albums. Built with React, Redux, Material-UI, AWS, Flask, and SQLAlchemy. Users can also upload a photo to personalize playlists, browse and read reviews left by other users for albums. App utilizes AWS and SQLAlchemy for backend, React and Material-UI for frontend. Gives music lovers the ability to fully customize their listening experience and get insights from other users.
     <br />
     <br />
     <a href="https://spotify-aa-clone.onrender.com/dashboard"> Live Link </a>

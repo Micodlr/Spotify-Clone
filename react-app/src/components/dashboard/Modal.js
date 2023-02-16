@@ -51,7 +51,7 @@ export default function BasicModal() {
   return (
     <div>
       <Button
-        sx={{ fontSize: 16, py: "2px", px: "2px", color: "whitesmoke" }}
+        sx={{ fontSize: 16, py: "2px", px: "2px", color: "black" }}
         onClick={handleOpen}
       >
         Create Playlist

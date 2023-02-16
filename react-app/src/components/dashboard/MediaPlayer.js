@@ -19,11 +19,14 @@ import { useState } from "react";
 import PauseIcon from "@mui/icons-material/Pause";
 import "./Silverbackogo.png";
 import h from "./hLogo.png";
+import { LinearProgress } from "@mui/material";
 
 export default function MediaControlCard() {
   const theme = useTheme();
   const song = useSelector((state) => state.mediaPlayer);
   const [play, setPlay] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   //   const theme = createTheme({
   //     palette: {
@@ -41,23 +44,42 @@ export default function MediaControlCard() {
   const audioRef = React.useRef();
 
   const handlePlay = () => {
-    audioRef.current.play();
     setPlay(true);
+    audioRef.current.play();
   };
 
   const handlePause = () => {
-    audioRef.current.pause();
     setPlay(false);
+    audioRef.current.pause();
   };
 
-  const handleSeek = (event) => {
-    audioRef.current.currentTime = event.target.value;
+  const handleSeek = (e) => {
+    // Set the current time of the audio to the value of the seek bar
+    audioRef.current.currentTime = e.target.value;
+    setCurrentTime(audioRef.current.currentTime);
   };
 
   useEffect(() => {
     setPlay(true);
     handlePlay();
   }, [song?.songUrl]);
+
+  useEffect(() => {
+    // Update the duration state when the audio metadata is loaded
+    audioRef.current.addEventListener("loadedmetadata", () => {
+      setDuration(audioRef.current.duration);
+    });
+  }, []);
+
+  useEffect(() => {
+    // Update the current time state every second when the audio is playing
+    const intervalId = setInterval(() => {
+      if (play) {
+        setCurrentTime(audioRef.current.currentTime);
+      }
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, [play]);
 
   return (
     <Card
@@ -103,6 +125,16 @@ export default function MediaControlCard() {
             pb: 1,
           }}
         >
+          {/* <audio src={song?.songUrl} ref={audioRef} />
+          <input
+            type="range"
+            min="0"
+            max={duration}
+            value={currentTime}
+            onChange={handleSeek}
+            style={{ marginRight: "10px" }}
+          /> */}
+
           <IconButton aria-label="previous" sx={{ color: "whitesmoke" }}>
             {theme.direction === "rtl" ? (
               <SkipNextIcon />

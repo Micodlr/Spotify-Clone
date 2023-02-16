@@ -171,10 +171,12 @@ export default function PlaylistSongs() {
                 <FavoriteBorderIcon />
               )}
             </IconButton> */}
-            {playlist?.user?.id === 4 ? (
-              <PlaylistSongsElipsis songId={song.id} />
-            ) : (
+            {playlist?.userId === 4 ? (
               <SongEllipsis songId={song.id} />
+            ) : (
+              <>
+                <PlaylistSongsElipsis songId={song.id} />
+              </>
             )}
           </ListItem>
         ))}

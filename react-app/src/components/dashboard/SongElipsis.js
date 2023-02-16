@@ -107,7 +107,7 @@ export default function SongEllipsis({ songId }) {
       >
         <MenuItem sx={{ "&:hover": { color: "#1DB954", fontWeight: "bold" } }}>
           <PlaylistAddIcon />
-          Create playlist
+
           <BasicModal />
         </MenuItem>
         <MenuItem

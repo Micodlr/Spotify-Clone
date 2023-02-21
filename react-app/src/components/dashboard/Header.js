@@ -16,6 +16,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { deepOrange } from "@mui/material/colors";
 import AccountMenu from "./AccountMenu";
+import SearchBar from "./SearchBar";
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -27,6 +28,7 @@ function Header(props) {
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
+            <SearchBar />
             <Grid sx={{ display: { sm: "none", xs: "block" } }} item>
               <IconButton
                 color="inherit"

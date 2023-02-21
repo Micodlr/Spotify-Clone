@@ -78,7 +78,9 @@ export default function SongEllipsis({ songId }) {
         // onClick={handleClose}
         PaperProps={{
           elevation: 0,
+
           sx: {
+            bgcolor: "black",
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
@@ -105,13 +107,22 @@ export default function SongEllipsis({ songId }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem sx={{ "&:hover": { color: "#1DB954", fontWeight: "bold" } }}>
+        <MenuItem
+          sx={{
+            color: "whitesmoke",
+
+            "&:hover": { color: "#1DB954", fontWeight: "bold" },
+          }}
+        >
           <PlaylistAddIcon />
 
           <BasicModal />
         </MenuItem>
         <MenuItem
-          sx={{ "&:hover": { color: "#1DB954", fontWeight: "bold" } }}
+          sx={{
+            color: "whitesmoke",
+            "&:hover": { color: "#1DB954", fontWeight: "bold" },
+          }}
           //   onClick={handleNestedMenuOpen}
           onMouseEnter={handleNestedMenuOpen}
         >
@@ -125,9 +136,46 @@ export default function SongEllipsis({ songId }) {
           open={Boolean(nestedAnchorEl)}
           onClose={handleClose}
           onMouseLeave={handleClose}
+          PaperProps={{
+            elevation: 0,
+
+            sx: {
+              bgcolor: "black",
+              overflow: "visible",
+              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+              mt: 1.5,
+              "& .MuiAvatar-root": {
+                width: 32,
+                height: 32,
+                ml: -0.5,
+                mr: 1,
+              },
+              "&:before": {
+                content: '""',
+                display: "block",
+                position: "absolute",
+                top: 0,
+                right: 14,
+                width: 10,
+                height: 10,
+                bgcolor: "background.paper",
+                transform: "translateY(-50%) rotate(45deg)",
+                zIndex: 0,
+              },
+            },
+          }}
         >
           {userPlaylists.map((playlist) => (
             <MenuItem
+              sx={{
+                bgcolor: "black",
+                color: "whitesmoke",
+                "&:hover": {
+                  bgcolor: "black",
+                  color: "#1DB954",
+                  fontWeight: "bold",
+                },
+              }}
               key={playlist.id}
               onClick={(e) => addSong(e, playlist.id)}
             >

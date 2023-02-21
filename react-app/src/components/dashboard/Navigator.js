@@ -294,7 +294,7 @@ export default function Navigator(props) {
                     <ListItemIcon>
                       <PlaylistAddIcon />
                     </ListItemIcon>
-                    <BasicModal />
+                    <BasicModal sx={{ color: "whitesmoke" }} />
                     {/* <ListItemText></ListItemText> */}
                   </ListItemButton>
                 </ListItem>

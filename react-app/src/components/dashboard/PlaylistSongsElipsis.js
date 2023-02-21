@@ -78,6 +78,7 @@ export default function PlaylistSongsElipsis({ songId }) {
         PaperProps={{
           elevation: 0,
           sx: {
+            bgcolor: "black",
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
@@ -105,7 +106,10 @@ export default function PlaylistSongsElipsis({ songId }) {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem
-          sx={{ "&:hover": { color: "red", fontWeight: "bold" } }}
+          sx={{
+            color: "whitesmoke",
+            "&:hover": { color: "red", fontWeight: "bold" },
+          }}
           onClick={(e) => deleteSong(e, playlistId, songId)}
         >
           <ClearIcon />

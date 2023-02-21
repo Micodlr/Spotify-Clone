@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import SearchBar from "./SearchBar";
 
 const ComingSoonPage = () => {
   return (

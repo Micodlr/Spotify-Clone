@@ -88,6 +88,12 @@ export default function AboutMeModal() {
             >
               Linkedin
             </a>
+            <a
+              style={{ textDecoration: "none", color: "#1DB954" }}
+              href="https://micodlr.github.io/portfolio/"
+            >
+              Portfolio
+            </a>
           </Box>
 
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>

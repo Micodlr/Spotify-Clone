@@ -314,7 +314,7 @@ export default function Paperbase() {
               controls
               // src="https://boring-music.s3.us-west-1.amazonaws.com/clear-sky-hartzmann-main-version-02-20-18592.mp3"
             ></audio> */}
-            <Copyright />
+            {/* <Copyright /> */}
             <MediaControlCard />
           </Box>
         </Box>

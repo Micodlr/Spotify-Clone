@@ -19,6 +19,7 @@ import {
   Container,
   IconButton,
   ListItemIcon,
+  ListSubheader,
 } from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
@@ -115,13 +116,17 @@ export default function PlaylistSongs() {
         <Ellipsis />
       </div>
 
-      <List>
+      <List component="ol">
+        {/* <Box>
+          <ListSubheader>Title</ListSubheader>
+          <ListSubheader>Album</ListSubheader>
+        </Box> */}
         {/* <ListSubheader style={{ color: "whitesmoke" }}>
           {playlistName}
         </ListSubheader> */}
 
         {listOfSongs.map((song, index) => (
-          <ListItem key={song.id}>
+          <ListItem component="li" key={song.id}>
             <ListItemAvatar>
               <ListItemIcon>
                 <IconButton
@@ -152,6 +157,7 @@ export default function PlaylistSongs() {
                 src={song?.album?.albumCover}
               />
             </ListItemIcon>
+
             <ListItemText
               style={{ color: "whitesmoke" }}
               secondaryTypographyProps={{ style: { color: "whitesmoke" } }}

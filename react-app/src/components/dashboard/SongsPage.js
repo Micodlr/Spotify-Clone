@@ -37,11 +37,12 @@ import AudioContext from "./AudioContext";
 // import { getAllreviews } from "../../store/reviews";
 
 export default function AllSongs() {
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-
-  function handleListItemClick(event, index) {
-    setSelectedIndex(index);
+  function handleTogglePlay(index) {
+    const newPlayStatus = [...playStatus];
+    newPlayStatus[index] = !newPlayStatus[index];
+    setPlayStatus(newPlayStatus);
   }
+
   const audioRef = useContext(AudioContext);
   const [open, setOpen] = useState(false);
   const handleClick = () => {
@@ -60,6 +61,9 @@ export default function AllSongs() {
 
   const user = useSelector((state) => state.session.user);
   const songs = useSelector((state) => Object.values(state.songs));
+  const [playStatus, setPlayStatus] = useState(
+    new Array(songs.length).fill(false)
+  );
 
   useEffect(() => {
     dispatch(getSongsThunk());
@@ -78,12 +82,7 @@ export default function AllSongs() {
         <h1 style={{ color: "whitesmoke" }}>Songs</h1>
 
         {songs.map((song, index) => (
-          <ListItem
-            key={index}
-            button
-            selected={selectedIndex === index}
-            onClick={(event) => handleListItemClick(event, index)}
-          >
+          <ListItem key={index}>
             <ListItemAvatar>
               <ListItemIcon>
                 <IconButton
@@ -95,11 +94,18 @@ export default function AllSongs() {
                   type="submit"
                   variant="contained"
                   color="primary"
+                  onClick={() => handleTogglePlay(index)}
                 >
                   {/* <PlayArrowIcon /> */}
-                  {!song.play ? (
+                  {playStatus[index] ? (
+                    <PauseIcon onClick={(e) => handlePause(song)} />
+                  ) : (
+                    <PlayArrowIcon onClick={(e) => onClick(song)} />
+                  )}
+                  {/* {!song.play ? (
                     <PlayArrowIcon
-                      onClick={(e) => onClick(song)}
+                      // onClick={(e) => onClick(song)}
+                      onClick={handleTogglePlay}
                       sx={{ height: 38, width: 38 }}
                     />
                   ) : (
@@ -107,7 +113,7 @@ export default function AllSongs() {
                       onClick={(e) => handlePause(song)}
                       sx={{ height: 38, width: 38 }}
                     />
-                  )}
+                  )} */}
                 </IconButton>
 
                 <Snackbar

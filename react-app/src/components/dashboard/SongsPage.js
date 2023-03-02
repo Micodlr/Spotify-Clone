@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import * as React from "react";
+import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlaylistSongsThunk } from "../../store/playlistSongs";
 import { useParams, Link } from "react-router-dom";
 import { getSongsThunk } from "../../store/songs";
 import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
+import PauseIcon from "@mui/icons-material/Pause";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -30,10 +32,17 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { Grid } from "@material-ui/core";
 import { getSong } from "../../store/mediaPlayer";
+import AudioContext from "./AudioContext";
 
 // import { getAllreviews } from "../../store/reviews";
 
 export default function AllSongs() {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  function handleListItemClick(event, index) {
+    setSelectedIndex(index);
+  }
+  const audioRef = useContext(AudioContext);
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(true);
@@ -41,20 +50,26 @@ export default function AllSongs() {
   const handleClose = () => {
     setOpen(false);
   };
+  const handlePause = (song) => {
+    song.play = true;
+    audioRef?.current?.pause();
+  };
   const { playlistId } = useParams();
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
+  const songs = useSelector((state) => Object.values(state.songs));
 
   useEffect(() => {
     dispatch(getSongsThunk());
     // dispatch(getAllreviews());
   }, [dispatch, playlistId]);
-  const songs = useSelector((state) => Object.values(state.songs));
-  const onClick = (e, song) => {
+  const onClick = (song) => {
     if (!user) return handleClick();
-    e.preventDefault();
+
+    song.play = !song.play;
+
     dispatch(getSong(song));
   };
   return (
@@ -63,11 +78,16 @@ export default function AllSongs() {
         <h1 style={{ color: "whitesmoke" }}>Songs</h1>
 
         {songs.map((song, index) => (
-          <ListItem key={song.id}>
+          <ListItem
+            key={index}
+            button
+            selected={selectedIndex === index}
+            onClick={(event) => handleListItemClick(event, index)}
+          >
             <ListItemAvatar>
               <ListItemIcon>
                 <IconButton
-                  onClick={(e) => onClick(e, song)}
+                  // onClick={(e) => onClick(e, song)}
                   sx={{
                     color: "whitesmoke",
                     "&:hover": { bgcolor: "#1DB954", color: "black" },
@@ -76,8 +96,20 @@ export default function AllSongs() {
                   variant="contained"
                   color="primary"
                 >
-                  <PlayArrowIcon />
+                  {/* <PlayArrowIcon /> */}
+                  {!song.play ? (
+                    <PlayArrowIcon
+                      onClick={(e) => onClick(song)}
+                      sx={{ height: 38, width: 38 }}
+                    />
+                  ) : (
+                    <PauseIcon
+                      onClick={(e) => handlePause(song)}
+                      sx={{ height: 38, width: 38 }}
+                    />
+                  )}
                 </IconButton>
+
                 <Snackbar
                   anchorOrigin={{
                     vertical: "bottom",

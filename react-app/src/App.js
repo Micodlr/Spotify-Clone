@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Routes } from "react";
+import React, { useState, useEffect, Routes, useRef } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
@@ -17,10 +17,12 @@ import Navigator from "./components/dashboard/Navigator";
 import Paperbase from "./components/dashboard/Paperbase";
 import HomePage from "./components/dashboard/Home";
 import AudioPlayer from "material-ui-audio-player";
+import AudioContext from "./components/dashboard/AudioContext";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const audioRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -40,7 +42,9 @@ function App() {
       {/* <Content /> */}
       <Switch>
         <Route path="/">
-          <Paperbase />
+          <AudioContext.Provider value={audioRef}>
+            <Paperbase />
+          </AudioContext.Provider>
 
           {/* <Route path="home">
               <Content Component={HomePage} />

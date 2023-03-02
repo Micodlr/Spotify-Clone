@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useContext } from "react";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -20,6 +21,7 @@ import PauseIcon from "@mui/icons-material/Pause";
 import "./Silverbackogo.png";
 import h from "./hLogo.png";
 import { LinearProgress } from "@mui/material";
+import AudioContext from "./AudioContext";
 
 export default function MediaControlCard() {
   const theme = useTheme();
@@ -41,7 +43,7 @@ export default function MediaControlCard() {
   //     },
   //   });
 
-  const audioRef = React.useRef();
+  const audioRef = useContext(AudioContext);
 
   const handlePlay = () => {
     setPlay(true);
@@ -60,7 +62,7 @@ export default function MediaControlCard() {
   };
 
   useEffect(() => {
-    setPlay(true);
+    setPlay(!true);
     handlePlay();
   }, [song?.songUrl]);
 

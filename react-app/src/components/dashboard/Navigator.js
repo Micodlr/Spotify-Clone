@@ -15,7 +15,17 @@ import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import LandingPage from "../LandingPage";
-import { Alert, Avatar, Button, Snackbar } from "@mui/material";
+import {
+  Alert,
+  Avatar,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Modal,
+  Snackbar,
+} from "@mui/material";
 import { useHistory } from "react-router-dom";
 import logo from "./logo2.png";
 
@@ -118,12 +128,10 @@ const itemCategory = {
 };
 
 export default function Navigator(props) {
-  const [open, setOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
   const handleClick = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
+    setSnackbarOpen(true);
   };
 
   const { ...other } = props;
@@ -177,12 +185,59 @@ export default function Navigator(props) {
                     <ListItemIcon>{icon}</ListItemIcon>
                     <ListItemText>{childId}</ListItemText>
                   </ListItemButton>
-                  <Snackbar
+
+                  <Dialog
+                    open={snackbarOpen}
+                    onClose={() => setSnackbarOpen(false)}
+                    keepMounted
+                  >
+                    <DialogTitle
+                      sx={{ backgroundColor: "black", color: "#fff" }}
+                    >
+                      Error: Login Required
+                    </DialogTitle>
+                    <DialogContent
+                      sx={{ backgroundColor: "black", color: "#fff" }}
+                    >
+                      <Alert
+                        severity="error"
+                        sx={{ backgroundColor: "black", color: "#fff" }}
+                      >
+                        Please log in to access this feature.
+                      </Alert>
+                    </DialogContent>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        bgcolor: "black",
+                      }}
+                    >
+                      <Box sx={{ backgroundColor: "black", color: "#fff" }}>
+                        <SignUpModal />
+                      </Box>
+                      <Box>
+                        <LoginModal sx={{ backgroundColor: "green" }} />
+                      </Box>
+                    </Box>
+                    <DialogActions
+                      sx={{ backgroundColor: "black", color: "#fff" }}
+                    >
+                      <Button
+                        onClick={() => setSnackbarOpen(false)}
+                        sx={{ color: "#fff", "&:hover": { color: "red" } }}
+                      >
+                        Close
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+
+                  {/* <Snackbar
                     anchorOrigin={{
                       vertical: "bottom",
                       horizontal: "left",
                     }}
-                    open={open}
+                    open={snackbarOpen}
                     autoHideDuration={6000}
                     onClose={handleClose}
                   >
@@ -202,7 +257,8 @@ export default function Navigator(props) {
                       Error: Login Required. Please log in to access this
                       feature.
                     </Alert>
-                  </Snackbar>
+                  </Snackbar> */}
+
                   {/* <Snackbar
                     anchorOrigin={{
                       vertical: "center",
@@ -240,42 +296,49 @@ export default function Navigator(props) {
                   Create Playlist
                   {/* <ListItemText></ListItemText> */}
                 </ListItemButton>
-
-                <Snackbar
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  open={open}
-                  autoHideDuration={6000}
-                  onClose={handleClose}
+                <Dialog
+                  open={snackbarOpen}
+                  onClose={() => setSnackbarOpen(false)}
+                  keepMounted
                 >
-                  <Alert
-                    onClose={handleClose}
-                    severity="error"
+                  <DialogTitle sx={{ backgroundColor: "black", color: "#fff" }}>
+                    Error: Login Required
+                  </DialogTitle>
+                  <DialogContent
+                    sx={{ backgroundColor: "black", color: "#fff" }}
+                  >
+                    <Alert
+                      severity="error"
+                      sx={{ backgroundColor: "black", color: "#fff" }}
+                    >
+                      Please log in to access this feature.
+                    </Alert>
+                  </DialogContent>
+                  <Box
                     sx={{
-                      fontSize: "18px",
-                      fontWeight: "bold",
-                      borderRadius: "15px",
-
-                      width: "100%",
-                      color: "whitesmoke",
+                      display: "flex",
+                      justifyContent: "space-evenly",
                       bgcolor: "black",
                     }}
                   >
-                    Error: Login Required. Please log in to access this feature.
-                    {/* <Box
-                        sx={{ display: "flex", justifyContent: "space-evenly" }}
-                      >
-                        <Button sx={{ bgcolor: "black" }}>
-                          <SignUpModal />
-                        </Button>
-                        <Button>
-                          <LoginModal />
-                        </Button>
-                      </Box> */}
-                  </Alert>
-                </Snackbar>
+                    <Box sx={{ backgroundColor: "black", color: "#fff" }}>
+                      <SignUpModal />
+                    </Box>
+                    <Box>
+                      <LoginModal sx={{ backgroundColor: "green" }} />
+                    </Box>
+                  </Box>
+                  <DialogActions
+                    sx={{ backgroundColor: "black", color: "#fff" }}
+                  >
+                    <Button
+                      onClick={() => setSnackbarOpen(false)}
+                      sx={{ color: "#fff", "&:hover": { color: "red" } }}
+                    >
+                      Close
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </ListItem>
             ) : (
               <>

@@ -78,7 +78,7 @@ export default function SignUpModal() {
 
   return (
     <div>
-      <Button
+      {/* <Button
         sx={{
           py: "12px",
           px: "25px",
@@ -87,6 +87,22 @@ export default function SignUpModal() {
           fontSize: "17px",
           fontWeight: "bold",
           "&:hover": { color: "white" },
+        }}
+        onClick={handleOpen}
+      >
+        Sign up
+      </Button> */}
+      <Button
+        sx={{
+          borderRadius: "30px",
+          background: "black",
+          py: "12px",
+          px: "25px",
+          width: "100%",
+          color: "whitesmoke",
+          fontSize: "17px",
+          fontWeight: "bold",
+          "&:hover": { bgcolor: "	#1DB954" },
         }}
         onClick={handleOpen}
       >

@@ -47,12 +47,12 @@ export default function MediaControlCard() {
 
   const handlePlay = () => {
     setPlay(true);
-    audioRef.current.play();
+    audioRef?.current?.play();
   };
 
   const handlePause = () => {
     setPlay(false);
-    audioRef.current.pause();
+    audioRef?.current?.pause();
   };
 
   useEffect(() => {

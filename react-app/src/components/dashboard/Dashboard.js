@@ -7,7 +7,17 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import { Alert, Box, CardActionArea, Container, Snackbar } from "@mui/material";
+import {
+  Alert,
+  Box,
+  CardActionArea,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Snackbar,
+} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
@@ -17,14 +27,16 @@ import { useHistory } from "react-router-dom";
 import Ellipsis from "./EditPlaylist";
 import { getArtistThunk } from "../../store/artists";
 import AllSongs from "./SongsPage";
+import SignUpModal from "../auth/SignupModal";
+import LoginModal from "../auth/LoginModal";
 
 export default function Dashboard() {
-  const [open, setOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const handleClick = () => {
-    setOpen(true);
+    setSnackbarOpen(true);
   };
   const handleClose = () => {
-    setOpen(false);
+    setSnackbarOpen(false);
   };
   const dispatch = useDispatch();
   //   const playlistsState = useSelector((state) => state.playlists);
@@ -109,7 +121,46 @@ export default function Dashboard() {
           <Button size="small">Share</Button>
         </CardActions> */}
             </CardActionArea>
-            <Snackbar
+            <Dialog
+              open={snackbarOpen}
+              onClose={() => setSnackbarOpen(false)}
+              keepMounted
+            >
+              <DialogTitle sx={{ backgroundColor: "black", color: "#fff" }}>
+                Error: Login Required
+              </DialogTitle>
+              <DialogContent sx={{ backgroundColor: "black", color: "#fff" }}>
+                <Alert
+                  severity="error"
+                  sx={{ backgroundColor: "black", color: "#fff" }}
+                >
+                  Please log in to access this feature.
+                </Alert>
+              </DialogContent>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  bgcolor: "black",
+                }}
+              >
+                <Box sx={{ backgroundColor: "black", color: "#fff" }}>
+                  <SignUpModal />
+                </Box>
+                <Box>
+                  <LoginModal sx={{ backgroundColor: "green" }} />
+                </Box>
+              </Box>
+              <DialogActions sx={{ backgroundColor: "black", color: "#fff" }}>
+                <Button
+                  onClick={() => setSnackbarOpen(false)}
+                  sx={{ color: "#fff", "&:hover": { color: "red" } }}
+                >
+                  Close
+                </Button>
+              </DialogActions>
+            </Dialog>
+            {/* <Snackbar
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "left",
@@ -133,7 +184,7 @@ export default function Dashboard() {
               >
                 Error: Login Required. Please log in to access this feature.
               </Alert>
-            </Snackbar>
+            </Snackbar> */}
           </Card>
         ))}
       </Container>

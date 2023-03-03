@@ -86,6 +86,7 @@ export default function AllSongs() {
     const newPlayStatus = [...playStatus];
     newPlayStatus[index] = !newPlayStatus[index];
     setPlayStatus(newPlayStatus);
+    audioRef.current.play();
 
     // stop currently playing song, if any
     if (currentSongIndex !== -1 && currentSongIndex !== index) {

@@ -55,6 +55,18 @@ export default function MediaControlCard() {
     audioRef.current.pause();
   };
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.addEventListener("pause", handlePause);
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("pause", handlePause);
+      }
+    };
+  }, [audioRef]);
+
   const handleSeek = (e) => {
     // Set the current time of the audio to the value of the seek bar
     audioRef.current.currentTime = e.target.value;

@@ -37,13 +37,10 @@ import AudioContext from "./AudioContext";
 // import { getAllreviews } from "../../store/reviews";
 
 export default function AllSongs() {
-  function handleTogglePlay(index) {
-    const newPlayStatus = [...playStatus];
-    newPlayStatus[index] = !newPlayStatus[index];
-    setPlayStatus(newPlayStatus);
-  }
+  const [currentSongIndex, setCurrentSongIndex] = useState(-1);
 
   const audioRef = useContext(AudioContext);
+
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(true);
@@ -51,8 +48,13 @@ export default function AllSongs() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handlePause = (song) => {
-    song.play = true;
+  const handlePause = () => {
+    if (currentSongIndex !== -1) {
+      const newPlayStatus = [...playStatus];
+      newPlayStatus[currentSongIndex] = false;
+      setPlayStatus(newPlayStatus);
+      setCurrentSongIndex(-1);
+    }
     audioRef?.current?.pause();
   };
   const { playlistId } = useParams();
@@ -64,6 +66,36 @@ export default function AllSongs() {
   const [playStatus, setPlayStatus] = useState(
     new Array(songs.length).fill(false)
   );
+
+  function resetPlayStatus() {
+    setPlayStatus(new Array(songs.length).fill(false));
+  }
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.addEventListener("pause", resetPlayStatus);
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("pause", resetPlayStatus);
+      }
+    };
+  }, [audioRef]);
+
+  function handleTogglePlay(index) {
+    const newPlayStatus = [...playStatus];
+    newPlayStatus[index] = !newPlayStatus[index];
+    setPlayStatus(newPlayStatus);
+
+    // stop currently playing song, if any
+    if (currentSongIndex !== -1 && currentSongIndex !== index) {
+      newPlayStatus[currentSongIndex] = false;
+      setPlayStatus(newPlayStatus);
+    }
+
+    // update current song index
+    setCurrentSongIndex(playStatus[index] ? -1 : index);
+  }
 
   useEffect(() => {
     dispatch(getSongsThunk());
@@ -89,6 +121,8 @@ export default function AllSongs() {
                   // onClick={(e) => onClick(e, song)}
                   sx={{
                     color: "whitesmoke",
+                    borderRadius: "20px",
+
                     "&:hover": { bgcolor: "#1DB954", color: "black" },
                   }}
                   type="submit"
@@ -98,7 +132,14 @@ export default function AllSongs() {
                 >
                   {/* <PlayArrowIcon /> */}
                   {playStatus[index] ? (
-                    <PauseIcon onClick={(e) => handlePause(song)} />
+                    <PauseIcon
+                      sx={{
+                        bgcolor: "green",
+                        borderRadius: "18px",
+                        height: "1em",
+                      }}
+                      onClick={(e) => handlePause(song)}
+                    />
                   ) : (
                     <PlayArrowIcon onClick={(e) => onClick(song)} />
                   )}

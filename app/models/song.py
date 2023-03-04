@@ -14,6 +14,7 @@ class Song(db.Model):
   lyrics = db.Column(db.String, nullable=True)
   songUrl = db.Column(db.String, nullable=True)
   spotifySongId = db.Column(db.Integer, nullable=True)
+  play = db.Column(db.Boolean, default=False)
 
   artists = db.relationship('Artist', back_populates='songs')
   albums = db.relationship('Album', back_populates='songs')
@@ -30,6 +31,7 @@ class Song(db.Model):
         'lyrics': self.lyrics,
         'songUrl': self.songUrl,
         'spotifySongId': self.spotifySongId,
+        'play': self.play,
         'artist':self.artists.to_dict(),
         'album':self.albums.to_dict()
     }

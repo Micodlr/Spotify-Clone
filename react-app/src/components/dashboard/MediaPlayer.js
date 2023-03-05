@@ -90,12 +90,12 @@ export default function MediaControlCard() {
     handlePlay();
   }, [song?.songUrl]);
 
-  useEffect(() => {
-    // Update the duration state when the audio metadata is loaded
-    audioRef.current.addEventListener("loadedmetadata", () => {
-      setDuration(audioRef.current.duration);
-    });
-  }, []);
+  // useEffect(() => {
+  //   // Update the duration state when the audio metadata is loaded
+  //   audioRef.current.addEventListener("loadedmetadata", () => {
+  //     setDuration(audioRef.current.duration);
+  //   });
+  // }, []);
 
   useEffect(() => {
     // Update the current time state every second when the audio is playing

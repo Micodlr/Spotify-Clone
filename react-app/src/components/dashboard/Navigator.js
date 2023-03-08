@@ -15,6 +15,7 @@ import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import LandingPage from "../LandingPage";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
   Alert,
   Avatar,
@@ -29,14 +30,16 @@ import {
 import { useHistory } from "react-router-dom";
 import logo from "./logo2.png";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InfoIcon from "@mui/icons-material/Info";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BasicModal from "./Modal";
 import AboutMeModal from "./AboutMeModal";
 import { height } from "@mui/system";
 import SignUpModal from "../auth/SignupModal";
 import LoginModal from "../auth/LoginModal";
+
+import { getplaylistsThunk } from "../../store/playlists";
 
 const categories = [
   {
@@ -53,11 +56,11 @@ const categories = [
         icon: <GroupIcon />,
         href: "/artists",
       },
-      // {
-      //   id: "Songs",
-      //   icon: <LibraryMusicIcon />,
-      //   href: "/songs",
-      // },
+      {
+        id: "Songs",
+        icon: <LibraryMusicIcon />,
+        href: "/songs",
+      },
       {
         id: "Search",
         icon: <SearchIcon />,
@@ -129,7 +132,18 @@ const itemCategory = {
 
 export default function Navigator(props) {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getplaylistsThunk());
+  }, [dispatch]);
 
+  //liked songs
+  const playlists = useSelector((state) => Object.values(state.playlists));
+  const likedSongsPlaylist = playlists.filter(
+    (playlist) => playlist.name == "Liked Songs"
+  );
+  const likedSongsPlaylistId = likedSongsPlaylist[0]?.id;
+  const likedSongsList = likedSongsPlaylist[0]?.playlistSongs;
   const handleClick = () => {
     setSnackbarOpen(true);
   };
@@ -374,13 +388,13 @@ export default function Navigator(props) {
                       },
                     }}
                     onClick={(e) => {
-                      changeUrl(e, "/likedSongs");
+                      changeUrl(e, `/playlists/${likedSongsPlaylistId}`);
                     }}
                   >
                     <ListItemIcon>
-                      <LibraryMusicIcon />
+                      <FavoriteIcon />
                     </ListItemIcon>
-                    Songs
+                    Liked Songs
                     {/* <ListItemText></ListItemText> */}
                   </ListItemButton>
                 </ListItem>

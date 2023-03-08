@@ -201,7 +201,7 @@ theme = {
 const drawerWidth = 220;
 
 export default function Paperbase() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(getArtistThunk());
   // }, [dispatch]);
@@ -209,6 +209,17 @@ export default function Paperbase() {
   //   const myPlaylists = async () => await dispatch(getplaylistsThunk());
   //   myPlaylists();
   // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getplaylistsThunk());
+  }, [dispatch]);
+
+  //liked songs
+  const playlists = useSelector((state) => Object.values(state.playlists));
+  const likedSongsPlaylist = playlists.filter(
+    (playlist) => playlist.name == "Liked Songs"
+  );
+  const likedSongsPlaylistId = likedSongsPlaylist[0]?.id;
+  const likedSongsList = likedSongsPlaylist[0]?.playlistSongs;
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
@@ -283,7 +294,7 @@ export default function Paperbase() {
               <Route exact path="/dashboard/albums/:albumId">
                 <Content Component={AlbumPage} />
               </Route>
-              <Route path="/dashboard/likedSongs">
+              <Route path="/dashboard/songs">
                 <Content Component={AllSongs} />
               </Route>
               <Route path="/dashboard/library">

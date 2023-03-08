@@ -62,7 +62,9 @@ export default function LoginModal({ snackbar }) {
     if (res) {
       return setErrors(res);
     }
-    snackbar(false);
+    if (snackbar) {
+      snackbar(false);
+    }
     handleClose();
   };
 
@@ -75,7 +77,9 @@ export default function LoginModal({ snackbar }) {
     if (res) {
       return setErrors(res);
     }
-    snackbar(false);
+    if (snackbar) {
+      snackbar(false);
+    }
     handleClose();
   };
 

@@ -203,7 +203,6 @@ export default function Navigator(props) {
                   <Dialog
                     open={snackbarOpen}
                     onClose={() => setSnackbarOpen(false)}
-                    keepMounted
                   >
                     <DialogTitle
                       sx={{ backgroundColor: "black", color: "#fff" }}
@@ -231,7 +230,10 @@ export default function Navigator(props) {
                         <SignUpModal />
                       </Box>
                       <Box>
-                        <LoginModal sx={{ backgroundColor: "green" }} />
+                        <LoginModal
+                          snackbar={setSnackbarOpen}
+                          sx={{ backgroundColor: "green" }}
+                        />
                       </Box>
                     </Box>
                     <DialogActions
@@ -339,7 +341,10 @@ export default function Navigator(props) {
                       <SignUpModal />
                     </Box>
                     <Box>
-                      <LoginModal sx={{ backgroundColor: "green" }} />
+                      <LoginModal
+                        snackbar={setSnackbarOpen}
+                        sx={{ backgroundColor: "green" }}
+                      />
                     </Box>
                   </Box>
                   <DialogActions

@@ -8,7 +8,7 @@ const SearchBar = () => {
     //lodash debounce
     <TextField
       variant="outlined"
-      placeholder="Search"
+      placeholder="Upcoming feature"
       sx={{ bgcolor: "whitesmoke", borderRadius: "200px" }}
       InputProps={{
         endAdornment: (

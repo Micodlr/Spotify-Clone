@@ -23,6 +23,12 @@ def seed_playlists():
     test4 = Playlist(name='JS playlist', userId=1, playlistImg="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVy5CBdj9NUMIcRI7q7JafnO5zVUJl09hhrQ&usqp=CAU")
     test5 = Playlist(name='python_playlist', userId=1, playlistImg="https://contentstatic.techgig.com/photo/80901469/5-key-considerations-for-python-programmers-before-they-start-coding.jpg?132269")
 
+    likedSongs1 = Playlist(name='Liked Songs', userId=1, playlistImg="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm290MPFN_f1e17t8FxGyhr2jVsVmjF4fDOx8DX8nDLA&usqp=CAU&ec=48600113")
+
+    likedSongs2 = Playlist(name='Liked Songs', userId=2, playlistImg="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm290MPFN_f1e17t8FxGyhr2jVsVmjF4fDOx8DX8nDLA&usqp=CAU&ec=48600113")
+    likedSongs3 = Playlist(name='Liked Songs', userId=3, playlistImg="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm290MPFN_f1e17t8FxGyhr2jVsVmjF4fDOx8DX8nDLA&usqp=CAU&ec=48600113")
+
+
 
 
 
@@ -40,6 +46,10 @@ def seed_playlists():
     db.session.add(suggested_playlist_5)
     db.session.add(suggested_playlist_6)
     db.session.add(suggested_playlist_7)
+    db.session.add(likedSongs1)
+    db.session.add(likedSongs2)
+    db.session.add(likedSongs3)
+
     db.session.commit()
 
 

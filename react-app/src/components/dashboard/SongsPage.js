@@ -1,8 +1,11 @@
 import * as React from "react";
 import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPlaylistSongsThunk } from "../../store/playlistSongs";
-import { useParams, Link } from "react-router-dom";
+import {
+  addSongToPlaylistThunk,
+  getPlaylistSongsThunk,
+} from "../../store/playlistSongs";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { getSongsThunk } from "../../store/songs";
 import Ellipsis from "./EditPlaylist";
 import { Box, fontSize } from "@mui/system";
@@ -29,10 +32,15 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import SongEllipsis from "./SongElipsis";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { Grid } from "@material-ui/core";
 import { getSong } from "../../store/mediaPlayer";
 import AudioContext from "./AudioContext";
+import { likeSong } from "../../store/likedSongs";
+import { getplaylistsThunk } from "../../store/playlists";
+import ToggleComponent from "./ToggleTest";
+import FavoriteToggleButton from "./ToggleTest";
 
 // import { getAllreviews } from "../../store/reviews";
 
@@ -60,12 +68,18 @@ export default function AllSongs() {
   const { playlistId } = useParams();
 
   const dispatch = useDispatch();
-
+  const playlists = useSelector((state) => Object.values(state.playlists));
   const user = useSelector((state) => state.session.user);
   const songs = useSelector((state) => Object.values(state.songs));
   const [playStatus, setPlayStatus] = useState(
     new Array(songs.length).fill(false)
   );
+
+  const likedSongs = playlists.filter(
+    (playlist) => playlist.name == "Liked Songs"
+  );
+  const likedSongsId = likedSongs[0]?.id;
+  const likedSongsList = likedSongs[0]?.playlistSongs;
 
   function resetPlayStatus() {
     setPlayStatus(new Array(songs.length).fill(false));
@@ -100,15 +114,18 @@ export default function AllSongs() {
 
   useEffect(() => {
     dispatch(getSongsThunk());
-    // dispatch(getAllreviews());
-  }, [dispatch, playlistId]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getplaylistsThunk());
+  }, [dispatch]);
   const onClick = (song) => {
     if (!user) return handleClick();
 
-    song.play = !song.play;
-
     dispatch(getSong(song));
+    dispatch(getplaylistsThunk());
   };
+
   return (
     <Container sx={{ ml: 0, pb: 5 }}>
       <List>
@@ -144,18 +161,6 @@ export default function AllSongs() {
                   ) : (
                     <PlayArrowIcon onClick={(e) => onClick(song)} />
                   )}
-                  {/* {!song.play ? (
-                    <PlayArrowIcon
-                      // onClick={(e) => onClick(song)}
-                      onClick={handleTogglePlay}
-                      sx={{ height: 38, width: 38 }}
-                    />
-                  ) : (
-                    <PauseIcon
-                      onClick={(e) => handlePause(song)}
-                      sx={{ height: 38, width: 38 }}
-                    />
-                  )} */}
                 </IconButton>
 
                 <Snackbar
@@ -198,7 +203,35 @@ export default function AllSongs() {
               primary={song.title}
               secondary={song.artist.name}
             />
-            <FavoriteBorderIcon sx={{ color: "whitesmoke" }} />
+
+            {/* {likedSongsList.some((obj) => obj.songId === song.id) ? (
+              <FavoriteIcon sx={{ color: "green" }} />
+            ) : (
+              <FavoriteBorderIcon
+                onClick={(e) => likeSong(e, song.id)}
+                sx={{ color: "whitesmoke" }}
+              />
+            )} */}
+            {/* <IconButton onClick={() => handleLikeSong(index)}>
+              {likedSongs.has(index) ? (
+                <FavoriteIcon
+                  sx={{
+                    color: "whitesmoke",
+                  }}
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  sx={{
+                    color: "whitesmoke",
+                  }}
+                />
+              )}
+            </IconButton> */}
+            <FavoriteToggleButton
+              songId={song.id}
+              playlist={likedSongsList}
+              playlistId={likedSongsId}
+            />
             <SongEllipsis songId={song.id} />
           </ListItem>
         ))}

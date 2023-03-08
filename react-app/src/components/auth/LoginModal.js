@@ -34,7 +34,7 @@ const style = {
   p: 4,
 };
 
-export default function LoginModal() {
+export default function LoginModal({ snackbar }) {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,6 +62,7 @@ export default function LoginModal() {
     if (res) {
       return setErrors(res);
     }
+    snackbar(false);
     handleClose();
   };
 
@@ -74,6 +75,7 @@ export default function LoginModal() {
     if (res) {
       return setErrors(res);
     }
+    snackbar(false);
     handleClose();
   };
 

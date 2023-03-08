@@ -52,7 +52,7 @@ def createPlaylist():
     if form.validate_on_submit():
         new_playlist = Playlist(
             name = form.name.data,
-            userId = current_user.id
+            userId =  form.userId.data or current_user.id,
         )
         db.session.add(new_playlist)
         db.session.commit()

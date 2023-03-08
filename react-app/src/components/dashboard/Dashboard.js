@@ -148,7 +148,10 @@ export default function Dashboard() {
                   <SignUpModal />
                 </Box>
                 <Box>
-                  <LoginModal sx={{ backgroundColor: "green" }} />
+                  <LoginModal
+                    sx={{ backgroundColor: "green" }}
+                    snackbar={setSnackbarOpen}
+                  />
                 </Box>
               </Box>
               <DialogActions sx={{ backgroundColor: "black", color: "#fff" }}>

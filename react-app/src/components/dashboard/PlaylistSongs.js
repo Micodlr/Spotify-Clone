@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlaylistSongsThunk } from "../../store/playlistSongs";
 import { getplaylistsThunk } from "../../store/playlists";
@@ -23,17 +23,18 @@ import {
 } from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import PauseIcon from "@mui/icons-material/Pause";
 
 import PlaylistSongsElipsis from "./PlaylistSongsElipsis";
 import { getSong } from "../../store/mediaPlayer";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SongEllipsis from "./SongElipsis";
+import AudioContext from "./AudioContext";
+import FavoriteToggleButton from "./ToggleTest";
 
 export default function PlaylistSongs() {
   const { playlistId } = useParams();
-
-  const [like, setLike] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -47,22 +48,83 @@ export default function PlaylistSongs() {
   const songId = useSelector((state) => Object.values(state.playlistSongs));
   let songsId = songId.map((song) => song.songId);
 
+  const songs = useSelector((state) => Object.values(state.songs));
+  let listOfSongs = songs.filter((song) => songsId.includes(song.id));
+  const playlist = useSelector((state) => state.playlists[playlistId]);
+  const [currentSongIndex, setCurrentSongIndex] = useState(-1);
+
+  //liked songs playlistId
+  const playlists = useSelector((state) => Object.values(state.playlists));
+  const likedSongsPlaylist = playlists.filter(
+    (playlist) => playlist.name == "Liked Songs"
+  );
+  const likedSongsPlaylistId = likedSongsPlaylist[0]?.id;
+  const likedSongsList = likedSongsPlaylist[0]?.playlistSongs;
+
+  const audioRef = useContext(AudioContext);
+
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handlePause = () => {
+    if (currentSongIndex !== -1) {
+      const newPlayStatus = [...playStatus];
+      newPlayStatus[currentSongIndex] = false;
+      setPlayStatus(newPlayStatus);
+      setCurrentSongIndex(-1);
+    }
+    audioRef?.current?.pause();
+  };
+
+  const user = useSelector((state) => state.session.user);
+  // const songs = useSelector((state) => Object.values(state.songs));
+  const [playStatus, setPlayStatus] = useState(
+    new Array(songs.length).fill(false)
+  );
+
+  function resetPlayStatus() {
+    setPlayStatus(new Array(listOfSongs.length).fill(false));
+  }
+  useEffect(() => {
+    if (audioRef?.current) {
+      audioRef?.current?.addEventListener("pause", resetPlayStatus);
+    }
+
+    return () => {
+      if (audioRef?.current) {
+        audioRef?.current?.removeEventListener("pause", resetPlayStatus);
+      }
+    };
+  }, [audioRef]);
+
+  function handleTogglePlay(index) {
+    const newPlayStatus = [...playStatus];
+    newPlayStatus[index] = !newPlayStatus[index];
+    setPlayStatus(newPlayStatus);
+    audioRef?.current?.play();
+
+    // stop currently playing song, if any
+    if (currentSongIndex !== -1 && currentSongIndex !== index) {
+      newPlayStatus[currentSongIndex] = false;
+      setPlayStatus(newPlayStatus);
+    }
+
+    // update current song index
+    setCurrentSongIndex(playStatus[index] ? -1 : index);
+  }
+
   useEffect(() => {
     dispatch(getSongsThunk());
     // dispatch(getAllreviews());
   }, [dispatch, playlistId]);
-  const songs = useSelector((state) => Object.values(state.songs));
-  let listOfSongs = songs.filter((song) => songsId.includes(song.id));
+  const onClick = (song) => {
+    if (!user) return handleClick();
 
-  const playlist = useSelector((state) => state.playlists[playlistId]);
-
-  const onClick = (e, song) => {
-    e.preventDefault();
     dispatch(getSong(song));
-  };
-  const likeButton = (e) => {
-    e.preventDefault();
-    setLike(!like);
   };
 
   return (
@@ -126,10 +188,49 @@ export default function PlaylistSongs() {
         </ListSubheader> */}
 
         {listOfSongs.map((song, index) => (
-          <ListItem component="li" key={song.id}>
+          <ListItem component="li" key={index}>
             <ListItemAvatar>
               <ListItemIcon>
                 <IconButton
+                  // onClick={(e) => onClick(e, song)}
+                  sx={{
+                    color: "whitesmoke",
+                    borderRadius: "20px",
+
+                    "&:hover": { bgcolor: "#1DB954", color: "black" },
+                  }}
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleTogglePlay(index)}
+                >
+                  {/* <PlayArrowIcon /> */}
+                  {playStatus[index] ? (
+                    <PauseIcon
+                      sx={{
+                        bgcolor: "green",
+                        borderRadius: "18px",
+                        height: "1em",
+                      }}
+                      onClick={(e) => handlePause(song)}
+                    />
+                  ) : (
+                    <PlayArrowIcon onClick={(e) => onClick(song)} />
+                  )}
+                  {/* {!song.play ? (
+                    <PlayArrowIcon
+                      // onClick={(e) => onClick(song)}
+                      onClick={handleTogglePlay}
+                      sx={{ height: 38, width: 38 }}
+                    />
+                  ) : (
+                    <PauseIcon
+                      onClick={(e) => handlePause(song)}
+                      sx={{ height: 38, width: 38 }}
+                    />
+                  )} */}
+                </IconButton>
+                {/* <IconButton
                   sx={{
                     color: "whitesmoke",
                     "&:hover": { bgcolor: "#1DB954", color: "black" },
@@ -140,7 +241,7 @@ export default function PlaylistSongs() {
                   onClick={(e) => onClick(e, song)}
                 >
                   <PlayArrowIcon />
-                </IconButton>
+                </IconButton> */}
                 {/* <PlayArrowIcon
                   style={{
                     color: "whitesmoke",
@@ -169,7 +270,12 @@ export default function PlaylistSongs() {
               <PlayArrowIcon />
             </IconButton> */}
 
-            <FavoriteBorderIcon sx={{ color: "whitesmoke" }} />
+            <FavoriteToggleButton
+              songId={song.id}
+              playlist={likedSongsList}
+              playlistId={likedSongsPlaylistId}
+            />
+
             {/* <IconButton onClick={(e) => likeButton(e)}>
               {like ? (
                 <FavoriteIcon sx={{ color: "#1DB954" }} />

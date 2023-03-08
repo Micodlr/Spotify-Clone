@@ -39,10 +39,6 @@ export default function PlaylistSongsElipsis({ songId }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  //   React.useEffect(() => {
-  //     dispatch(getPlaylistSongsThunk(playlistId));
-  //     // dispatch(getAllreviews());
-  //   }, [dispatch, playlistId]);
   const deleteSong = async (e, playlistId, songId) => {
     e.preventDefault();
     await dispatch(deleteSongThunk({ songId: songId, playlistId: playlistId }));

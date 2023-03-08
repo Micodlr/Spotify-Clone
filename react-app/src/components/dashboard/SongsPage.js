@@ -18,21 +18,15 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import {
   Avatar,
-  Button,
   Container,
-  Icon,
   ListItemIcon,
   IconButton,
   Snackbar,
   Alert,
-  Typography,
-  ListSubheader,
 } from "@mui/material";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import SongEllipsis from "./SongElipsis";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { Grid } from "@material-ui/core";
 import { getSong } from "../../store/mediaPlayer";

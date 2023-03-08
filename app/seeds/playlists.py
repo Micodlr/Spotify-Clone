@@ -25,6 +25,9 @@ def seed_playlists():
 
 
 
+
+
+
     db.session.add(test1)
     db.session.add(test2)
     db.session.add(test3)

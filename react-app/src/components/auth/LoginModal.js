@@ -57,7 +57,7 @@ export default function LoginModal({ snackbar }) {
     event.preventDefault();
 
     const res = await dispatch(login(email, password));
-    history.push("/dashboard/home");
+    history.push("/dashboard/home/");
 
     if (res) {
       return setErrors(res);
